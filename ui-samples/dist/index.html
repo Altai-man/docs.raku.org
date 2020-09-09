@@ -9,80 +9,10 @@
 
     <script type="text/javascript" src="js/core.js"></script>
 
-    <style type="text/css" media="screen">
-
-     html, body {
-       height: 100%;
-     }
-
-     body {
-       display: flex;
-       flex-direction: column;
-     }
-
-
-     #wrapper {
-       flex: 1 0 auto;
-     }
-
-     .navbar-item img {
-       max-height: 100%;
-     }
-
-     /* Resize search box */
-     .navbar-item input {
-       width: 200px;
-
-     }
-
-     .navbar-item .button, .navbar-item input {
-       height: 1.85em;
-     }
-
-     .navbar-search {
-       height: 30px;
-     }
-
-     .footer {
-       height: 50px;
-       padding:0;
-       border-top: 1px solid #e5e5e5;
-     }
-
-     .footer .level {
-       height: 50px;
-     }
-
-     .footer-content {
-       max-width: 1000px;
-       margin: 0 auto;
-     }
-
-     .navbar {
-       background: #F2F2F2;
-       border-bottom: 1px solid #E5E5E5;
-     }
-
-     .navbar > .container {
-       margin: 0 auto;
-       max-width: 1140px;
-       padding-left: 1rem;
-       padding-right: 1rem;
-     }
-
-     .hero-body {
-       background: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
-       mix-blend-mode: normal;
-     }
-
-     .icon-large {
-       font-size: 96px;
-     }
-    </style>
-
   </head>
   <body>
 
+    <!-- Header -->
     <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
       <div class="container">
 
@@ -179,6 +109,7 @@
         </div>
       </div>
     </nav>
+    <!-- Header ends -->
 
     <div id="mainSidebar" class="ui-sidebar">
 
@@ -195,7 +126,7 @@
       <section class="hero is-medium is-primary">
         <div class="hero-body">
           <div class="container">
-            <h1 class="title is-1 has-text-centered">
+            <h1 class="title is-1 is-size-2-mobile has-text-centered">
               Raku documentation
             </h1>
             <h2 class="subtitle is-4 has-text-centered mt-3">
@@ -343,7 +274,7 @@
 
 
       <!-- TODO: Add horizontal gap  -->
-      <section class="raku-links-block">
+      <section class="raku links-block">
         <div class="has-background-dark">
           <div class="container px-4 py-5">
             <div class="columns is-centered is-variable is-8">
@@ -387,12 +318,16 @@
       <!-- Wrapper ends -->
     </div>
 
-    <footer class="footer">
+    <footer class="footer main-footer">
       <div class="container">
 
         <nav class="level">
           <div class="level-item">
             <a href="#">About</a>
+          </div>
+
+          <div class="level-item">
+            <a href="#">Toggle theme</a>
           </div>
 
           <div class="level-item">
