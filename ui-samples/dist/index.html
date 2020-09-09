@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Homepage - Raku Docs</title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <script type="text/javascript" src="js/core.js"></script>
+
+    <style type="text/css" media="screen">
+
+     html, body {
+       height: 100%;
+     }
+
+     body {
+       display: flex;
+       flex-direction: column;
+     }
+
+
+     #wrapper {
+       flex: 1 0 auto;
+     }
+
+     .navbar-item img {
+       max-height: 100%;
+     }
+
+     /* Resize search box */
+     .navbar-item input {
+       width: 200px;
+
+     }
+
+     .navbar-item .button, .navbar-item input {
+       height: 1.85em;
+     }
+
+     .navbar-search {
+       height: 30px;
+     }
+
+     .footer {
+       height: 50px;
+       padding:0;
+       border-top: 1px solid #e5e5e5;
+     }
+
+     .footer .level {
+       height: 50px;
+     }
+
+     .footer-content {
+       max-width: 1000px;
+       margin: 0 auto;
+     }
+
+     .navbar {
+       background: #F2F2F2;
+       border-bottom: 1px solid #E5E5E5;
+     }
+
+     .navbar > .container {
+       margin: 0 auto;
+       max-width: 1140px;
+       padding-left: 1rem;
+       padding-right: 1rem;
+     }
+
+     .hero-body {
+       background: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
+       mix-blend-mode: normal;
+     }
+
+     .icon-large {
+       font-size: 96px;
+     }
+    </style>
+
+  </head>
+  <body>
+
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="container">
+
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="./img/camelia-recoloured.png" width="52.83" height="38">
+          </a>
+
+
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navMenu" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Language
+            </a>
+
+            <a class="navbar-item">
+              Types
+            </a>
+
+            <a class="navbar-item">
+              Routines
+            </a>
+
+            <a class="navbar-item">
+              Programs
+            </a>
+
+
+            <a class="navbar-item">
+              Raku Homepage
+            </a>
+
+            <a class="navbar-item">
+              Chat with us
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  About
+                </a>
+                <a class="navbar-item">
+                  Jobs
+                </a>
+                <a class="navbar-item">
+                  Contact
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field has-addons">
+                <div class="control">
+                  <input class="input" type="text" placeholder="Find a repository">
+                </div>
+                <div class="control">
+                  <a class="button is-primary">
+                    <span class="icon">
+                      <i class="fas fa-search "></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              <!--
+                   <div class="buttons">
+                   <a class="button is-primary">
+                   <strong>Sign up</strong>
+                   </a>
+                   <a class="button is-light">
+                   Log in
+                   </a>
+                   </div>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mainSidebar" class="ui-sidebar">
+
+      <div class="ui-sidebar-body">
+        <div class="ui-sidebar-block">
+          test
+
+        </div>
+      </div>
+
+    </div>
+
+    <div id="wrapper">
+      <section class="hero is-medium is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title is-1 has-text-centered">
+              Raku documentation
+            </h1>
+            <h2 class="subtitle is-4 has-text-centered mt-3">
+              Welcome to the official documentation of the Raku programming language!
+            </h2>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="section">
+        <div class="container px-4">
+          <div class="columns is-multiline">
+
+            <!-- Card -->
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+
+                  <div class="has-text-centered">
+                    <span class="icon is-large has-text-primary">
+                      <i class="fas fa-graduation-cap icon-large"></i>
+                    </span>
+                  </div>
+
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary">Language Reference & Tutorials</p>
+                  </div>
+
+                  <div class="content">
+                    A collection of documents describing, in detail, the various conceptual parts of
+                    the Raku language.
+                  </div>
+
+
+                  <div class="has-text-centered">
+                    <a class="button is-primary">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- Card ends -->
+
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+
+                  <div class="has-text-centered">
+                    <span class="icon is-large has-text-primary">
+                      <i class="fas fa-graduation-cap icon-large"></i>
+                    </span>
+                  </div>
+
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary">Language Reference & Tutorials</p>
+                  </div>
+
+                  <div class="content">
+                    A collection of documents describing, in detail, the various conceptual parts of
+                    the Raku language.
+                  </div>
+
+
+                  <div class="has-text-centered">
+                    <a class="button is-primary">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+
+                  <div class="has-text-centered">
+                    <span class="icon is-large has-text-primary">
+                      <i class="fas fa-graduation-cap icon-large"></i>
+                    </span>
+                  </div>
+
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary">Language Reference & Tutorials</p>
+                  </div>
+
+                  <div class="content">
+                    A collection of documents describing, in detail, the various conceptual parts of
+                    the Raku language.
+                  </div>
+
+
+                  <div class="has-text-centered">
+                    <a class="button is-primary">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+
+                  <div class="has-text-centered">
+                    <span class="icon is-large has-text-primary">
+                      <i class="fas fa-graduation-cap icon-large"></i>
+                    </span>
+                  </div>
+
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary">Language Reference & Tutorials</p>
+                  </div>
+
+                  <div class="content">
+                    A collection of documents describing, in detail, the various conceptual parts of
+                    the Raku language.
+                  </div>
+
+
+                  <div class="has-text-centered">
+                    <a class="button is-primary">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+            <!-- Columns ends -->
+          </div>
+        </div>
+      </section>
+
+
+      <!-- TODO: Add horizontal gap  -->
+      <section class="raku-links-block">
+        <div class="has-background-dark">
+          <div class="container px-4 py-5">
+            <div class="columns is-centered is-variable is-8">
+
+              <div class="column is-one-quarter">
+                <p class="title">Community</p>
+                <ul>
+                  <li><a href="#">Discord</a></li>
+                  <li><a href="#">Facebook</a></li>
+                  <li><a href="#">Reddit</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">Freenode</a></li>
+                </ul>
+              </div>
+
+              <div class="column is-one-quarter">
+                <p class="title">Recources</p>
+                <ul>
+                  <li><a href="#">Raku homepage</a></li>
+                  <li><a href="#">Issue tracker</a></li>
+                  <li><a href="#">...</a></li>
+                  <li><a href="#">...</a></li>
+                </ul>
+              </div>
+
+              <div class="column is-one-quarter">
+                <p class="title">Explore</p>
+                <ul>
+                  <li><a href="#">Books</a></li>
+                  <li><a href="#">Rosseta code</a></li>
+                  <li><a href="#">...</a></li>
+                  <li><a href="#">...</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wrapper ends -->
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+
+        <nav class="level">
+          <div class="level-item">
+            <a href="#">About</a>
+          </div>
+
+          <div class="level-item">
+            <p>
+              This website is licensed under
+              <a href="#">the Artistic License 2.0</a>
+            </p>
+          </div>
+        </nav>
+
+      </div>
+    </footer>
+
+    <!-- Include Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </body>
+</html>

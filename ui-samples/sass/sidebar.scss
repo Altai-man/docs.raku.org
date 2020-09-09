@@ -1,0 +1,74 @@
+// UI Sidebar module
+@import "./initial-variables";
+
+$sidebar-z: 50 !default;
+$sidebar-header-height: 3.25em !default;
+$sidebar-footer-height: 4rem !default;
+$sidebar-shadow: 5px 0px 13px 3px rgba( 0, 0, 0, 0.1 ) !default;
+$sidebar-divider: 1px solid $grey-lighter !default;
+
+.ui-sidebar {
+  // display: flex;
+  display: none;
+  flex-direction: column;
+  background-color: $white;
+  max-width: calc(100% - 50px);
+  &.is-marginless {
+    max-width: 100%;
+  }
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: $sidebar-z;
+  // overflow-x: hidden; // Disable horizontal scroll
+  transofrm: tranlateZ (0);
+  transition: .3s ease;
+  backface-visibility: hidden;
+  perspective: 1000;
+  will-change: transforn;
+  width: 300px;
+  +mobile {
+    width: 100%;
+    right: -100%;
+  }
+  +tablet {
+    width: 50%;
+    right: -50%;
+  }
+  +desktop {
+    width: 35%;
+    right: -35%;
+  }
+  +widescreen {
+    width: 30%;
+    right: -30%;
+  }
+  +fullhd {
+    width: 25%;
+    right: -25%;
+  }
+  &.is-left {
+    +mobile {
+      left: -100%;
+    }
+    +tablet {
+      left: -50%;
+    }
+    +desktop {
+      left: -35%;
+    }
+    +widescreen {
+      left: -30%;
+    }
+    +fullhd {
+      left: -25%;
+    }
+    &.is-active {
+      right: 0;
+      box-shadow: $sidebar-shadow;
+      &.is-left {
+        left: 0;
+      }
+    }
+  }
+}

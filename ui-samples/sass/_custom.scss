@@ -1,0 +1,48 @@
+// Custom SCSS
+
+// Titles
+h1,h2,h3,h4,h5,h6 {
+  font-family: $family-secondary;
+}
+
+.button, .title {
+  font-family: $family-secondary;
+}
+
+.card .button {
+  width: 200px;
+}
+
+// Custom classes
+.has-background-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.raku-links-block .title {
+  font-family: $family-secondary;
+  font-size: $size-6;
+  font-weight: $weight-bold;
+  color: $white;
+}
+
+.raku-links-block a {
+  font-family: $family-secondary;
+  font-size: $size-6;
+  font-weight: $weight-bold;
+
+  color: $white;
+  &:hover {
+    color: $yellow;
+  }
+}
+
+.raku-links-block li {
+  margin-bottom: 0.5rem;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,64 @@
+// Colors
+
+$black: #030303;
+$black-bis:    hsl(0, 0%, 7%);
+$black-ter:    hsl(0, 0%, 14%);
+
+$grey-darker:  #3A3D4E;
+$grey-dark:    #83858D;
+$grey:         #cccccc;
+$grey-light:   #d8d8d8;
+$grey-lighter: #e5e5e5;
+$grey-lightest: #f2f2f2;
+
+$white-ter:    #f5f5f5;
+$white-bis:    #f7f7f7;
+$white: #fafafa;
+
+$orange:       hsl(14,  100%, 53%);
+$yellow:       hsl(48,  100%, 67%);
+$green:        #1C6301;
+$turquoise:    #005C43;
+$cyan:         hsl(204, 71%,  53%);
+$blue:         #004FB3;
+$purple:       #5503B3;
+$red:          #A30031;
+
+// Typography
+$family-sans-serif: "Inter", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$family-monospace: monospace;
+$render-mode: optimizeLegibility;
+
+$size-1: 3rem;
+$size-2: 2.5rem;
+$size-3: 2rem;
+$size-4: 1.5rem;
+$size-5: 1.25rem;
+$size-6: 1rem;
+$size-7: 0.75rem;
+
+$weight-light: 300;
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+// Spacing
+$block-spacing: 1.5rem;
+
+// Responsiveness
+// The container horizontal gap, which acts as the offset for breakpoints
+$gap: 32px;
+// 960, 1152, and 1344 have been chosen because they are divisible by both 12 and 16
+$tablet: 769px;
+// 960px container + 4rem
+// $desktop: 960px + (2 * $gap);
+$desktop: 1140px + (2 * $gap);
+// 1152px container + 4rem
+$widescreen: 1152px + (2 * $gap);
+$widescreen-enabled: true;
+// 1344px container + 4rem
+$fullhd: 1344px + (2 * $gap);
+
+$fullhd-enabled: false;
+$widescreen-enabled: false;
