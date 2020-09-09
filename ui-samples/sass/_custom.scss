@@ -13,6 +13,84 @@ h1,h2,h3,h4,h5,h6 {
   width: 200px;
 }
 
+
+ // Common parts
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+
+#wrapper {
+  flex: 1 0 auto;
+}
+
+
+/* Site header */
+.navbar {
+  background: #F2F2F2;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.navbar-brand .navbar-item img {
+  max-height: 100%;
+}
+
+/* Resize search box */
+.navbar-item input {
+  width: 200px;
+}
+
+.navbar-item .button, .navbar-item input {
+  height: 1.85em;
+}
+
+.navbar-search {
+  height: 30px;
+}
+
+.navbar > .container {
+  margin: 0 auto;
+  max-width: 1140px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+// Site footer
+.footer {
+  height: 50px;
+  padding:0;
+  border-top: 1px solid #e5e5e5;
+}
+
+.footer .level {
+  height: 50px;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.hero-body {
+  background: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
+  mix-blend-mode: normal;
+}
+
+.icon-large {
+  font-size: 96px;
+}
+
+
 // Custom classes
 .has-background-image {
   background-position: center;
@@ -20,29 +98,63 @@ h1,h2,h3,h4,h5,h6 {
   background-size: cover;
 }
 
+.raku.links-block {
+  .title {
+    font-family: $family-secondary;
+    font-size: $size-6;
+    font-weight: $weight-bold;
+    color: $white;
+    }
 
-.raku-links-block .title {
+    a {
+      font-family: $family-secondary;
+      font-size: $size-6;
+      font-weight: $weight-bold;
+
+      color: $white;
+      &:hover {
+        color: $yellow;
+      }
+    }
+
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+}
+
+
+// Raku page template
+.raku.page-title,
+.raku.page-subtitle {
   font-family: $family-secondary;
+}
+
+.raku.page-title {
+  font-size: $size-4;
+  color: $red;
+  font-weight: $weight-semibold;
+}
+
+.raku.page-subtitle {
   font-size: $size-6;
-  font-weight: $weight-bold;
-  color: $white;
 }
 
-.raku-links-block a {
-  font-family: $family-secondary;
-  font-size: $size-6;
-  font-weight: $weight-bold;
-
-  color: $white;
-  &:hover {
-    color: $yellow;
-  }
+.raku.page-header {
+  margin-top: $size-6;
 }
 
-.raku-links-block li {
-  margin-bottom: 0.5rem;
+.raku.page-header,
+.raku.page-content {
+  padding: 1rem 1.5rem;
 }
 
-.footer a:hover {
-  text-decoration: underline;
-}
+// Workaround
+
+// @include mobile {
+//   // to fix 'too wide' bug on mobile
+//   .columns {
+//     margin-left: 0;
+//     margin-right: 0;
+//   }
+// }

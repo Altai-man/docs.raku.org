@@ -1,0 +1,20 @@
+// Import Bulma mixins
+@import '../node_modules/bulma/bulma.sass';
+@import '../node_modules/bulma/sass/utilities/mixins';
+@import "./initial-variables";
+
+// Responsiveness
+@include mobile {
+  body {
+    overflow-x: hidden;
+  }
+
+  .footer {
+    height: auto;
+    background-color: $grey-lightest;
+  }
+
+  .footer .level {
+    height: auto;
+  }
+}
