@@ -1,3 +1,4 @@
 ui-samples/node_modules/
 ui-samples/dist/css/
 ui-samples/yarn.lock
+ui-samples/dist/sandbox.html
