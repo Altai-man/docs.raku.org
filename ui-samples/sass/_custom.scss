@@ -33,7 +33,7 @@ body {
 /* Site header */
 .navbar {
   background: #F2F2F2;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid $border;
 }
 
 .navbar-brand .navbar-item img {
@@ -64,8 +64,8 @@ body {
 // Site footer
 .footer {
   height: 50px;
-  padding:0;
-  border-top: 1px solid #e5e5e5;
+  padding: 0;
+  border-top: 1px solid $border;
 }
 
 .footer .level {

@@ -18,3 +18,10 @@
     height: auto;
   }
 }
+
+.input, .textarea, .select select {
+    background-color: $white;
+    border-color: $grey;
+    border-radius: 3px;
+    color: $grey-darker;
+}

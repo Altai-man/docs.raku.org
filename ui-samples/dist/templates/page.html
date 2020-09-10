@@ -16,7 +16,7 @@
   <body class="has-navbar-fixed-top">
 
     <!-- Header -->
-    <nav class="navbar has-shadow is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="container">
 
         <div class="navbar-brand">
@@ -87,6 +87,7 @@
                 <div class="control">
                   <input class="input" type="text" placeholder="Find a repository">
                 </div>
+
                 <div class="control">
                   <a class="button is-primary">
                     <span class="icon">
@@ -113,13 +114,85 @@
     </nav>
     <!-- Header ends -->
 
-    <div id="mainSidebar" class="ui-sidebar">
+      <div class="raku-sidebar-toggle">
+        <a class="button is-primary">
+          <span class="icon">
+            <!-- <i class="fas fa-chevron-right"></i> -->
+            <i class="fas fa-chevron-left is-medium"></i>
+          </span>
+        </a>
+      </div>
 
-      <div class="ui-sidebar-body">
-        <div class="ui-sidebar-block">
-          test
+    <div id="mainSidebar" class="raku-sidebar">
 
+
+      <div class="field">
+        <label class="label has-text-centered">Table of Contents</label>
+        <div class="control has-icons-right">
+          <input class="input" type="text" placeholder="Filter">
+          <span class="icon is-right has-text-grey">
+            <i class="fas fa-search is-medium"></i>
+          </span>
         </div>
+      </div>
+      <div class="raku-sidebar-body">
+
+          <aside class="menu">
+            <p class="menu-label">
+              General
+            </p>
+            <ul class="menu-list">
+              <li><a>Dashboard</a></li>
+              <li><a>Customers</a></li>
+            </ul>
+            <p class="menu-label">
+              Administration
+            </p>
+            <ul class="menu-list">
+              <li><a>Team Settings</a></li>
+              <li>
+                <a class="is-active">Manage Your Team</a>
+                <ul>
+                  <li><a>Members</a></li>
+                  <li><a>Plugins</a></li>
+                  <li><a>Add a member</a></li>
+                </ul>
+              </li>
+              <li><a>Invitations</a></li>
+              <li><a>Cloud Storage Environment Settings</a></li>
+              <li><a>Authentication</a></li>
+            </ul>
+            <p class="menu-label">
+              Transactions
+            </p>
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+            </ul>
+            <!-- Delete -->
+
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+            </ul>
+
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+            </ul>
+
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+            </ul>
+
+          </aside>
+
+
       </div>
 
     </div>

@@ -1,17 +1,17 @@
 // UI Sidebar module
 @import "./initial-variables";
+@import "../node_modules/bulma/sass/elements/icon.sass";
 
-$sidebar-z: 50 !default;
+$sidebar-z: 25 !default;
 $sidebar-header-height: 3.25em !default;
 $sidebar-footer-height: 4rem !default;
-$sidebar-shadow: 5px 0px 13px 3px rgba( 0, 0, 0, 0.1 ) !default;
+$sidebar-shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.25 ) !default;
 $sidebar-divider: 1px solid $grey-lighter !default;
 
-.ui-sidebar {
+.raku-sidebar {
   // display: flex;
-  display: none;
-  flex-direction: column;
-  background-color: $white;
+  // flex-direction: column;
+  background-color: $grey-lightest;
   max-width: calc(100% - 50px);
   &.is-marginless {
     max-width: 100%;
@@ -20,13 +20,21 @@ $sidebar-divider: 1px solid $grey-lighter !default;
   top: 0;
   bottom: 0;
   z-index: $sidebar-z;
-  // overflow-x: hidden; // Disable horizontal scroll
+  overflow-x: hidden; // Disable horizontal scroll
   transofrm: tranlateZ (0);
   transition: .3s ease;
   backface-visibility: hidden;
   perspective: 1000;
   will-change: transforn;
+
+  height: 100%;
   width: 300px;
+  padding: 2rem;
+  padding-top: 5rem;
+
+  border-right: 1px solid $grey;
+  box-shadow: $sidebar-shadow; // delete
+
   +mobile {
     width: 100%;
     right: -100%;
@@ -71,4 +79,20 @@ $sidebar-divider: 1px solid $grey-lighter !default;
       }
     }
   }
+}
+
+.raku-sidebar .menu {
+  overflow-x: hidden;
+}
+
+.raku-sidebar-body .menu-label {
+  font-weight: $weight-semibold;
+}
+
+.raku-sidebar-toggle {
+  z-index: 20;
+  position: fixed;
+  top: 100px;
+  left: 295px;
+
 }
