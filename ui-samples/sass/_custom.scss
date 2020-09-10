@@ -32,8 +32,8 @@ body {
 
 /* Site header */
 .navbar {
-  background: #F2F2F2;
-  border-bottom: 1px solid $border;
+  background: $grey-lightest;
+  border-bottom: 1px solid $grey-light;
 }
 
 .navbar-brand .navbar-item img {
@@ -65,7 +65,7 @@ body {
 .footer {
   height: 50px;
   padding: 0;
-  border-top: 1px solid $border;
+  border-top: 1px solid $grey-light;
 }
 
 .footer .level {

@@ -49,7 +49,7 @@ $scheme-invert-ter: $black-ter;
 
 $background: $white;
 
-$border: $grey-lighter;
+$border: $grey;
 $border-hover: $grey-light;
 $border-light: $grey-lightest;
 $border-light-hover: $grey-light;
@@ -108,11 +108,14 @@ $hero-body-padding-medium: 6rem 0.5rem;
 $hr-background-color: $grey-lighter;
 $icon-dimensions-large: 6rem;
 $body-line-height: 1.4;
+
 $footer-background-color: $grey-lightest;
 $input-placeholder-color: $grey-darker;
 $footer-padding: 0;
+
 $navbar-height: 3.75rem;
 $navbar-background-color: $grey-lightest;
+$navbar-dropdown-arrow: $primary;
 
 $menu-label-color: $black;
 $menu-item-hover-color: $black;

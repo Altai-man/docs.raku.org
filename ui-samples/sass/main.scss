@@ -16,6 +16,11 @@
 // Base
 @import "../node_modules/bulma/sass/base/_all.sass";
 
+// Import Bulma mixins
+@import '../node_modules/bulma/bulma.sass';
+@import '../node_modules/bulma/sass/utilities/mixins';
+
+
 // Components
 @import "../node_modules/bulma/sass/components/card.sass";
 @import "../node_modules/bulma/sass/components/level.sass";

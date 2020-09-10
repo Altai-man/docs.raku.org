@@ -1,8 +1,3 @@
-// Import Bulma mixins
-@import '../node_modules/bulma/bulma.sass';
-@import '../node_modules/bulma/sass/utilities/mixins';
-@import "./initial-variables";
-
 // Responsiveness
 @include mobile {
   body {
@@ -19,9 +14,9 @@
   }
 }
 
-.input, .textarea, .select select {
-    background-color: $white;
-    border-color: $grey;
-    border-radius: 3px;
-    color: $grey-darker;
-}
+// .input, .textarea, .select select {
+//     background-color: $white;
+//     border-color: $grey;
+//     border-radius: 3px;
+//     color: $grey-darker;
+// }
