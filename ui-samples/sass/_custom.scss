@@ -61,6 +61,25 @@ body {
   padding-right: 1rem;
 }
 
+// .navbar-brand .navbar-item::after {
+//   content: "tm";
+//   font-size: $size-7;
+//   color: $grey-darker;
+// }
+
+.navbar-logo {
+  position: relative;
+}
+
+.navbar-logo-tm {
+  position: absolute;
+  z-index: 35;
+  top: 0.35rem;
+  right: -0.35rem;
+  font-size: $size-7;
+  color: $grey-darker;
+}
+
 
 // Site footer
 .footer {
