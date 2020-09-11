@@ -43,8 +43,10 @@ $code-variable-color: #5503B3;
   .code-output-title {
     font-size: $size-6;
     font-weight: $weight-medium;
+    border-bottom: 1px solid $border;
     color: $red;
     padding: 0.25rem 0;
+    margin-bottom: 0.5rem;
   }
 
   pre {
