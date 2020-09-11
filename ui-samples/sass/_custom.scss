@@ -179,6 +179,42 @@ body {
   }
 }
 
+// Categories
+.raku-category.category-block {
+    border: 1px solid $border;
+    border-bottom: 5px solid $grey-lighter;
+    box-shadow: 0px 2px 3px 0px rgba( 0, 0, 0, 0.07 );
+    margin-bottom: $size-5;
+
+}
+
+.raku-category {
+
+  .category-header {
+    background: $grey-lightest;
+    border-bottom: 1px solid $border;
+    color: $grey-dark;
+    padding: 0.35rem;
+  }
+
+  .category-items {
+    padding-top: 0.25rem;
+    padding-bottom: $size-7;
+  }
+
+  .category-item {
+    font-weight: $weight-medium;
+    padding: $size-6 $size-3;
+    border-bottom: 1px solid $border;
+  }
+
+  .category-item-title {
+    margin-bottom: 0.25rem;
+  }
+
+
+}
+
 // Workaround
 
 // @include mobile {
