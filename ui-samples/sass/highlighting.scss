@@ -1,7 +1,7 @@
 // Raku code highlighting
 @import "./initial-variables";
 
-$code-background: #f2f2f2;
+$code-background: #fafafa;
 $code-foreground: #030303;
 
 $code-callable-color: #005C43;
@@ -15,6 +15,37 @@ $code-variable-color: #5503B3;
 
 .raku-code {
   border: 1px solid $border;
+  border-bottom: 3px solid $border;
+
+  .code-name {
+    padding-top: $size-7;
+    padding-left: $size-5;
+    color: $red;
+    font-weight: $weight-medium;
+  }
+
+  .code-button {
+    position: absolute;
+    top: $size-7;
+    right: $size-5;
+    background: $grey-lightest;
+    height: 2em;
+  }
+
+  .code-output {
+    font-size: $size-7;
+    font-family: $family-monospace;
+    padding: $size-7 $size-5;
+    border-top: 1px solid $border;
+    background: $grey-lightest;
+  }
+
+  .code-output-title {
+    font-size: $size-6;
+    font-weight: $weight-medium;
+    color: $red;
+    padding: 0.25rem 0;
+  }
 
   pre {
     background-color: $code-background;

@@ -131,6 +131,10 @@ body {
   font-family: $family-secondary;
 }
 
+.page-generated {
+  padding: $size-7;
+}
+
 .raku.page-title {
   font-size: $size-4;
   color: $red;
@@ -211,8 +215,55 @@ body {
   .category-item-title {
     margin-bottom: 0.25rem;
   }
+}
+
+// Raku page headings
+.raku-h1 {
+  background: $grey-lightest;
+  border: 1px solid $border;
+  border-bottom: 3px solid $red;
+  color: $red;
+  font-size: $size-5;
+  font-weight: $weight-medium;
+  padding: 0.25rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 
 
+.raku-h2 {
+  border-bottom: 3px solid $red;
+  color: $red;
+  font-size: $size-5;
+  font-weight: $weight-medium;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+// Version note
+.raku.version-note {
+  padding: $size-5;
+  background: $grey-lightest;
+  border: 1px solid $border;
+}
+
+.version-note-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.25;
+  padding-bottom: 0.5em;
+  position: relative;
+}
+
+.version-related-to {
+  position: absolute;
+  right: $size-6;
+}
+
+.version-note-header {
+  color: $red;
+  font-weight: $weight-medium;
 }
 
 // Workaround
