@@ -296,9 +296,11 @@ body {
 
 // Version note
 .raku.version-note {
+  margin: $size-6 0;
   padding: $size-5;
   background: $grey-lightest;
   border: 1px solid $border;
+  box-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
 }
 
 .version-note-header {
@@ -318,6 +320,16 @@ body {
 .version-note-header {
   color: $red;
   font-weight: $weight-medium;
+}
+
+table {
+  box-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+}
+
+table.centered {
+    margin-left:auto;
+    margin-right:auto;
+
 }
 
 // Workaround
