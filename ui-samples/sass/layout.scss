@@ -4,6 +4,29 @@
     overflow-x: hidden;
   }
 
+  .section {
+    padding: $size-6 $size-7;
+  }
+
+  // searchbox
+
+  .navbar-item span {
+    display: block;
+    overflow: hidden;
+    padding: 0 5px 0 0;
+  }
+
+  // .navbar-item .control {
+  //   width: inherit;
+  // }
+  .navbar-item .field .control:first-child {
+    width: 90%;
+  }
+
+  .navbar-item input {
+    width: 100%;
+  }
+
   .footer {
     height: auto;
     padding: $size-6;
