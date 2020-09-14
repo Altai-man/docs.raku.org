@@ -332,6 +332,33 @@ table.centered {
 
 }
 
+// About page
+.raku-about .card {
+  margin: $size-5 0;
+  border: 1px solid $grey-lighter;
+  border-bottom: 3px solid $grey-lighter;
+  box-shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.07 );
+  // box-shadow: unset;
+  border-radius: 3px;
+}
+
+.raku-about.minor-list {
+  li {
+    margin: $size-7 0;
+
+  }
+}
+
+.raku-about-major .user-info,
+.raku-about-minor .user-info {
+  margin-bottom: 0.25rem;
+}
+
+
+// .raku-about .card-content {
+//   background-color: $white;
+// }
+
 // Workaround
 
 // @include mobile {
