@@ -359,6 +359,34 @@ table.centered {
 //   background-color: $white;
 // }
 
+// Tabs
+.raku.tabs {
+  background: $grey-lightest;
+  border: 1px solid $grey-light;
+  border-bottom: unset;
+
+  a {
+    color: $grey-darker;
+  }
+
+  &.is-boxed a {
+    border: unset;
+    border-radius: unset;
+    border-right: 1px solid $grey-light;
+    padding: 0.5em 1.25em;
+  }
+
+  &.is-boxed li.is-active a {
+    color: $grey-darker;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid $white;
+  }
+}
+
+.raku.tabcontent {
+  display: none;
+}
+
 // Workaround
 
 // @include mobile {
