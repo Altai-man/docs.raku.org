@@ -21,21 +21,17 @@ class Docky::Renderer::Node is Node::To::HTML {
     }
 
     multi method node2html(Pod::Block::Code $node) {
-        # TODO header
-        # TODO results
         # TODO get back %*POD2HTML-CALLBACKS from Documentable (?)
-        my $header = False ?? q:to/END/
-          <div class="code-header">
-            <p class="code-name">example-name.pm6</p>
-            <button class="b}utton code-button" aria-label="run">Run</button>
-          </div>
-        END
-        !! '';
-
         qq:to/END/;
         <div class="raku-code">
-          $header
+          <div class="code-header">
+            <p class="code-name">example-name.pm6</p>
+            <button class="button code-button" aria-label="run">Run</button>
+          </div>
           <pre><code>{ self.node2inline($node.contents) }</code></pre>
+          <div class="code-output">
+            <p class="code-output-title">Output</p>
+          </div>
         </div>
         END
     }

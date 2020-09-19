@@ -1,4 +1,5 @@
 use Cro::WebApp::Template;
+use Cro::HTTP::Client;
 use Cro::HTTP::Router;
 use Docky::Constants;
 use Docky::Renderer::TOC;
@@ -7,6 +8,8 @@ use Documentable;
 use Documentable::Registry;
 use Documentable::DocPage::Factory;
 use Documentable::To::HTML::Wrapper;
+
+constant GLOT_KEY = %*ENV<DOCKY_GLOT_IO_KEY>;
 
 # TODO properly initialize everything somewhere else
 my $registry = Documentable::Registry.new(
@@ -45,7 +48,7 @@ my @type-categories = <class role>.map(-> $category {
 my @kinds = $config.kinds.cache;
 
 sub routes() is export {
-    my $UI-PREFIX = "docs.raku.org/ui-samples/dist";
+    my $UI-PREFIX = "ui-samples/dist";
     template-location 'templates';
 
     sub calculate-categories(Str $kind) {
@@ -103,9 +106,6 @@ sub routes() is export {
 
         # Individual item page
         get -> *@path {
-            my %classes = h1 => 'raku-h1', h2 => 'raku-h2', h3 => 'raku-h3',
-                          h4 => 'raku-h4', h5 => 'raku-h5', h6 => 'raku-h6';
-
             state @docs = $registry.documentables.grep({ .kind eq Kind::Language });
             my $doc = @docs.first(*.url eq ('/' ~ @path.join('/')));
             my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node);
@@ -114,9 +114,28 @@ sub routes() is export {
             template 'entry.crotmp', { title => $renderer.metadata<title> ~ ' - Raku Documentation', |$config.config, :$html };
         }
 
+        post -> 'run' {
+            request-body -> %json {
+                my $code = %json<code>.subst("\x200B", '', :g); # Remove zero-width space from editing...
+
+                my $resp = await Cro::HTTP::Client.post('https://run.glot.io/languages/perl6/latest',
+                        content-type => 'application/json',
+                        headers => [ 'Authorization' => 'Token ' ~ GLOT_KEY ],
+                        body => { files => [{ :name<main.p6>, :content($code) },] });
+                if $resp.status eq 200 {
+                    my $json = await $resp.body;
+                    content 'text/plain',
+                            ($json<stdout>.subst("\n", '<br>', :g),
+                             ($json<stderr> ?? "STDERR:<br>$json<stderr>".subst("\n", '<br>', :g) !! '')).join;
+                } else {
+                    bad-request;
+                }
+            }
+        }
+
         # Statics
         get -> 'css', *@path { static "$UI-PREFIX/css/", @path }
-        get -> 'js',  *@path { static "$UI-PREFIX/js/",  @path }
+        get -> 'js',  *@path { static "static/js/",  @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
     }
 }
