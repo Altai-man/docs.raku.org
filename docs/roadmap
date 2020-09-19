@@ -1,0 +1,71 @@
+### Website to address
+
+* Uniform file names for Language document https://github.com/Raku/doc/issues/2244
+
+Cro level redirect.
+
+* Collect raku traffic https://github.com/Raku/doc/issues/2045
+
+Done behind nginx.
+
+* Fix broken links https://github.com/Raku/doc/issues/1838
+
+Cro level redirect.
+
+* Convert to Cro https://github.com/Raku/doc/issues/1057 https://github.com/Raku/doc/issues/1246 https://github.com/Raku/doc/issues/2910
+
+* Website content updates https://github.com/Raku/doc/issues/2227
+
+* Search index anchors point a line too low https://github.com/Raku/doc/issues/1303
+
+* Automatic checks and deployment https://github.com/Raku/doc/issues/3451
+
+JS for scrolling.
+
+* Teach SE about `rakulang` keywords
+
+* Create templates https://github.com/Raku/doc/issues/2508
+
+* Prohibit L<Foo> and L<foo> lone links instead of complete ones https://github.com/Raku/doc/issues/1488
+
+* Ensure Windows works https://github.com/Raku/doc/issues/1480
+
+* Highlight Raku as Raku and others as others
+
+* Sort TOC https://github.com/Raku/doc/issues/392
+
+### To address
+
+* On types page render roles and classes differently https://github.com/Raku/doc/issues/2477
+
+Suggests to render role/class word on Types page in the same way, but we will have two sections instead.
+
+* Add a button to execute code on glot.io https://github.com/Raku/doc/issues/1866
+
+* New top level search page https://github.com/Raku/doc/issues/1099
+
+* Special flags for versioned sections https://github.com/Raku/doc/issues/302
+
+* Mobile version https://github.com/Raku/doc/issues/3470
+
+* Dark theme https://github.com/Raku/doc/issues/3055
+
+* To think about ␤ replacement https://github.com/Raku/doc/issues/2670
+
+### Done
+
+* Add sidebar https://github.com/Raku/doc/issues/2509 https://github.com/Raku/doc/issues/2138
+
+Done in a fixed way. Make sure mobile version will have a cool solution not to scroll sidebar as well.
+
+* Improve UI https://github.com/Raku/doc/issues/2429 https://github.com/Raku/doc/issues/1090
+
+Done.
+
+* Language page is divided into columns https://github.com/Raku/doc/issues/2186
+
+Done.
+
+### To close
+
+* Simple/expert view https://github.com/Raku/doc/issues/2593

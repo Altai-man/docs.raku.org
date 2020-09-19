@@ -1,0 +1,101 @@
+<:use 'layout.crotmp'>
+<|layout('Raku Documentation', .kinds, .irc-link)>
+    <div id="wrapper">
+      <section class="hero is-medium is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title is-1 is-size-2-mobile has-text-centered">
+              Raku documentation
+            </h1>
+            <h2 class="subtitle is-4 has-text-centered mt-3">
+              Welcome to the official documentation of the Raku programming language!
+            </h2>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="section">
+        <div class="container px-4">
+          <div class="columns is-multiline">
+
+            <!-- Card -->
+            <@backup-cards>
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+
+                  <div class="has-text-centered">
+                    <span class="icon is-large has-text-primary">
+                      <i class="fas <.icon> icon-large"></i>
+                    </span>
+                  </div>
+
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><.title></p>
+                  </div>
+
+                  <div class="content">
+                    <.description>
+                  </div>
+
+
+                  <div class="has-text-centered">
+                    <a class="button is-primary" href="<.url>">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            </@>
+            <!-- Card ends -->
+
+            <!-- Columns ends -->
+          </div>
+        </div>
+      </section>
+
+
+      <!-- TODO: Add horizontal gap  -->
+      <section class="raku links-block">
+        <div class="has-background-dark">
+          <div class="container px-4 py-5">
+            <div class="columns is-centered is-variable is-8">
+
+              <div class="column is-one-quarter">
+                <p class="title">Community</p>
+                <ul>
+                  <@community-links>
+                  <li><a href="<.url>"><.title></a></li>
+                  </@>
+                </ul>
+              </div>
+
+              <div class="column is-one-quarter">
+                <p class="title">Recources</p>
+                <ul>
+                  <@resource-links>
+                  <li><a href="<.url>"><.title></a></li>
+                  </@>
+                </ul>
+              </div>
+
+              <div class="column is-one-quarter">
+                <p class="title">Explore</p>
+                <ul>
+                  <@explore-links>
+                  <li><a href="<.url>"><.title></a></li>
+                  </@>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- Wrapper ends -->
+</|>

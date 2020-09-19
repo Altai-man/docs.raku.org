@@ -1,0 +1,117 @@
+<:macro layout($title, $kinds, $irclink)>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><$title></title>
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script type="text/javascript" src="/js/core.js"></script>
+
+  </head>
+
+
+  <body class="has-navbar-fixed-top">
+
+    <!-- Header -->
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="container">
+
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/img/camelia-recoloured.png" width="52.83" height="38">
+          </a>
+
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navMenu" class="navbar-menu">
+          <div class="navbar-start">
+            <@$kinds>
+              <a class="navbar-item" href="/<.kind>.html">
+                <.display-text>
+              </a>
+            </@>
+
+            <a class="navbar-item" href="https://raku.org">
+              Raku Homepage
+            </a>
+
+            <a class="navbar-item" href="<$irclink>">
+              Chat with us
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="/about">
+                  About
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="https://github.com/raku/doc/blob/master/CONTRIBUTING.md#reporting-bugs">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field has-addons">
+                <div class="control">
+                  <input class="input" type="text" placeholder="Search">
+                </div>
+                <div class="control">
+                  <a class="button is-primary">
+                    <span class="icon">
+                      <i class="fas fa-search "></i>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Header ends -->
+
+    <:body>
+
+    <footer class="footer main-footer">
+      <div class="container">
+
+        <nav class="level">
+          <div class="level-item">
+            <a href="#">About</a>
+          </div>
+
+          <div class="level-item">
+            <a href="#">Toggle theme</a>
+          </div>
+
+          <div class="level-item">
+            <p>
+              This website is licensed under
+              <a href="https://raw.githubusercontent.com/Raku/doc/master/LICENSE">the Artistic License 2.0</a>
+            </p>
+          </div>
+        </nav>
+
+      </div>
+    </footer>
+
+    <!-- Include Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </body>
+</html>
+</:>

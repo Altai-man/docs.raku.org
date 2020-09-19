@@ -1,0 +1,73 @@
+<div class="raku-sidebar-toggle">
+  <a class="button is-primary">
+    <span class="icon">
+      <i class="fas fa-chevron-left is-medium"></i>
+    </span>
+  </a>
+</div>
+
+<div id="mainSidebar" class="raku-sidebar">
+
+      <div class="field">
+        <label class="label has-text-centered">Table of Contents</label>
+        <div class="control has-icons-right">
+          <input class="input" type="text" placeholder="Filter">
+          <span class="icon is-right has-text-grey">
+            <i class="fas fa-search is-medium"></i>
+          </span>
+        </div>
+      </div>
+      <div class="raku-sidebar-body">
+
+          {{{toc}}}
+
+      </div>
+
+    </div>
+
+
+<div id="wrapper">
+  <section class="raku page-header">
+    <div class="container px-4">
+      <div class="raku page-title has-text-centered">{{{ title }}}</div>
+      <div class="raku page-subtitle has-text-centered">{{{ subtitle }}}</div>
+    </div>
+  </section>
+
+  <section class="raku page-content">
+    <div class="container px-4">
+      {{#body}}{{{ . }}}{{/body}}
+    </div>
+  </section>
+
+  <section class="page-footnotes">
+    <div class="container">
+      <ol type="1">
+        <li>
+          <a href="#">[^]</a>
+          the comb routine is a much better choice for many tasks that in other languages are handled by the split.
+        </li>
+        <li>
+          <a href="#">[^]</a>
+          the comb routine is a much better choice for many tasks that in other languages are handled by the split.
+        </li>
+        <li>
+
+          <a href="#">[^]</a>
+          the comb routine is a much better choice for many tasks that in other languages are handled by the split.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="page-generated">
+    <div class="container has-text-centered">
+      <p>
+        Generated from
+        <a href="#">/language/variables</a>
+      </p>
+    </div>
+  </section>
+
+</div>
+<!-- Wrapper ends -->

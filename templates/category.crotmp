@@ -1,0 +1,78 @@
+<:use 'layout.crotmp'>
+<|layout(.title, .kinds, .irc-link)>
+    <div id="wrapper">
+
+      <div class="raku page">
+
+        <section class="raku page-header">
+          <div class="container px-4">
+            <div class="raku page-title has-text-centered"><.category-title></div>
+            <div class="raku page-subtitle has-text-centered"><.category-description></div>
+          </div>
+        </section>
+
+
+        <section class="raku page-content">
+          <div class="container">
+
+            <div class="columns">
+
+              <div class="column is-one-half">
+                <@categories-a>
+                <div class="raku-category category-block">
+                  <div class="category-header has-text-centered">
+                    <.title>
+                  </div>
+
+                  <div class="category-items">
+                    <@pages>
+                    <div class="category-item">
+                      <div class="category-item-title">
+                        <a href="<.url>" class="search-item-title"><.title></a>
+                      </div>
+                      <p>
+                        <.description>
+                      </p>
+                    </div>
+                    </@>
+                  </div>
+
+                </div>
+                </@>
+              </div>
+
+              <div class="column is-one-half">
+                <@categories-b>
+                <div class="raku-category category-block">
+                  <div class="category-header has-text-centered">
+                    <.title>
+                  </div>
+
+                  <div class="category-items">
+                    <@pages>
+                    <div class="category-item">
+                      <div class="category-item-title">
+                        <a href="<.url>" class="search-item-title"><.title></a>
+                      </div>
+                      <p>
+                        <.description>
+                      </p>
+                    </div>
+                    </@>
+                  </div>
+
+                </div>
+                </@>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+
+
+    </div>
+    <!-- Wrapper ends -->
+</|>

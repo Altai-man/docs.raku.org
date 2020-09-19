@@ -1,0 +1,34 @@
+{
+  "name": "docky",
+  "description": "Write me!",
+  "version": "0.0.1",
+  "perl": "6.*",
+  "meta-version": "0",
+  "authors": [
+    "Alexander Kiryuhin"
+  ],
+  "auth": "Write me!",
+  "depends": [
+    "Cro::HTTP",
+    "Documentable",
+    "Cro::WebApp"
+  ],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {
+    "Docky::Constants": "lib/Docky/Constants.pm6",
+    "Docky::Renderer::Node": "lib/Docky/Renderer/Node.pm6",
+    "Docky::Renderer::TOC": "lib/Docky/Renderer/TOC.pm6",
+    "Renderer": "lib/Renderer.pm6",
+    "Routes": "lib/Routes.pm6",
+  },
+  "resources": [],
+  "support": {
+    "source": "Write me!"
+  },
+  "license": "Write me!",
+  "tags": [
+    ""
+  ],
+  "source-url": "Write me!"
+}

@@ -1,0 +1,15 @@
+---
+endpoints: 
+  - 
+    id: http
+    host-env: DOCKY_HOST
+    protocol: http
+    port-env: DOCKY_PORT
+    name: HTTP
+links:  []
+name: docky
+id: docky
+entrypoint: service.p6
+cro: 1
+env:  []
+...

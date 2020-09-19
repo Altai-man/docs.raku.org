@@ -1,0 +1,4 @@
+<:use 'layout.crotmp'>
+<|layout(.title, .kinds, .irc-link)>
+<&HTML(.html)>
+</|>
