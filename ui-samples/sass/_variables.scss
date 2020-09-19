@@ -118,10 +118,17 @@ $navbar-background-color: $grey-lightest;
 $navbar-dropdown-arrow: $primary;
 
 $menu-label-color: $black;
+$menu-label-font-size: 0.75rem;
+
 $menu-item-hover-color: $black;
 $menu-item-hover-background-color: $grey-light;
 $menu-list-border-left: 1px solid $grey;
-$menu-label-font-size: 0.75rem;
+
+$menu-item-radius: 0px;
+$menu-list-line-height: 1.05;
+$menu-nested-list-padding-left: 0.5em;
+$menu-nested-list-margin: 0.5em;
+$menu-list-link-padding: 0.5em 0.5em;
 
 $section-padding: $size-4 $size-4;
 $control-radius: 3px;
