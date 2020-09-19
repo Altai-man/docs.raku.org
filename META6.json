@@ -20,7 +20,7 @@
     "Docky::Renderer::Node": "lib/Docky/Renderer/Node.pm6",
     "Docky::Renderer::TOC": "lib/Docky/Renderer/TOC.pm6",
     "Renderer": "lib/Renderer.pm6",
-    "Routes": "lib/Routes.pm6",
+    "Routes": "lib/Routes.pm6"
   },
   "resources": [],
   "support": {
