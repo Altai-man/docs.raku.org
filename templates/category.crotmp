@@ -28,10 +28,10 @@
                     <@pages>
                     <div class="category-item">
                       <div class="category-item-title">
-                        <a href="<.url>" class="search-item-title"><.title></a>
+                        <a href="<.url>" class="search-item-title"><.name></a>
                       </div>
                       <p>
-                        <.description>
+                        <.summary>
                       </p>
                     </div>
                     </@>
@@ -52,10 +52,10 @@
                     <@pages>
                     <div class="category-item">
                       <div class="category-item-title">
-                        <a href="<.url>" class="search-item-title"><.title></a>
+                        <a href="<.url>" class="search-item-title"><.name></a>
                       </div>
                       <p>
-                        <.description>
+                        <.summary>
                       </p>
                     </div>
                     </@>

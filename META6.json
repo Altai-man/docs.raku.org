@@ -17,6 +17,7 @@
   "test-depends": [],
   "provides": {
     "Docky::Constants": "lib/Docky/Constants.pm6",
+    "Docky::Host": "lib/Docky/Host.pm6",
     "Docky::Renderer::Node": "lib/Docky/Renderer/Node.pm6",
     "Docky::Renderer::TOC": "lib/Docky/Renderer/TOC.pm6",
     "Renderer": "lib/Renderer.pm6",

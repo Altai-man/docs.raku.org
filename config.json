@@ -90,7 +90,11 @@
     },
     {
       "kind": "programs",
-      "display-text": "Programs"
+      "display-text": "Programs",
+      "categories": {
+        "name": "programs",
+        "display-text": "Development Assistance"
+      }
     }
   ]
 }

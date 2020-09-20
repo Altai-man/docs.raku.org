@@ -2,6 +2,7 @@ use Cro::WebApp::Template;
 use Cro::HTTP::Client;
 use Cro::HTTP::Router;
 use Docky::Constants;
+use Docky::Host;
 use Docky::Renderer::TOC;
 use Docky::Renderer::Node;
 use Documentable;
@@ -11,63 +12,32 @@ use Documentable::To::HTML::Wrapper;
 
 constant GLOT_KEY = %*ENV<DOCKY_GLOT_IO_KEY>;
 
-# TODO properly initialize everything somewhere else
-my $registry = Documentable::Registry.new(
-        topdir => 'doc/doc',
-        :dirs( "Language", "Type", "Programs", "Native" ),
-        :verbose);
-$registry.compose;
-
-my @language-pages = $registry.lookup(Kind::Language.Str, :by<kind>).map({
-    %(
-        title    => .name,
-        url     => .url,
-        description => .summary,
-        category => .pod.config<category>
-    )}).cache;
-
-my $config = Documentable::Config.new(filename => 'config.json');
-
-my @type-pages = $registry.lookup(Kind::Type.Str, :by<kind>).map({
-    die $_ if .subkinds.elems > 1;
-    %(
-    title => .filename,
-    url => .url,
-    description => .summary,
-    category => .subkinds[0]
-)}).cache;
-
-my @language-categories = $config.get-categories(Kind::Language).map(-> $category {
-    { title => $category<display-text>, pages => @language-pages.grep({ $_<category> eq $category<name> }).cache }
-});
-
-my @type-categories = <class role>.map(-> $category {
-    { title => $category.tc, pages => @type-pages.grep({ $_<category> eq $category }).cache }
-});
-
-my @kinds = $config.kinds.cache;
-
-sub routes() is export {
+sub routes(Docky::Host $host) is export {
     my $UI-PREFIX = "ui-samples/dist";
     template-location 'templates';
 
     sub calculate-categories(Str $kind) {
+        # FIXME this is very temporary, as index page design is not established yet
         given $kind {
             when Kind::Language.Str {
-                my @categories-a = @language-categories[0, 1, 2, 4].cache;
-                my @categories-b = @language-categories[3, 5].cache;
+                my @categories-a = $host.get-index-page-data(Kind::Language)[0, 1, 2, 4].cache;
+                my @categories-b = $host.get-index-page-data(Kind::Language)[3, 5].cache;
                 return { :@categories-a, :@categories-b }
             }
             when Kind::Type.Str {
-                my @categories-a = @type-categories[0];
-                my @categories-b = @type-categories[1];
+                my @categories-a = $host.get-index-page-data(Kind::Type).cache;
+                my @categories-b = $host.get-index-page-data(Kind::Type).cache;
                 return { :@categories-a, :@categories-b }
             }
             when Kind::Routine.Str {
-                return { }
+                my @categories-a = $host.get-index-page-data(Kind::Routine).cache;
+                my @categories-b = $host.get-index-page-data(Kind::Routine).cache;
+                return { :@categories-a, :@categories-b }
             }
             when Kind::Programs.Str {
-                return { }
+                my @categories-a = $host.get-index-page-data(Kind::Programs).cache;
+                my @categories-b = $host.get-index-page-data(Kind::Programs).cache;
+                return { :@categories-a, :@categories-b }
             }
             default {
                 die "'$kind'";
@@ -80,8 +50,8 @@ sub routes() is export {
         # Index
         get -> {
             template 'index.crotmp', %(
-                :@backup-cards, |$config.config,
-                :@community-links, :@resource-links, :@explore-links
+                |$host.config.config,
+                :@backup-cards, :@community-links, :@resource-links, :@explore-links
             )
         }
 
@@ -90,10 +60,10 @@ sub routes() is export {
         }
 
         # Page categories
-        get -> $category-id where 'language'|'type' {
-            with @kinds.first(*<kind> eq $category-id) -> $category {
+        get -> $category-id where 'language'|'type'|'routine'|'programs' {
+            with $host.config.kinds.first(*<kind> eq $category-id) -> $category {
                 template 'category.crotmp', %(
-                    |$config.config,
+                    |$host.config.config,
                     title => "$category<display-text> - Raku Documentation",
                     category-title => $category<display-text>,
                     category-description => $category<description>,
@@ -106,12 +76,14 @@ sub routes() is export {
 
         # Individual item page
         get -> *@path {
-            state @docs = $registry.documentables.grep({ .kind eq Kind::Language });
+            state @docs = $host.registry.documentables.grep({ .kind eq Kind::Language });
             my $doc = @docs.first(*.url eq ('/' ~ @path.join('/')));
             my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node);
             my $html = $renderer.render($doc.pod, toc => Docky::Renderer::TOC);
             # static "$UI-PREFIX/templates/elems.html";
-            template 'entry.crotmp', { title => $renderer.metadata<title> ~ ' - Raku Documentation', |$config.config, :$html };
+            template 'entry.crotmp', {
+                title => $renderer.metadata<title> ~ ' - Raku Documentation',
+                |$host.config.config, :$html };
         }
 
         post -> 'run' {
@@ -137,5 +109,6 @@ sub routes() is export {
         get -> 'css', *@path { static "$UI-PREFIX/css/", @path }
         get -> 'js',  *@path { static "static/js/",  @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
+        get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
     }
 }
