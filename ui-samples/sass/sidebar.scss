@@ -22,7 +22,7 @@ $sidebar-divider: 1px solid $grey-lighter !default;
   z-index: $sidebar-z;
   overflow-x: hidden; // Disable horizontal scroll
   transofrm: tranlateZ (0);
-  transition: .3s ease;
+  transition: width 1s ease;
   backface-visibility: hidden;
   perspective: 1000;
   will-change: transforn;
