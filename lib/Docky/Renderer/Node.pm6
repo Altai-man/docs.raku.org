@@ -35,4 +35,9 @@ class Docky::Renderer::Node is Node::To::HTML {
         </div>
         END
     }
+
+    multi method node2html(Pod::Block::Table $node) {
+        $node.config<class> = 'table is-bordered centered';
+        Node::To::HTML.node2html($node);
+    }
 }
