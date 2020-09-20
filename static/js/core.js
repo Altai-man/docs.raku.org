@@ -42,6 +42,27 @@ function setup_glot_io() {
         });
     });
 
+    var base_width, toggle_width, sidebar = true;
+
+    $('.raku-sidebar-toggle').each(function(i, el) {
+        $(el).click(function() {
+            if (sidebar) {
+                sidebar = false;
+                base_width = $("#mainSidebar").css('width');
+                $("#mainSidebar").css('width', '0');
+                $("#mainSidebar").css('display', 'none');
+                toggle_width = $(this).css('left');
+                $(this).css('left', '0');
+                $(el).find('i').removeClass('fas fa-chevron-left is-medium').addClass('fas fa-chevron-right is-medium');
+            } else {
+                sidebar = true;
+                $("#mainSidebar").css('width', base_width);
+                $("#mainSidebar").css('display', 'block');
+                $(this).css('left', toggle_width);
+                $(el).find('i').removeClass('fas fa-chevron-right is-medium').addClass('fas fa-chevron-left is-medium');
+            }
+        });
+    });
 }
 
 // Open navbar menu
