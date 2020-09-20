@@ -17,7 +17,7 @@ class Docky::Renderer::Node is Node::To::HTML {
                 !!'<a class="u" href="#___top" title="go to top of document">' ~ %escaped<html> ~ '</a>';
         $content ~= qq:to/END/;
 
-                <a class="raku-acnhor" href="#%escaped<id>">§</a>
+                <a class="raku-anchor" href="#%escaped<id>">§</a>
         END
         "<h$level class=\"raku-h$level\" id={ "\"%escaped<id>\"" }>$content\</h$level>\n";
     }

@@ -293,13 +293,6 @@ body {
 }
 
 // Raku page headings
-.raku-anchor {
-  // visibility: hidden;
-  font-size: 0.9em;
-  color: $grey-darker;
-  text-decoration: none;
-}
-
 .raku-h1 {
   background: $grey-lightest;
   border: 1px solid $border;
@@ -309,6 +302,7 @@ body {
   font-weight: $weight-medium;
   padding: 0.35rem;
   text-align: center;
+  margin-top: $size-7;
   margin-bottom: 1rem;
 }
 
@@ -319,6 +313,7 @@ body {
   font-size: 1.375rem; // 22px
   font-weight: $weight-medium;
   padding: 0.25rem;
+  margin-top: $size-7;
   margin-bottom: 1rem;
 }
 
@@ -326,6 +321,7 @@ body {
   color: $red;
   font-size: $size-5; // 20px
   font-weight: $weight-medium;
+  margin-top: $size-7;
   margin-bottom: 1rem;
 }
 
@@ -349,6 +345,38 @@ body {
   font-weight: $weight-semibold;
   margin-bottom: 1rem;
 }
+
+.raku-h1 a, .raku-h2 a, .raku-h3 a, .raku-h4 a, .raku-h5 a, .raku-h6 a {
+  color: $red;
+}
+
+.raku-h1 a:hover, .raku-h2 a:hover, .raku-h3 a:hover, .raku-h4 a:hover, .raku-h5 a:hover, .raku-h6 a:hover {
+  color: $primary;
+}
+
+
+.raku-anchor {
+  // visibility: hidden;
+  font-size: 0.9em;
+  color: $grey-darker;
+  text-decoration: none;
+}
+
+
+a.raku-anchor:hover {
+  color: $primary;
+}
+
+a.raku-anchor,
+.raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
+  color: $grey-darker;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
 
 // Version note
 .raku.version-note {
@@ -441,6 +469,17 @@ table.centered {
 
 .raku.tabcontent {
   display: none;
+}
+
+// Text
+p {
+  padding-top: $size-7 !important;
+  padding-bottom: $size-7 !important;
+}
+
+p > code {
+  background-color: $grey-lightest;
+  border: 1px solid $grey-lighter;
 }
 
 // Workaround
