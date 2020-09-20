@@ -3,8 +3,11 @@ $(function(){
 });
 
 function setup_glot_io() {
-    $('pre').each(function(i, el){
+    $('pre').each(function(i, el) {
         var $el = $(el);
+        if (!$el.parent().hasClass('raku-lang')) {
+            return;
+        }
         var mirror = CodeMirror(el, {
             lineNumbers:    true,
             lineWrapping:   true,
@@ -13,7 +16,6 @@ function setup_glot_io() {
             theme:          'ayaya',
             value:          $el.find('code').text().trim()
         });
-
         $el.find('code').text('')
     });
 
