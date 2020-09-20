@@ -9,6 +9,7 @@ use Documentable;
 use Documentable::Registry;
 use Documentable::DocPage::Factory;
 use Documentable::To::HTML::Wrapper;
+use Pod::Utilities::Build;
 
 constant GLOT_KEY = %*ENV<DOCKY_GLOT_IO_KEY>;
 
@@ -55,11 +56,12 @@ sub routes(Docky::Host $host) is export {
             )
         }
 
+        # Redirect from `.html` FIXME more redirects, much more
         get -> $page where $page.ends-with('.html') {
             redirect $page.subst('.html'), :permanent;
         }
 
-        # Page categories
+        # Category indexes
         get -> $category-id where 'language'|'type'|'routine'|'programs' {
             with $host.config.kinds.first(*<kind> eq $category-id) -> $category {
                 template 'category.crotmp', %(
@@ -74,16 +76,35 @@ sub routes(Docky::Host $host) is export {
             }
         }
 
-        # Individual item page
-        get -> *@path {
-            state @docs = $host.registry.documentables.grep({ .kind eq Kind::Language });
-            my $doc = @docs.first(*.url eq ('/' ~ @path.join('/')));
+        # /type/Int or /syntax/token...
+        get -> $category-id where 'language'|'type'|'programs'|'routine'|'reference'|'syntax', $name {
             my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node);
-            my $html = $renderer.render($doc.pod, toc => Docky::Renderer::TOC);
-            # static "$UI-PREFIX/templates/elems.html";
-            template 'entry.crotmp', {
-                title => $renderer.metadata<title> ~ ' - Raku Documentation',
-                |$host.config.config, :$html };
+            my $pod;
+            # The simple way is where we have a single document to render
+            # If it is not so, we need to gather each relevant piece and assemble a document
+            if $category-id eq 'language'|'type'|'programs' {
+                # Technically, this can be merged with `else` branch to just grep and then take first, but with .first we don't need
+                # to traverse whole structure if we found the doc, while in else branch we _have to_ exhaust it to
+                # make sure we don't miss some definition of some method on a page we did not traverse
+                $pod = $_.pod with $host.registry.lookup($category-id, :by<kind>).first(*.url eq "/$category-id/$name");
+            }
+            else {
+                my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
+                $pod = pod-with-title("SUBKIND TODO $name",
+                        pod-block("Documentation for SUBKIND TODO ", pod-code($name), " assembled from the following types:"),
+                        @docs.map({
+                            pod-heading("{.origin.human-kind} {.origin.name}"),
+                            pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
+                        })) if @docs.elems != 0;;
+            }
+            with $pod {
+                my $html = $renderer.render($_, toc => Docky::Renderer::TOC);
+                template 'entry.crotmp', { title => $renderer.metadata<title> ~ ' - Raku Documentation',
+                                           |$host.config.config, :$html }
+            }
+            else {
+                not-found;
+            }
         }
 
         post -> 'run' {
