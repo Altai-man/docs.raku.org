@@ -26,10 +26,13 @@
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="container">
 
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/img/camelia-recoloured.png" width="52.83" height="38">
-          </a>
+        <div class="navbar-brand navbar-logo">
+          <div class="navbar-logo">
+            <a class="navbar-item" href="/">
+              <img src="/img/camelia-recoloured.png" width="52.83" height="38">
+            </a>
+            <div class="navbar-logo-tm">tm</div>
+          </div>
 
           <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
             <span aria-hidden="true"></span>
