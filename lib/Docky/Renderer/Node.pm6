@@ -12,11 +12,13 @@ class Docky::Renderer::Node is Node::To::HTML {
         my %escaped = id => escape_id(node2rawtext($node.contents)),
                       html => self.node2inline($node.contents);
         %escaped<uri> = uri_escape(%escaped<id>);
-
         my $content = %escaped<html> ~~ m{href .+ \<\/a\>}
                 ?? %escaped<html>
                 !!'<a class="u" href="#___top" title="go to top of document">' ~ %escaped<html> ~ '</a>';
+        $content ~= qq:to/END/;
 
+                <a class="raku-acnhor" href="#%escaped<id>">§</a>
+        END
         "<h$level class=\"raku-h$level\" id={ "\"%escaped<id>\"" }>$content\</h$level>\n";
     }
 
