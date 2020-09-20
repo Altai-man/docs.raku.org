@@ -61,7 +61,7 @@
       <!-- TODO: Add horizontal gap  -->
       <section class="raku links-block">
           <div class="container px-4 py-5">
-            <div class="columns">
+            <div class="columns is-vcentered">
 
              <div class="column is-one-third has-text-centered">
                <div class="pt-5">
