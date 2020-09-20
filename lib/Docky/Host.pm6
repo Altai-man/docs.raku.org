@@ -23,7 +23,6 @@ class Docky::Host {
         my %pages;
         for Kind.enums.keys -> $kind {
             my $key = ::Kind::($kind);
-            note $config.get-categories($key);
             %pages{$key.Str} = $config.get-categories($key).map(-> $category {
                 %( title => $category<display-text>,
                    pages => %all-pages{$key}.grep({
@@ -32,7 +31,6 @@ class Docky::Host {
                 )
             });
         }
-        note %pages{Kind::Programs};
         %pages;
     }
 
