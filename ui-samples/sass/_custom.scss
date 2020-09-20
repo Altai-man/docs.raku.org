@@ -304,6 +304,8 @@ body {
   text-align: center;
   margin-top: $size-7;
   margin-bottom: 1rem;
+
+  scroll-margin-top: 5rem;
 }
 
 
@@ -315,6 +317,8 @@ body {
   padding: 0.25rem;
   margin-top: $size-7;
   margin-bottom: 1rem;
+
+  scroll-margin-top: 5rem;
 }
 
 .raku-h3 {
@@ -323,6 +327,8 @@ body {
   font-weight: $weight-medium;
   margin-top: $size-7;
   margin-bottom: 1rem;
+
+  scroll-margin-top: 4rem;
 }
 
 .raku-h4 {
@@ -330,6 +336,8 @@ body {
   font-size: $size-6;
   font-weight: $weight-medium;
   margin-bottom: 1rem;
+
+  scroll-margin-top: 4rem;
 }
 
 .raku-h5 {
@@ -337,6 +345,8 @@ body {
   font-size: 0.875rem;
   font-weight: $weight-medium;
   margin-bottom: 1rem;
+
+  scroll-margin-top: 3rem;
 }
 
 .raku-h6 {
@@ -344,7 +354,14 @@ body {
   font-size: $size-7;
   font-weight: $weight-semibold;
   margin-bottom: 1rem;
+
+  scroll-margin-top: 3rem;
 }
+
+
+// .raku-h1 code, .raku-h2 code, .raku-h3 code, .raku-h4 code, .raku-h5 code, .raku-h6 code {
+//   color: $yellow;
+// }
 
 .raku-h1 a, .raku-h2 a, .raku-h3 a, .raku-h4 a, .raku-h5 a, .raku-h6 a {
   color: $red;
