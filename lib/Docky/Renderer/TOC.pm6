@@ -9,7 +9,7 @@ class Docky::Renderer::TOC is TOC::Calculator {
             my $text = self.render-heading($item<text>);
             my $common = "<li><a href=\"#$item<link>\">$text\</a>";
             if $item<level> eq $curr-level {
-                $result ~= $common;
+                $result ~= "$common\</li>";
             } elsif $item<level> > $curr-level {
                 $result ~= "<li><ul>$common\</li>";
                 $curr-level++;
@@ -18,6 +18,8 @@ class Docky::Renderer::TOC is TOC::Calculator {
                 $curr-level--;
             }
         }
-        $result ~= '</ul></aside>';
+        $result ~= '</ul>' while $curr-level-- != 1;
+        note $result ~= '</ul></aside>';
+        $result;
     }
 }
