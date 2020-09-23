@@ -63,6 +63,20 @@ function setup_glot_io() {
             }
         });
     });
+
+    $(".tab-switch").each(function(i, el) {
+        $(el).click(function () {
+            $('.tab-switch').each(function(i, el) {
+                $(el).removeClass('is-active');
+            });
+            var tab_id = 'tab-' + $(el).attr('id').substring(7);
+            $('.tabcontent').each(function(i, el) {
+                $(el).css('display', 'none');
+            });
+            $(el).addClass('is-active');
+            $('#' + tab_id).css('display', 'block');
+        });
+    });
 }
 
 // Open navbar menu

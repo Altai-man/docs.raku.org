@@ -25,20 +25,36 @@ sub routes(Docky::Host $host) is export {
                 my @categories-b = $host.get-index-page-data(Kind::Language)[3, 5].cache;
                 return { :@categories-a, :@categories-b }
             }
-            when Kind::Type.Str {
-                my @categories-a = $host.get-index-page-data(Kind::Type).cache;
-                my @categories-b = $host.get-index-page-data(Kind::Type).cache;
-                return { :@categories-a, :@categories-b }
-            }
-            when Kind::Routine.Str {
-                my @categories-a = $host.get-index-page-data(Kind::Routine).cache;
-                my @categories-b = $host.get-index-page-data(Kind::Routine).cache;
-                return { :@categories-a, :@categories-b }
-            }
             when Kind::Programs.Str {
                 my @categories-a = $host.get-index-page-data(Kind::Programs).cache;
                 my @categories-b = $host.get-index-page-data(Kind::Programs).cache;
                 return { :@categories-a, :@categories-b }
+            }
+            when Kind::Type.Str {
+                my @docs = $host.registry.lookup(Kind::Type.Str, :by<kind>)
+                        .categorize(*.name).sort(*.key).map(*.value)
+                        .map({%(
+                    name     => .[0].name,
+                    url      => .[0].url,
+                    subkinds => .map({.subkinds // Nil}).flat.unique.List,
+                    summary  => .[0].summary,
+                    subkind  => .[0].subkinds[0]
+                )}).cache;
+
+                my @columns = <name Type Description>;
+                my @rows = @docs.map({
+                    ["<a href=\"$_.<url>\">$_.<name>\</a>", .<subkinds>, .<summary>]
+                }).cache;
+                my @tabs;
+                @tabs.push: %( :is-active, :display-text<All>, :name<all>, :@columns, :@rows );
+                @tabs.append: $host.config.get-categories(Kind::Type).map({ %( name => .<name>, display-text => .<display-text>, :!is-active, :@columns, :@rows ) });
+                return @( :@tabs, :section-title('Raku Types'), :section-description('This is a list of all built-in Types that are documented here as part of the Raku language.') );
+            }
+            when Kind::Routine.Str {
+                my @tabs;
+                @tabs.push: %( :is-active, :display-text<All>, :title('This is a list of all built-in Types that are documented here as part of the Raku language. Use the above menu to narrow it down topically.') );
+                @tabs.append: $host.config.get-categories(Kind::Routine).map({ %( display-text => .<display-text>, :!is-active ) });
+                return :@tabs;
             }
             default {
                 die "'$kind'";
@@ -56,15 +72,11 @@ sub routes(Docky::Host $host) is export {
             )
         }
 
-        # Redirect from `.html` FIXME more redirects, much more
-        get -> $page where $page.ends-with('.html') {
-            redirect $page.subst('.html'), :permanent;
-        }
-
         # Category indexes
         get -> $category-id where 'language'|'type'|'routine'|'programs' {
             with $host.config.kinds.first(*<kind> eq $category-id) -> $category {
-                template 'category.crotmp', %(
+                my $template = $category-id eq 'language'|'programs' ?? 'category' !! 'tabbed';
+                template "$template.crotmp", %(
                     |$host.config.config,
                     title => "$category<display-text> - Raku Documentation",
                     category-title => $category<display-text>,
@@ -131,5 +143,12 @@ sub routes(Docky::Host $host) is export {
         get -> 'js',  *@path { static "static/js/",  @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
+
+        # Saint redirects for everyone, to cover as many links as possible...
+        get -> $page where $page.ends-with('.html') {
+            redirect $page.subst('.html'), :permanent;
+        }
+
+        #get -> 'type-basic'
     }
 }
