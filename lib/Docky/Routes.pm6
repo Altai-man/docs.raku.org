@@ -60,7 +60,6 @@ sub routes(Docky::Host $host) is export {
                 die "'$kind'";
             }
         }
-
     }
 
     route {
@@ -90,7 +89,6 @@ sub routes(Docky::Host $host) is export {
 
         # /type/Int or /syntax/token...
         get -> $category-id where 'language'|'type'|'programs'|'routine'|'reference'|'syntax', $name {
-            my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node);
             my $pod;
             # The simple way is where we have a single document to render
             # If it is not so, we need to gather each relevant piece and assemble a document
@@ -98,7 +96,7 @@ sub routes(Docky::Host $host) is export {
                 # Technically, this can be merged with `else` branch to just grep and then take first, but with .first we don't need
                 # to traverse whole structure if we found the doc, while in else branch we _have to_ exhaust it to
                 # make sure we don't miss some definition of some method on a page we did not traverse
-                $pod = $_.pod with $host.registry.lookup($category-id, :by<kind>).first(*.url eq "/$category-id/$name");
+                $pod = $host.registry.lookup($category-id, :by<kind>).first(*.url eq "/$category-id/$name");
             }
             else {
                 my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
@@ -110,7 +108,10 @@ sub routes(Docky::Host $host) is export {
                         })) if @docs.elems != 0;;
             }
             with $pod {
-                my $html = $renderer.render($_, toc => Docky::Renderer::TOC);
+                my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,
+                        prettyPodPath => "$category-id.tc()/$name.subst('::', '/', :g).pod6",
+                        podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6");
+                my $html = $renderer.render($_.pod, toc => Docky::Renderer::TOC);
                 template 'entry.crotmp', { title => $renderer.metadata<title> ~ ' - Raku Documentation',
                                            |$host.config.config, :$html }
             }
