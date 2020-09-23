@@ -24,6 +24,7 @@ class Docky::Renderer::Node is Node::To::HTML {
 
     multi method node2html(Pod::Block::Code $node) {
         my $lang = $node.config<lang> ?? '' !! ' raku-lang';
+        $lang = '' with $node.config<skip-test>;
         my $header = $lang ??
         q:to/END/
         <div class="code-header">
