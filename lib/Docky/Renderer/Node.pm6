@@ -49,4 +49,27 @@ class Docky::Renderer::Node is Node::To::HTML {
         $node.config<class> = 'table is-bordered centered';
         Node::To::HTML.node2html($node);
     }
+
+    multi method node2html(Pod::Block::Para $node, *%config --> Str) {
+        with %config<versioned> {
+            qq:to/END/
+            <article class="raku version-note">
+                <div class="version-note-header">
+                    <p>Version Note</p>
+                    <div class="version-related-to">
+                <span class="icon">
+                  <i class="fas fa-chevron-up is-medium"></i>
+                </span>
+                    </div>
+                </div>
+
+                <div class="version-body">
+                    {self.node2inline($node.contents)}
+                </div>
+            </article>
+            END
+        } else {
+            self.node2inline($node.contents)
+        }
+    }
 }
