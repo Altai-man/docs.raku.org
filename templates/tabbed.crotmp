@@ -1,0 +1,44 @@
+<:use 'layout.crotmp'>
+<|layout(.title, .kinds, .irc-link)>
+    <div id="wrapper">
+        <section class="raku page-header">
+            <div class="container px-4">
+                <div class="raku page-title has-text-centered"><.section-title></div>
+                <div class="raku page-subtitle has-text-centered"><.section-description></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+
+                <!-- Table -->
+
+                <div class="raku tabs is-boxed">
+                    <ul>
+                        <@tabs>
+                        <li id="switch-<.name>" class="tab-switch <?.is-active>is-active</?>">
+                            <a>
+                                <span><.display-text></span>
+                            </a>
+                        </li>
+                        </@>
+                    </ul>
+                </div>
+
+                <@tabs>
+                    <div id="tab-<.name>" class="raku tabcontent" <?.is-active>style="display: block;"</?>>
+
+                        <table class="pod-table table is-bordered centered">
+                            <thead><tr><@columns><th><$_></th></@></tr></thead>
+                            <tbody><@rows><tr><@$_><td><&HTML($_)></@></tr></@></tbody>
+                        </table>
+
+
+                    </div>
+                </@>
+            </div>
+        </section>
+
+    </div>
+    <!-- Wrapper ends -->
+</|>
