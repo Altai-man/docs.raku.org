@@ -58,7 +58,7 @@ class Docky::Renderer::Node is Node::To::HTML {
                     <p>Version Note</p>
                     <div class="version-related-to">
                 <span class="icon">
-                  <i class="fas fa-chevron-up is-medium"></i>
+                  <i class="fas fa-chevron-$_ is-medium"></i>
                 </span>
                     </div>
                 </div>
