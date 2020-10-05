@@ -91,10 +91,10 @@
     {
       "kind": "programs",
       "display-text": "Programs",
-      "categories": {
+      "categories": [{
         "name": "programs",
         "display-text": "Development Assistance"
-      }
+      }]
     }
   ]
 }
