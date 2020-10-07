@@ -92,6 +92,11 @@ body {
   border-top: 1px solid $grey-light;
 }
 
+
+.main-footer {
+  font-size: 0.875rem;
+}
+
 .footer .level {
   height: 50px;
 }
@@ -115,6 +120,7 @@ body {
 }
 
 
+
 // Custom classes
 .has-background-image {
   background-position: center;
@@ -128,7 +134,7 @@ body {
   .head {
     font-family: $family-secondary;
     font-size: $size-6;
-    font-weight: $weight-bold;
+    font-weight: $weight-semibold;
     color: $dark;
     margin-bottom: 0.5rem;
   }
@@ -222,6 +228,7 @@ body {
 
 .raku.page-header {
   margin-top: $size-6;
+  position: relative;
 }
 
 .raku.page-header,
@@ -229,11 +236,31 @@ body {
   padding: 1rem 1.5rem;
 }
 
+.raku.page-header .page-edit {
+  position: absolute;
+  right: $size-6;
+  top: $size-7;
+
+
+  color: $grey-dark;
+
+  .page-edit-button {
+    background: $grey-lightest;
+    color: $grey-dark;
+
+    height: 30px;
+
+    &:hover {
+      color: $grey-darker;
+    }
+  }
+}
+
 // Raku search page
 .raku-search {
   .search-category {
     border: 1px solid $grey;
-    box-shadow: 0px 2px 3px 0px rgba( 0, 0, 0, 0.07 );
+    box-shadow: $shadow-below;
   }
 
   .search-item {
@@ -262,7 +289,7 @@ body {
 .raku-category.category-block {
   border: 1px solid $border;
   border-bottom: 5px solid $grey-lighter;
-  box-shadow: 0px 2px 3px 0px rgba( 0, 0, 0, 0.07 );
+  box-shadow: $shadow-below;
   margin-bottom: $size-5;
 
 }
@@ -289,6 +316,37 @@ body {
 
   .category-item-title {
     margin-bottom: 0.25rem;
+  }
+}
+
+.raku-programs {
+
+  // .programs-header {
+  //   background: $grey-lightest;
+  //   border-bottom: 1px solid $border;
+  //   color: $grey-dark;
+  //   padding: 0.35rem;
+  // }
+
+  .programs-items {
+    padding-top: 0.25rem;
+    padding-bottom: $size-7;
+  }
+
+  .programs-item {
+    font-weight: $weight-medium;
+    padding: $size-6 $size-4;
+    // margin: $size-7 0;
+    // border: 1px solid $border;
+    // border-radius: 3px;
+
+  }
+
+  .programs-item-title {
+    font-size: $size-5;
+    font-weight: $weight-medium;
+    // margin-bottom: 0.25rem;
+    border-bottom: 1px solid $border;
   }
 }
 
@@ -401,7 +459,7 @@ a.raku-anchor,
   padding: $size-5;
   background: $grey-lightest;
   border: 1px solid $border;
-  box-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+  box-shadow: $shadow-below;
 }
 
 .version-note-header {
@@ -425,7 +483,7 @@ a.raku-anchor,
 
 // Tables
 table {
-  box-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+  box-shadow: $shadow-below;
 }
 
 table.centered {
@@ -438,7 +496,7 @@ table.centered {
   margin: $size-5 0;
   border: 1px solid $grey-lighter;
   border-bottom: 3px solid $grey-lighter;
-  box-shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.07 );
+  box-shadow: $shadow;
   // box-shadow: unset;
   border-radius: 3px;
 }
@@ -488,7 +546,7 @@ table.centered {
   display: none;
 }
 
-// Text
+// Text & other stuff
 p {
   padding-top: $size-7 !important;
   padding-bottom: $size-7 !important;

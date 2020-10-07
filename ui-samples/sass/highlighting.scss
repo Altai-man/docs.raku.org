@@ -18,7 +18,7 @@ $code-variable-color: #5503B3;
   border: 1px solid $border;
   border-bottom: 3px solid $border;
   margin: $size-6 0;
-  box-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+  box-shadow: $shadow-below;
 
   .code-name {
     padding-top: $size-7;

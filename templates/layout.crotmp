@@ -98,23 +98,28 @@
     <:body>
 
     <footer class="footer main-footer">
-      <div class="container">
+      <div class="container px-4">
 
         <nav class="level">
+        <div class="level-left">
           <div class="level-item">
-            <a href="#">About</a>
-          </div>
+              <a href="#">About</a>
+           </div>
 
-          <div class="level-item">
-            <a href="#">Toggle theme</a>
-          </div>
+            <div class="level-item">
+              <a href="#">Toggle theme</a>
+            </div>
+        </div>
 
+        <div class="level-right">
           <div class="level-item">
             <p>
               This website is licensed under
               <a href="https://raw.githubusercontent.com/Raku/doc/master/LICENSE">the Artistic License 2.0</a>
             </p>
           </div>
+        </div>
+
         </nav>
 
       </div>

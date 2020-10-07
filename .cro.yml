@@ -12,4 +12,6 @@ id: docky
 entrypoint: service.p6
 cro: 1
 env:  []
+ignore:
+  - ui-samples/
 ...

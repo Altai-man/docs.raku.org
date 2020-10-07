@@ -35,7 +35,7 @@
                     <p class="title is-5 has-text-primary"><.title></p>
                   </div>
 
-                  <div class="content">
+                  <div class="content has-text-centered">
                     <.description>
                   </div>
 
