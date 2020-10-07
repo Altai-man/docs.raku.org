@@ -3,7 +3,7 @@ use Pod::To::HTML;
 class Docky::Renderer::TOC is TOC::Calculator {
     method render() {
         my @toc = self.calculate;
-        my $result = '<aside class="menu"><ul class="menu-list">';
+        my $result = '<aside id="toc-menu" class="menu"><ul class="menu-list">';
         my $curr-level = 1;
         my $first = True;
         for @toc -> $item {
