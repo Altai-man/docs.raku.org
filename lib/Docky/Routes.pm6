@@ -140,7 +140,9 @@ sub routes(Docky::Host $host) is export {
         }
 
         # Statics
-        # get -> 'about' { static "$UI-PREFIX/templates/about.html" }
+        get -> 'about' {
+            template 'about.crotmp', { title => 'About - Raku Documentation', |$host.config.config }
+        }
         get -> 'css', *@path { static "static/css/", @path }
         get -> 'js',  *@path { static "static/js/",  @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }

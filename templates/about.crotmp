@@ -1,0 +1,35 @@
+<:use 'layout.crotmp'>
+<|layout(.title, .kinds, .irc-link)>
+    <div id="wrapper">
+
+      <div class="raku page">
+
+        <section class="raku page-header">
+          <div class="container px-4">
+            <div class="raku page-title has-text-centered">About docs.raku.org website</div>
+          </div>
+        </section>
+
+
+        <section class="raku page-content">
+          <div class="container">
+            <div class="content">
+              <p><b>Raku programming language</b> is a very flexible, modern programming language.</p>
+              <p>This website is dedicated to be a good <i>viewer</i> for its documentation. A great lot of people contributed to documentation's text and tooling, a dedicated credits page is <a href="https://raw.githubusercontent.com/Raku/doc/master/CREDITS">here</a>.</p>
+              <p>This particular website is a fraction of effort standing on the shoulders of the giants.</p>
+              <p>Below, some people <i>related to this website creation</i> are listed:</p>
+              <ul>
+                <li><a href="https://github.com/ogdenwebb">Ogden Webb</a> - author of initial website design.</li>
+                <li><a href="https://github.com/AlexDaniel">Aleks-Daniel Jakimenko-Aleksejev</a> - provided invaluable feedback.</li>
+                <li><a href="https://github.com/JJ">JJ</a> - provided invaluable feedback, organized efforts resulting in <a href="https://github.com/Raku/Documentable">Documentable</a> creation.</li>
+              </ul>
+            </div>
+
+          </div>
+
+      </div>
+
+
+    </div>
+    <!-- Wrapper ends -->
+</|>
