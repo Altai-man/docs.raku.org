@@ -140,7 +140,8 @@ sub routes(Docky::Host $host) is export {
         }
 
         # Statics
-        get -> 'css', *@path { static "$UI-PREFIX/css/", @path }
+        # get -> 'about' { static "$UI-PREFIX/templates/about.html" }
+        get -> 'css', *@path { static "static/css/", @path }
         get -> 'js',  *@path { static "static/js/",  @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
