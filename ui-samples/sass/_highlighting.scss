@@ -1,18 +1,6 @@
 // Raku code highlighting
 @import "./initial-variables";
 
-$code-background: #fafafa;
-$code-foreground: #030303;
-
-$code-callable-color: #005C43;
-$code-comment-color:  #6D4F4B;
-$code-keyword-color:  #223B9E;
-$code-number-color:   #1C6301;
-$code-operator-color: #C01823;
-$code-string-color:   #004FB3;
-$code-type-color:     #A3004F;
-$code-variable-color: #5503B3;
-
 .raku-code {
   position: relative;
   border: 1px solid $border;
@@ -57,28 +45,28 @@ $code-variable-color: #5503B3;
     color: $code-foreground;
   }
 
-  .code-callable {
-    color: $code-callable-color;
-  }
-  .code-comment {
-    color: $code-comment-color;
-  }
-  .code-keyword {
-    color: $code-keyword-color;
-  }
-  .code-number {
-    color: $code-number-color;
-  }
-  .code-operator {
-    color: $code-operator-color;
-  }
-  .code-string {
-    color: $code-string-color;
-  }
-  .code-type {
-    color: $code-type-color;
-  }
-  .code-variable {
-    color: $code-variable-color;
-  }
+  // .code-callable {
+  //   color: $code-callable-color;
+  // }
+  // .code-comment {
+  //   color: $code-comment-color;
+  // }
+  // .code-keyword {
+  //   color: $code-keyword-color;
+  // }
+  // .code-number {
+  //   color: $code-number-color;
+  // }
+  // .code-operator {
+  //   color: $code-operator-color;
+  // }
+  // .code-string {
+  //   color: $code-string-color;
+  // }
+  // .code-type {
+  //   color: $code-type-color;
+  // }
+  // .code-variable {
+  //   color: $code-variable-color;
+  // }
 }

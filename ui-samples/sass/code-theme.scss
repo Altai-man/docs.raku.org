@@ -1,0 +1,24 @@
+@import "./initial-variables";
+
+/* Themes support */
+.cm-s-ayaya.CodeMirror {
+  background: $code-background;
+  color: $code-foreground;
+}
+
+.cm-s-ayaya {
+  span.cm-comment { color: $code-comment-color; }
+  span.cm-number { color: $code-number-color }
+
+  span.cm-comment.cm-type { color: #5998a6; }
+
+  span.cm-keyword { color: $code-keyword-color; }
+  span.cm-string { color: $code-string-color; }
+
+  span.cm-variable { color: $code-variable-color; }
+  span.cm-variable-2 { color: $code-variable-color; }
+  span.cm-variable-3 { color: $code-variable-color; }
+  span.cm-type { color: $code-type-color; }
+  span.cm-def { color: $code-keyword-color; }
+  span.cm-operator { color: $code-operator-color; }
+}

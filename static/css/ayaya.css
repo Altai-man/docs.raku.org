@@ -1,0 +1,37 @@
+/* Themes support */
+.cm-s-ayaya.CodeMirror {
+  background: #fafafa;
+  color: #030303; }
+
+.cm-s-ayaya span.cm-comment {
+  color: #6D4F4B; }
+
+.cm-s-ayaya span.cm-number {
+  color: #1C6301; }
+
+.cm-s-ayaya span.cm-comment.cm-type {
+  color: #5998a6; }
+
+.cm-s-ayaya span.cm-keyword {
+  color: #223B9E; }
+
+.cm-s-ayaya span.cm-string {
+  color: #004FB3; }
+
+.cm-s-ayaya span.cm-variable {
+  color: #5503B3; }
+
+.cm-s-ayaya span.cm-variable-2 {
+  color: #5503B3; }
+
+.cm-s-ayaya span.cm-variable-3 {
+  color: #5503B3; }
+
+.cm-s-ayaya span.cm-type {
+  color: #A3004F; }
+
+.cm-s-ayaya span.cm-def {
+  color: #223B9E; }
+
+.cm-s-ayaya span.cm-operator {
+  color: #C01823; }

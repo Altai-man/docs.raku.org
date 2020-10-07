@@ -1,20 +1,21 @@
 {
-  "name": "raku-docs",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "Artistic-2.0",
-  "dependencies": {
-    "autoprefixer": "^9.8.6",
-    "bulma": "^0.9.0",
-    "clean-css-cli": "^4.3.0",
-    "node-sass": "^4.14.1",
-    "postcss-cli": "^7.1.2"
-  },
-  "scripts": {
-    "css-build": "npx node-sass --omit-source-map-url sass/main.scss dist/css/main.css",
-    "css-postcss": "npx postcss --use autoprefixer --map true --output dist/css/main.css dist/css/main.css",
-    "css-minify": "npx cleancss --level 2 dist/css/main.css -o dist/css/main.min.css",
-    "css-watch": "npm run css-build -- --watch",
-    "start": "npm run css-watch"
-  }
+    "name": "raku-docs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "Artistic-2.0",
+    "dependencies": {
+        "autoprefixer": "^9.8.6",
+        "bulma": "^0.9.0",
+        "clean-css-cli": "^4.3.0",
+        "node-sass": "^4.14.1",
+        "postcss-cli": "^7.1.2"
+    },
+    "scripts": {
+        "css-build": "npx node-sass --omit-source-map-url sass/main.scss ../static/css/main.css",
+        "css-code": "npx node-sass --omit-source-map-url sass/code-theme.scss ../static/css/ayaya.css",
+        "css-postcss": "npx postcss --use autoprefixer --map true --output dist/css/main.css dist/css/main.css",
+        "css-minify": "npx cleancss --level 2 dist/css/main.css -o dist/css/main.min.css",
+        "css-watch": "npm run css-build -- --watch",
+        "start": "npm run css-watch"
+    }
 }
