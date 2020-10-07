@@ -110,7 +110,10 @@ sub routes(Docky::Host $host) is export {
             with $pod {
                 my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,
                         prettyPodPath => "$category-id.tc()/$name.subst('::', '/', :g).pod6",
-                        podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6");
+                        podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
+                        # FIXME this is a hack because Documentable::Config is not flexible enough...
+                        editURL => "{ $host.config.pod-root-path.subst('blob', 'edit') }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
+                        );
                 my $html = $renderer.render($_.pod, toc => Docky::Renderer::TOC);
                 template 'entry.crotmp', { title => $renderer.metadata<title> ~ ' - Raku Documentation',
                                            |$host.config.config, :$html }
