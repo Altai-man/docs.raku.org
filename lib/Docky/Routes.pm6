@@ -72,9 +72,9 @@ sub routes(Docky::Host $host) is export {
         }
 
         # Category indexes
-        get -> $category-id where 'language'|'type'|'routine'|'programs' {
+        get -> $category-id where 'language' | 'type' | 'routine' | 'programs' {
             with $host.config.kinds.first(*<kind> eq $category-id) -> $category {
-                my $template = $category-id eq 'language'|'programs' ?? 'category' !! 'tabbed';
+                my $template = $category-id eq 'language' | 'programs' ?? 'category' !! 'tabbed';
                 template "$template.crotmp", %(
                     |$host.config.config,
                     title => "$category<display-text> - Raku Documentation",
@@ -87,36 +87,53 @@ sub routes(Docky::Host $host) is export {
             }
         }
 
-        # /type/Int or /syntax/token...
-        get -> $category-id where 'language'|'type'|'programs'|'routine'|'reference'|'syntax', $name {
-            my $pod;
-            # The simple way is where we have a single document to render
-            # If it is not so, we need to gather each relevant piece and assemble a document
-            if $category-id eq 'language'|'type'|'programs' {
-                # Technically, this can be merged with `else` branch to just grep and then take first, but with .first we don't need
-                # to traverse whole structure if we found the doc, while in else branch we _have to_ exhaust it to
-                # make sure we don't miss some definition of some method on a page we did not traverse
-                $pod = $host.registry.lookup($category-id, :by<kind>).first(*.url eq "/$category-id/$name");
+        sub render-pod($category-id, $name, $pod) {
+            my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,
+                    prettyPodPath => "$category-id.tc()/$name.subst('::', '/', :g).pod6",
+                    podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
+                    # FIXME this is a hack because Documentable::Config is not flexible enough...
+                    editURL => "{ $host.config.pod-root-path.subst('blob', 'edit') }/$category-id.tc()/$name.subst('::', '/', :g).pod6");
+            my $html = $renderer.render($pod, toc => Docky::Renderer::TOC);
+            "$renderer.metadata()<title> - Raku Documentation" => $html;
+        }
+
+        # /type/Int
+        get -> $category-id where 'type'|'language'|'programs', $name {
+            with $host.render-cache{$category-id}{$name} -> $page {
+                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
+            } else {
+                my $kind = do given $category-id {
+                    when 'type'     { Kind::Type     }
+                    when 'language' { Kind::Language }
+                    when 'programs' { Kind::Programs }
+                }
+                my $doc = $host.registry.documentables.first({ .kind eq $kind && .url eq "/$category-id/$name" });
+                with $doc {
+                    my $pod = $kind eq Kind::Type
+                            ?? Documentable::DocPage::Primary::Type.compose-type($host.registry, $_).pod
+                            !! $_.pod;
+                    my $page = $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
+                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
+                } else {
+                    not-found;
+                }
             }
-            else {
-                my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
-                $pod = pod-with-title("SUBKIND TODO $name",
-                        pod-block("Documentation for SUBKIND TODO ", pod-code($name), " assembled from the following types:"),
-                        @docs.map({
-                            pod-heading("{.origin.human-kind} {.origin.name}"),
-                            pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
-                        })) if @docs.elems != 0;;
-            }
+        }
+
+        # /syntax/token...
+        get -> $category-id where 'routine' | 'reference' | 'syntax', $name {
+            my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
+            my $pod = pod-with-title("SUBKIND TODO $name",
+                    pod-block("Documentation for SUBKIND TODO ", pod-code($name),
+                            " assembled from the following types:"),
+                    @docs.map({
+                        pod-heading("{ .origin.human-kind } { .origin.name }"),
+                        pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
+                    })) if @docs.elems != 0;
+                    ;
             with $pod {
-                my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,
-                        prettyPodPath => "$category-id.tc()/$name.subst('::', '/', :g).pod6",
-                        podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
-                        # FIXME this is a hack because Documentable::Config is not flexible enough...
-                        editURL => "{ $host.config.pod-root-path.subst('blob', 'edit') }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
-                        );
-                my $html = $renderer.render($_.pod, toc => Docky::Renderer::TOC);
-                template 'entry.crotmp', { title => $renderer.metadata<title> ~ ' - Raku Documentation',
-                                           |$host.config.config, :$html }
+                my $page = render-pod($category-id, $name, $_.pod);
+                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
             }
             else {
                 not-found;
@@ -125,11 +142,12 @@ sub routes(Docky::Host $host) is export {
 
         post -> 'run' {
             request-body -> %json {
-                my $code = %json<code>.subst("\x200B", '', :g); # Remove zero-width space from editing...
+                # Remove zero-width space from editing...
+                my $code = %json<code>.subst("\x200B", '', :g);
 
                 my $resp = await Cro::HTTP::Client.post('https://run.glot.io/languages/perl6/latest',
                         content-type => 'application/json',
-                        headers => [ 'Authorization' => 'Token ' ~ GLOT_KEY ],
+                        headers => ['Authorization' => 'Token ' ~ GLOT_KEY],
                         body => { files => [{ :name<main.p6>, :content($code) },] });
                 if $resp.status eq 200 {
                     my $json = await $resp.body;
@@ -147,7 +165,7 @@ sub routes(Docky::Host $host) is export {
             template 'about.crotmp', { title => 'About - Raku Documentation', |$host.config.config }
         }
         get -> 'css', *@path { static "static/css/", @path }
-        get -> 'js',  *@path { static "static/js/",  @path }
+        get -> 'js',  *@path { static "static/js/", @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
 

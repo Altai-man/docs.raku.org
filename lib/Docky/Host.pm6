@@ -7,6 +7,7 @@ class Docky::Host {
     has Documentable::Config $.config;
     has %.page-sets;
     has %.index-pages;
+    has %.render-cache;
 
     method new(Str $config-file = 'config.json') {
         my $registry = Documentable::Registry.new(
