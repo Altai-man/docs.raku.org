@@ -124,9 +124,11 @@ sub routes(Docky::Host $host) is export {
         get -> $category-id where 'routine' | 'reference' | 'syntax', $name {
             my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
             if @docs.elems {
-                my $pod = pod-with-title("SUBKIND TODO $name",
-                        pod-block("Documentation for SUBKIND TODO ", pod-code($name),
-                                " assembled from the following types:"),
+                my @subkinds = @docs.map({slip .subkinds}).unique;
+                my $subkind = @subkinds == 1 ?? @subkinds[0] !! $category-id;
+                my $pod = pod-with-title("$subkind $name",
+                        pod-block("Documentation for $subkind ", pod-code($name),
+                                " assembled from the following pages:"),
                         @docs.map({
                             pod-heading("{ .origin.human-kind } { .origin.name }"),
                             pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
