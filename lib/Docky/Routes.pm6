@@ -175,10 +175,9 @@ sub routes(Docky::Host $host) is export {
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
 
         # Saint redirects for everyone, to cover as many links as possible...
+        # First, just redirect folks with `.html` to extension-less pages
         get -> $page where $page.ends-with('.html') {
             redirect $page.subst('.html'), :permanent;
         }
-
-        #get -> 'type-basic'
     }
 }
