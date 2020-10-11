@@ -293,5 +293,13 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Perl6::TypeGraph" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951820:Perl6::TypeGraph!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

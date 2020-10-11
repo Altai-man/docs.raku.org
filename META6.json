@@ -11,7 +11,8 @@
   "depends": [
     "Cro::HTTP",
     "Documentable",
-    "Cro::WebApp"
+    "Cro::WebApp",
+    "Perl6::TypeGraph"
   ],
   "build-depends": [],
   "test-depends": [],
