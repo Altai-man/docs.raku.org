@@ -46,7 +46,7 @@
         <div id="navMenu" class="navbar-menu">
           <div class="navbar-start">
             <@$kinds>
-              <a class="navbar-item" href="/<.kind>.html">
+              <a class="navbar-item" href="/<.kind>">
                 <.display-text>
               </a>
             </@>
