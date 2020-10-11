@@ -122,22 +122,26 @@ sub routes(Docky::Host $host) is export {
 
         # /syntax/token...
         get -> $category-id where 'routine' | 'reference' | 'syntax', $name {
-            my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
-            if @docs.elems {
-                my @subkinds = @docs.map({slip .subkinds}).unique;
-                my $subkind = @subkinds == 1 ?? @subkinds[0] !! $category-id;
-                my $pod = pod-with-title("$subkind $name",
-                        pod-block("Documentation for $subkind ", pod-code($name),
-                                " assembled from the following pages:"),
-                        @docs.map({
-                            pod-heading("{ .origin.human-kind } { .origin.name }"),
-                            pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
-                        }));
-                my $page = render-pod($category-id, $name, $pod);
+            with $host.render-cache{$category-id}{$name} -> $page {
                 template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
-            }
-            else {
-                not-found;
+            } else {
+                my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
+                if @docs.elems {
+                    my @subkinds = @docs.map({ slip .subkinds }).unique;
+                    my $subkind = @subkinds == 1 ?? @subkinds[0] !! $category-id;
+                    my $pod = pod-with-title("$subkind $name",
+                            pod-block("Documentation for $subkind ", pod-code($name),
+                                    " assembled from the following pages:"),
+                            @docs.map({
+                                pod-heading("{ .origin.human-kind } { .origin.name }"),
+                                pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
+                            }));
+                    my $page = $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
+                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
+                }
+                else {
+                    not-found;
+                }
             }
         }
 
