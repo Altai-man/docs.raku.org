@@ -123,16 +123,15 @@ sub routes(Docky::Host $host) is export {
         # /syntax/token...
         get -> $category-id where 'routine' | 'reference' | 'syntax', $name {
             my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
-            my $pod = pod-with-title("SUBKIND TODO $name",
-                    pod-block("Documentation for SUBKIND TODO ", pod-code($name),
-                            " assembled from the following types:"),
-                    @docs.map({
-                        pod-heading("{ .origin.human-kind } { .origin.name }"),
-                        pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
-                    })) if @docs.elems != 0;
-                    ;
-            with $pod {
-                my $page = render-pod($category-id, $name, $_.pod);
+            if @docs.elems {
+                my $pod = pod-with-title("SUBKIND TODO $name",
+                        pod-block("Documentation for SUBKIND TODO ", pod-code($name),
+                                " assembled from the following types:"),
+                        @docs.map({
+                            pod-heading("{ .origin.human-kind } { .origin.name }"),
+                            pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
+                        }));
+                my $page = render-pod($category-id, $name, $pod);
                 template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
             }
             else {
