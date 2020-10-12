@@ -1,11 +1,13 @@
 ui-samples/node_modules/
 ui-samples/dist/css/
 ui-samples/yarn.lock
+ui-samples/package-lock.json
 ui-samples/dist/sandbox.html
 
 doc/
 docs.raku.org/
 .idea/
+html/
 
 # Caches
 .precomp/
