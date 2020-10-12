@@ -1,0 +1,201 @@
+// Common template for every custom theme
+
+.navbar-logo-tm {
+  color: $grey-darker;
+}
+
+/* Site header */
+.navbar {
+  background: $grey-lightest;
+  border-bottom: 1px solid $grey-light;
+}
+
+/* Site footer */
+.footer {
+  border-top: 1px solid $grey-light;
+}
+
+.raku.links-block {
+  .head {
+    color: $dark;
+  }
+
+  a {
+    color: $pirmary;
+
+    // &:hover {
+    //   color: $primary;
+    // }
+  }
+}
+
+/* Raku page template */
+.raku.page-title {
+  color: $red; // TODO: heading
+}
+
+.raku.page-header .page-edit {
+  color: $grey-dark;
+
+  .page-edit-button {
+    background: $grey-lightest;
+    color: $grey-dark;
+
+    &:hover {
+      color: $grey-darker;
+    }
+  }
+}
+
+/* Raku search page */
+.raku-search {
+  .search-category {
+    border: 1px solid $grey;
+    box-shadow: $shadow-below;
+  }
+
+  .search-match {
+    background: $yellow;
+  }
+
+  .search-category-title {
+    color: $red;
+    border-bottom: 1px solid $border;
+  }
+}
+
+/* Categories */
+.raku-category.category-block {
+  border: 1px solid $border;
+  border-bottom: 5px solid $grey-lighter;
+  box-shadow: $shadow-below;
+
+}
+
+
+.raku-category {
+
+  .category-header {
+    background: $grey-lightest;
+    border-bottom: 1px solid $border;
+    color: $grey-dark;
+  }
+
+
+  .category-item {
+    border-bottom: 1px solid $border;
+  }
+}
+
+/* Programs page template */
+.raku-programs {
+  .programs-item-title {
+    border-bottom: 1px solid $border;
+  }
+}
+
+
+/* Raku headings */
+.raku-h1 {
+  background: $grey-lightest;
+  border: 1px solid $border;
+  border-bottom: 3px solid $red;
+  color: $red;
+}
+
+.raku-h2 {
+  border-bottom: 3px solid $red;
+  color: $red;
+}
+
+.raku-h3 {
+  color: $red;
+}
+
+.raku-h4 {
+  color: $red;
+}
+
+.raku-h5 {
+  color: $red;
+}
+
+.raku-h6 {
+  color: $red;
+}
+
+.raku-h1 a, .raku-h2 a, .raku-h3 a, .raku-h4 a, .raku-h5 a, .raku-h6 a {
+  color: $red;
+}
+
+.raku-h1 a:hover, .raku-h2 a:hover, .raku-h3 a:hover, .raku-h4 a:hover, .raku-h5 a:hover, .raku-h6 a:hover {
+  color: $primary;
+}
+
+.raku-anchor {
+  color: $grey-darker;
+  }
+
+a.raku-anchor:hover {
+  color: $primary;
+}
+
+a.raku-anchor,
+.raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
+  color: $grey-darker;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+/* Version note */
+.raku.version-note {
+  background: $grey-lightest;
+  border: 1px solid $border;
+  box-shadow: $shadow-below;
+}
+
+.version-note-header {
+  color: $red;
+}
+
+// Tables
+table {
+  box-shadow: $shadow-below;
+}
+
+// About page
+.raku-about .card {
+  border: 1px solid $grey-lighter;
+  border-bottom: 3px solid $grey-lighter;
+  box-shadow: $shadow;
+}
+
+// Tabs
+.raku.tabs {
+  background: $grey-lightest;
+  border: 1px solid $grey-light;
+  border-bottom: unset;
+
+  a {
+    color: $grey-darker;
+  }
+
+  &.is-boxed a {
+    border-right: 1px solid $grey-light;
+  }
+
+  &.is-boxed li.is-active a {
+    color: $grey-darker;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid $white;
+  }
+}
+
+
+// Text & other stuff
+p > code {
+  background-color: $grey-lightest;
+  border: 1px solid $grey-lighter;
+}
