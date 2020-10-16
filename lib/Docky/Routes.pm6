@@ -172,6 +172,7 @@ sub routes(Docky::Host $host) is export {
         get -> 'css', *@path { static "static/css/", @path }
         get -> 'js',  *@path { static "static/js/", @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
+        get -> 'images', $svg-path { static "doc/html/images/$svg-path" }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
 
         # Saint redirects for everyone, to cover as many links as possible...
