@@ -50,27 +50,51 @@ function setup_glot_io() {
     });
 }
 
-var base_width, toggle_width, sidebar = true;
+var base_width, toggle_width, sidebar_is_shown;
 
 function setup_sidebar() {
+    sidebar_is_shown = JSON.parse(window.localStorage.getItem('raku-docs-sidebar'));
+    if (sidebar_is_shown === null) {
+        sidebar_is_shown = true;
+        window.localStorage.setItem('raku-docs-sidebar', sidebar_is_shown);
+    }
+    else if (!sidebar_is_shown) {
+        hide_sidebar($('.raku-sidebar-toggle')[0]);
+    }
+
+    function hide_sidebar(el) {
+        var svg = $(el).find('svg')[0];
+        if (svg !== undefined) {
+            svg.setAttribute('data-icon', 'chevron-right');
+        }
+        base_width = $("#mainSidebar").css('width');
+        $("#mainSidebar").css('width', '0');
+        $("#mainSidebar").css('display', 'none');
+        toggle_width = $(el).css('left');
+        $(el).css('left', '0');
+    }
+
+    function show_sidebar(el) {
+        var svg = $(el).find('svg')[0];
+        if (svg !== undefined) {
+            svg.setAttribute('data-icon', 'chevron-left');
+        }
+        $("#mainSidebar").css('width', base_width);
+        $("#mainSidebar").css('display', 'block');
+        $(el).css('left', toggle_width);
+    }
+
     // Sidebar toggle
     $('.raku-sidebar-toggle').each(function(i, el) {
         $(el).click(function() {
-            if (sidebar) {
-                sidebar = false;
-                base_width = $("#mainSidebar").css('width');
-                $("#mainSidebar").css('width', '0');
-                $("#mainSidebar").css('display', 'none');
-                toggle_width = $(this).css('left');
-                $(this).css('left', '0');
-                $(el).find('i').removeClass('fas fa-chevron-left is-medium').addClass('fas fa-chevron-right is-medium');
+            if (sidebar_is_shown) {
+                sidebar_is_shown = false;
+                hide_sidebar(el);
             } else {
-                sidebar = true;
-                $("#mainSidebar").css('width', base_width);
-                $("#mainSidebar").css('display', 'block');
-                $(this).css('left', toggle_width);
-                $(el).find('i').removeClass('fas fa-chevron-right is-medium').addClass('fas fa-chevron-left is-medium');
+                sidebar_is_shown = true;
+                show_sidebar(el);
             }
+            window.localStorage.setItem('raku-docs-sidebar', sidebar_is_shown);
         });
     });
 
