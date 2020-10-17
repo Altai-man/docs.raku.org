@@ -1,5 +1,9 @@
 // Raku code highlighting
-@import "./initial-variables";
+@import "../../themes/colors";
+@import "../../themes/colors-variables";
+
+$code-background: #fafafa;
+$code-foreground: #030303;
 
 .raku-code {
   position: relative;

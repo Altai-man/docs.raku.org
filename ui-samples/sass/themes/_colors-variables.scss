@@ -1,6 +1,6 @@
-@import "./initial-variables";
-@import "../node_modules/bulma/sass/utilities/functions.sass";
+@import "./_colors.scss";
 
+// Color variables
 $primary: $blue;
 
 $info: $cyan;
@@ -83,21 +83,6 @@ $link-focus-border: $blue;
 $link-active: $grey-darker;
 $link-active-border: $grey-dark;
 
-// Shadow
-$shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.07 );
-$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
-
-// Typography
-$family-primary: $family-sans-serif;
-// $family-secondary: $family-sans-serif;
-$family-secondary: "Lato", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-$family-code: $family-monospace;
-
-$size-small: $size-7;
-$size-normal: $size-6;
-$size-medium: $size-5;
-$size-large: $size-4;
-
 // Lists and maps
 $custom-colors: null;
 $custom-shades: null;
@@ -105,38 +90,6 @@ $custom-shades: null;
 $colors: mergeColorMaps(("white": ($white, $black), "black": ($black, $white), "light": ($light, $light-invert), "dark": ($dark, $dark-invert), "primary": ($primary, $primary-invert, $primary-light, $primary-dark), "link": ($link, $link-invert, $link-light, $link-dark), "info": ($info, $info-invert, $info-light, $info-dark), "success": ($success, $success-invert, $success-light, $success-dark), "warning": ($warning, $warning-invert, $warning-light, $warning-dark), "danger": ($danger, $danger-invert, $danger-light, $danger-dark)), $custom-colors);
 $shades: mergeColorMaps(("black-bis": $black-bis, "black-ter": $black-ter, "grey-darker": $grey-darker, "grey-dark": $grey-dark, "grey": $grey, "grey-light": $grey-light, "grey-lighter": $grey-lighter, "white-ter": $white-ter, "white-bis": $white-bis), $custom-shades);
 
-$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7;
-
-// Sort
-$hero-body-padding-medium: 6rem 0.5rem;
-$hr-background-color: $grey-lighter;
-$icon-dimensions-large: 6rem;
-$body-line-height: 1.5;
-
-$footer-background-color: $grey-lightest;
-$input-placeholder-color: $grey-darker;
-$footer-padding: 0;
-
-$navbar-height: 3.75rem;
-$navbar-background-color: $grey-lightest;
-$navbar-dropdown-arrow: $primary;
-$navbar-dropdown-item-hover-background-color: $grey-lighter;
-
-$menu-label-color: $black;
-$menu-label-font-size: 0.75rem;
-
-$menu-item-hover-color: $black;
-$menu-item-hover-background-color: $grey-light;
-$menu-list-border-left: 1px solid $grey;
-
-$menu-item-radius: 0px;
-$menu-list-line-height: 1.05;
-$menu-nested-list-padding-left: 0.5em;
-$menu-nested-list-margin: 0.5em;
-$menu-list-link-padding: 0.5em 0.5em;
-
-$section-padding: $size-4 $size-4;
-$control-radius: 3px;
-
-$table-head-cell-color: $grey-darker;
-$table-head-background-color: $grey-lightest;
+// Shadow
+$shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.07 );
+$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );

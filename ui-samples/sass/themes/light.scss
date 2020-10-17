@@ -1,0 +1,10 @@
+@import "./_themes.scss";
+
+/* Light theme */
+$theme-current: light;
+
+$heading: getThemeValue(heading);
+
+@import "./_themes-template-common.scss";
+
+// Theme related styles going here

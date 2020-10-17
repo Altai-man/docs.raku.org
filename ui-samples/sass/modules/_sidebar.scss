@@ -1,5 +1,6 @@
 // UI Sidebar module
-@import "./initial-variables";
+@import "../themes/colors";
+@import "../themes/colors-variables";
 // @import "../node_modules/bulma/sass/elements/icon.sass";
 
 $sidebar-z: 25 !default;

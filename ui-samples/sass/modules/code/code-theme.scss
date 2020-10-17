@@ -1,4 +1,15 @@
-@import "./initial-variables";
+// Code colors
+$code-background: #fafafa;
+$code-foreground: #030303;
+
+$code-callable-color: #005C43;
+$code-comment-color:  #6D4F4B;
+$code-keyword-color:  #223B9E;
+$code-number-color:   #1C6301;
+$code-operator-color: #C01823;
+$code-string-color:   #004FB3;
+$code-type-color:     #A3004F;
+$code-variable-color: #5503B3;
 
 /* Themes support */
 .cm-s-ayaya.CodeMirror {

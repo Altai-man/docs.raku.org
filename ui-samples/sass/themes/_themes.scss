@@ -1,0 +1,44 @@
+@import "./_colors.scss";
+@import "./_colors-variables.scss";
+
+// Support for color themes
+$theme-default: light;
+// $theme-current: light;
+$theme-code-default: light;
+// $theme-code-current: dark;
+
+
+$themes: (
+  light: (
+    bg: $white,
+    bg2: $grey-lightest,
+    bg3: $grey-lighter,
+    popup: $grey-light,
+    fg: $black,
+    fg-dim: $grey-darker,
+    heading: $red,
+    heading-mono: $grey-darker,
+    link: $blue,
+    link-visited: $purple,
+    link-hover: $grey-darker,
+    border: $grey,
+    border-light: black,
+    border-dark: black,
+    button-bg: $blue,
+    button-fg: $white,
+    button-hover-bg: #223B9E,
+    button-hover-fg: $white,
+  ),
+  dark: (
+    bg: black,
+    fg: white,
+    headings: yellow,
+    links: skyblue,
+    border: grey,
+  ),
+);
+
+@function getThemeValue($value) {
+  $theme-map: map-get($themes, $theme-current);
+  @return map-get($theme-map, $value);
+}

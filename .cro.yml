@@ -13,5 +13,6 @@ entrypoint: service.p6
 cro: 1
 env:  []
 ignore:
+  - static/css/
   - ui-samples/
 ...
