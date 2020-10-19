@@ -1,6 +1,6 @@
 // UI Sidebar module
-@import "../themes/colors";
-@import "../themes/colors-variables";
+@import "../themes/themes-colors";
+// @import "../themes/colors-variables";
 // @import "../node_modules/bulma/sass/elements/icon.sass";
 
 $sidebar-z: 25 !default;
@@ -12,7 +12,7 @@ $sidebar-divider: 1px solid $grey-lighter !default;
 .raku-sidebar {
   // display: flex;
   // flex-direction: column;
-  background-color: $grey-lightest;
+  // background-color: $grey-lightest;
   max-width: calc(100% - 50px);
   &.is-marginless {
     max-width: 100%;
@@ -22,20 +22,20 @@ $sidebar-divider: 1px solid $grey-lighter !default;
   bottom: 0;
   z-index: $sidebar-z;
   overflow-x: hidden; // Disable horizontal scroll
-  transofrm: tranlateZ (0);
+  // transform: tranlateZ (0);
   transition: width 1s ease;
   backface-visibility: hidden;
-  perspective: 1000;
-  will-change: transforn;
+  // perspective: 1000;
+  // will-change: transforn;
 
   height: 100%;
   width: 300px;
   padding: 1.25rem;
   padding-top: 5rem;
 
-  border-right: 1px solid $grey;
-  border-bottom: 3px solid $grey;
-  box-shadow: $sidebar-shadow; // delete
+  // border-right: 1px solid $grey;
+  // border-bottom: 3px solid $grey;
+  // box-shadow: $sidebar-shadow; // delete
 
   +mobile {
     width: 100%;

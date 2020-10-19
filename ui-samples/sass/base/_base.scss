@@ -96,12 +96,6 @@ body {
   text-decoration: underline;
 }
 
-/* Hopepage title */
-.hero-body {
-  background: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
-  mix-blend-mode: normal;
-}
-
 .icon-large {
   font-size: 96px;
 }
@@ -157,7 +151,6 @@ body {
 
 .raku.page-title {
   font-size: $size-4;
-  color: $red;
   font-weight: $weight-semibold;
 }
 
@@ -193,9 +186,9 @@ body {
     margin-bottom: $size-5;
   }
 
-  .search-match {
-    background: $yellow;
-  }
+  // .search-match {
+  //   background: $yellow;
+  // }
 
   .search-item-title {
     font-weight: $weight-medium;
@@ -362,6 +355,10 @@ a.raku-anchor,
 table.centered {
   margin-left: auto;
   margin-right: auto;
+}
+
+.table {
+  margin: $size-7 0;
 }
 
 // About page

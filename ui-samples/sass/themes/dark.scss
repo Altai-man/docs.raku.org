@@ -1,4 +1,4 @@
-// Light raku theme
+// Dark raku theme
 
 // Colors
 $black:         #030303;
@@ -21,26 +21,26 @@ $yellow:       #EED891;
 $green:        #1C6301;
 $turquoise:    #005C43;
 $cyan:         hsl(204, 71%,  53%);
-$blue:         #004FB3;
+// $blue:         #004FB3;
+$blue:         #8DB2EB;
 $purple:       #5503B3;
 $red:          #A30031;
 
 // Bulma Variables
-$light: $white-ter;
+$light: $grey-light;
 $dark: $grey-darker;
 
-$scheme-main: $white;
-$scheme-main-bis: $grey-lightest;
-$scheme-main-ter: $white-ter;
-$scheme-invert: $black-bis;
-$scheme-invert-bis: $black-ter;
-$scheme-invert-ter: lighten($black-ter, 3);
+$scheme-main: $black-bis;
+$scheme-main-bis: $black-ter;
+$scheme-main-ter: lighten($black-ter, 3);
+$scheme-invert: $white;
+$scheme-invert-bis: $white-bis;
+$scheme-invert-ter: $white-ter;
 
+$body-background-color: $black-bis;
+$background: $black-bis;
 
-$body-background-color: $white;
-$background: $white;
-
-$border: $grey;
+$border: $grey-darker;
 $border-hover: $grey-light;
 $border-light: lighten($border, 5);
 $border-light-hover: $grey-light;
@@ -48,10 +48,10 @@ $border-light-hover: $grey-light;
 $primary: $blue;
 $primary-invert: findColorInvert($primary);
 $primary-light: lighten($primary, 10);
-$primary-dark: darken($primary, 10);
+$primary-dark: darken($primary, 15);
 
 // Text colors
-$text: $black;
+$text: $white-ter;
 $text-invert: findColorInvert($text);
 $text-light: lighten($text, 10);
 $text-dark: darken($text, 10);
@@ -78,12 +78,12 @@ $card-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
 
 $hr-background-color: $grey-lighter;
 
-$footer-background-color: $grey-lightest;
+$footer-background-color: $black-ter;
 $input-placeholder-color: $grey-darker;
 
-$navbar-background-color: $scheme-main-bis;
+$navbar-background-color: $black-ter;
 $navbar-dropdown-arrow: $primary;
-$navbar-item-hover-background-color: darken($navbar-background-color, 5);
+$navbar-item-hover-background-color: lighten($black-ter, 5);
 $navbar-dropdown-item-hover-background-color: $grey-lighter;
 // $navbar-dropdown-background-color: $bg2;
 
@@ -94,19 +94,23 @@ $menu-item-hover-color: $black;
 $menu-item-hover-background-color: $grey-light;
 $menu-list-border-left: 1px solid $grey;
 
-$table-head-cell-color: $grey-darker;
+$table-color: $text-strong;
+$table-head-cell-color: $text-strong;
 $table-head-background-color: $grey-lightest;
+$table-cell-border: $border;
 
 // Raku vars
-$heading: $red;
-$heading-mono: $grey-dark;
+$heading: $yellow;
+$heading-mono: $grey;
 
-$block-heading-background: $grey-lightest;
+$block-heading-background: $black-ter;
 
-$code-background: $scheme-main;
+$code-background: $scheme-main-bis;
 $code-foreground: $text;
 $code-output-background: $scheme-main-ter;
 
-$homepage-gradient: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
+$homepage-gradient: linear-gradient(180deg, #030303 0.2%, #170F44 1%, #35229E 82.29%, #271974 100%);
+
+// TODO: tabs support & menu [in sidebar]
 
 @import "./_themes-template-common";

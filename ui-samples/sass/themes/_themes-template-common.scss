@@ -1,48 +1,115 @@
 // Common template for every custom theme
 
+html {
+  background: $background;
+}
+
+body {
+  background: $background;
+  color: $text;
+}
+
 .navbar-logo-tm {
-  color: $grey-darker;
+  color: $text-strong;
 }
 
 /* Site header */
 .navbar {
-  background: $grey-lightest;
-  border-bottom: 1px solid $grey-light;
+  background: $navbar-background-color;
+  border-bottom: 1px solid $border-light;
+}
+
+.navbar a {
+  color: $link;
+}
+
+.navbar a:hover {
+  color: $link-hover;
+}
+
+a.navbar-item:hover {
+  background: $navbar-item-hover-background-color;
+}
+
+a {
+  color: $link;
+}
+
+a:hover {
+  color: $link-hover;
+}
+
+
+// Forms
+.button.is-primary {
+  background-color: $primary !important;
+}
+
+.button.is-primary:hover {
+  background-color: $primary-dark !important;
+}
+
+.input, .textarea, .select select {
+  background-color: $scheme-main-bis;
+  border-color: $border;
 }
 
 /* Site footer */
 .footer {
-  border-top: 1px solid $grey-light;
+  background: $footer-background-color;
+  border-top: 1px solid $border-light;
+}
+
+
+// Redifine text colors
+.has-text-primary {
+  color: $primary !important;
+}
+
+.has-text-dark {
+  color: $dark !important;
+}
+
+strong {
+  color: $text-strong;
 }
 
 .raku.links-block {
   .head {
-    color: $dark;
+    color: $heading-mono;
   }
 
   a {
     color: $primary;
 
-    // &:hover {
-    //   color: $primary;
-    // }
+    &:hover {
+      color: $primary-dark;
+    }
   }
 }
 
+/* Hopepage title */
+.hero-body {
+  background: $homepage-gradient;
+  mix-blend-mode: normal;
+}
+
+
 /* Raku page template */
 .raku.page-title {
-  color: $red; // TODO: heading
+  color: $heading; // TODO: heading
 }
 
 .raku.page-header .page-edit {
   color: $grey-dark;
 
   .page-edit-button {
-    background: $grey-lightest;
-    color: $grey-dark;
+    background: $scheme-main-ter;
+    color: $text-dark;
+    border-color: $border;
 
     &:hover {
-      color: $grey-darker;
+      background: $scheme-main-bis;
     }
   }
 }
@@ -59,7 +126,7 @@
   }
 
   .search-category-title {
-    color: $red;
+    color: $heading;
     border-bottom: 1px solid $border;
   }
 }
@@ -67,7 +134,7 @@
 /* Categories */
 .raku-category.category-block {
   border: 1px solid $border;
-  border-bottom: 5px solid $grey-lighter;
+  border-bottom: 5px solid $border-light;
   box-shadow: $shadow-below;
 
 }
@@ -76,7 +143,7 @@
 .raku-category {
 
   .category-header {
-    background: $grey-lightest;
+    background: $block-heading-background;
     border-bottom: 1px solid $border;
     color: $grey-dark;
   }
@@ -97,35 +164,35 @@
 
 /* Raku headings */
 .raku-h1 {
-  background: $grey-lightest;
+  background: $scheme-main-bis;
   border: 1px solid $border;
-  border-bottom: 3px solid $red;
-  color: $red;
+  border-bottom: 3px solid $heading;
+  color: $heading;
 }
 
 .raku-h2 {
-  border-bottom: 3px solid $red;
-  color: $red;
+  border-bottom: 3px solid $heading;
+  color: $heading;
 }
 
 .raku-h3 {
-  color: $red;
+  color: $heading;
 }
 
 .raku-h4 {
-  color: $red;
+  color: $heading;
 }
 
 .raku-h5 {
-  color: $red;
+  color: $heading;
 }
 
 .raku-h6 {
-  color: $red;
+  color: $heading;
 }
 
 .raku-h1 a, .raku-h2 a, .raku-h3 a, .raku-h4 a, .raku-h5 a, .raku-h6 a {
-  color: $red;
+  color: $heading;
 }
 
 .raku-h1 a:hover, .raku-h2 a:hover, .raku-h3 a:hover, .raku-h4 a:hover, .raku-h5 a:hover, .raku-h6 a:hover {
@@ -142,7 +209,7 @@ a.raku-anchor:hover {
 
 a.raku-anchor,
 .raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
-  color: $grey-darker;
+  color: $text-dark;
 
   &:hover {
     color: $primary;
@@ -157,12 +224,27 @@ a.raku-anchor,
 }
 
 .version-note-header {
-  color: $red;
+  color: $heading;
 }
 
 // Tables
-table {
+.table {
+  background-color: $scheme-main;
   box-shadow: $shadow-below;
+  color: $table-color;
+}
+
+.table thead td, .table thead th {
+  color: $table-head-cell-color;
+}
+
+.table td, .table th {
+  border: 1px solid $table-cell-border;
+}
+
+.card {
+  color: $text;
+  background-color: $background;
 }
 
 // About page
@@ -198,4 +280,51 @@ table {
 p > code {
   background-color: $grey-lightest;
   border: 1px solid $grey-lighter;
+}
+
+
+// Sidebar module
+
+.raku-sidebar {
+  background-color: $scheme-main-bis;
+  border-right: 1px solid $border;
+  border-bottom: 3px solid $border;
+  // box-shadow: $sidebar-shadow; // delete
+}
+
+// Raku code
+code {
+  background-color: $scheme-main-bis;
+  color: $heading;
+}
+
+.raku-code {
+  border-bottom: 3px solid $border;
+  box-shadow: $shadow-below;
+  border: 1px solid $border;
+
+  .code-button {
+    background: $scheme-main-ter;
+    color: $text;
+    border: $border;
+  }
+
+  .code-name {
+    color: $heading;
+  }
+
+  .code-output {
+    background: $code-output-background;
+    border-top: 1px solid $border;
+  }
+
+  .code-output-title {
+    border-bottom: 1px solid $border;
+    color: $heading;
+  }
+
+  pre {
+    background-color: $code-background;
+    color: $code-foreground;
+  }
 }
