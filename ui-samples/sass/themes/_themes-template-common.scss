@@ -290,9 +290,35 @@ p > code {
   border-right: 1px solid $border;
   border-bottom: 3px solid $border;
   // box-shadow: $sidebar-shadow; // delete
+
+  .input::placeholder, .textarea::placeholder, .select select::placeholder {
+    color: $text-dark;
+  }
+
+  .menu-list {
+    ::marker {
+      color: $heading;
+    }
+
+    li ul {
+      border-left: 1px solid $border;
+    }
+    a {
+      color: $text;
+
+      &:hover {
+        // TODO: change
+        background: $scheme-main-ter;
+      }
+    }
+  }
 }
 
 // Raku code
+a > code {
+  color: $link;
+}
+
 code {
   background-color: $scheme-main-bis;
   color: $heading;
@@ -304,8 +330,8 @@ code {
   border: 1px solid $border;
 
   .code-button {
-    background: $scheme-main-ter;
-    color: $text;
+    background: $primary;
+    color: $scheme-main;
     border: $border;
   }
 

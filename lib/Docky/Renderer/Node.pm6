@@ -36,10 +36,12 @@ class Docky::Renderer::Node is Node::To::HTML {
         # TODO get back %*POD2HTML-CALLBACKS from Documentable (?)
         qq:to/END/;
         <div class="raku-code$lang">
-          $header
           <pre><code>{ self.node2inline($node.contents) }</code></pre>
           <div class="code-output">
-            <p class="code-output-title">Output</p>
+            <!-- <p class="code-output-title">Output</p> -->
+
+            <button class="button code-button" aria-label="run">Run</button>
+
           </div>
         </div>
         END
