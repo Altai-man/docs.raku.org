@@ -2,7 +2,18 @@ $(function(){
     setup_glot_io();
     setup_sidebar();
     setup_search();
+    setup_theme();
 });
+
+function setup_theme() {
+    $('#toggle-theme').each(function(i, el) {
+        $(el).click(function() {
+            var theme = cookie.get('color-scheme', 'light');
+            cookie.set({'color-scheme' : theme === 'light' ? 'dark' : 'light'}, { expires: 30, path: '/', sameSite: true });
+            location.reload();
+        });
+    });
+}
 
 function setup_glot_io() {
     // CodeMirror editor is enabled on click

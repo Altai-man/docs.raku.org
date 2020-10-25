@@ -1,5 +1,5 @@
 <:use 'layout.crotmp'>
-<|layout('Raku Documentation', .kinds, .irc-link)>
+<|layout('Raku Documentation', .kinds, .irc-link, .color-scheme)>
     <div id="wrapper">
       <section class="hero is-medium is-primary">
         <div class="hero-body">

@@ -1,5 +1,5 @@
 <:use 'layout.crotmp'>
-<|layout(.title, .kinds, .irc-link)>
+<|layout(.title, .kinds, .irc-link, .color-scheme)>
     <div id="wrapper">
 
       <div class="raku page">

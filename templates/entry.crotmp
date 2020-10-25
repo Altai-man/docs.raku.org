@@ -1,4 +1,4 @@
 <:use 'layout.crotmp'>
-<|layout(.title, .kinds, .irc-link)>
+<|layout(.title, .kinds, .irc-link, .color-scheme)>
 <&HTML(.html)>
 </|>

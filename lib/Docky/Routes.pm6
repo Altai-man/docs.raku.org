@@ -64,19 +64,20 @@ sub routes(Docky::Host $host) is export {
 
     route {
         # Index
-        get -> {
+        get -> :$color-scheme is cookie {
             template 'index.crotmp', %(
                 |$host.config.config,
-                :@backup-cards, :@community-links, :@resource-links, :@explore-links
+                :@backup-cards, :@community-links, :@resource-links, :@explore-links,
+                color-scheme => $color-scheme // 'light'
             )
         }
 
         # Category indexes
-        get -> $category-id where 'language' | 'type' | 'routine' | 'programs' {
+        get -> $category-id where 'language' | 'type' | 'routine' | 'programs', :$color-scheme is cookie {
             with $host.config.kinds.first(*<kind> eq $category-id) -> $category {
                 my $template = $category-id eq 'language' | 'programs' ?? 'category' !! 'tabbed';
                 template "$template.crotmp", %(
-                    |$host.config.config,
+                    |$host.config.config, color-scheme => $color-scheme // 'light',
                     title => "$category<display-text> - Raku Documentation",
                     category-title => $category<display-text>,
                     category-description => $category<description>,
@@ -98,9 +99,10 @@ sub routes(Docky::Host $host) is export {
         }
 
         # /type/Int
-        get -> $category-id where 'type'|'language'|'programs', $name {
+        get -> $category-id where 'type'|'language'|'programs', $name, :$color-scheme is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
-                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
+                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
+                                           color-scheme => $color-scheme // 'light' }
             } else {
                 my $kind = do given $category-id {
                     when 'type'     { Kind::Type     }
@@ -113,7 +115,8 @@ sub routes(Docky::Host $host) is export {
                             ?? Documentable::DocPage::Primary::Type.compose-type($host.registry, $_).pod
                             !! $_.pod;
                     my $page = $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
-                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
+                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
+                                               color-scheme => $color-scheme // 'light' }
                 } else {
                     not-found;
                 }
@@ -121,9 +124,10 @@ sub routes(Docky::Host $host) is export {
         }
 
         # /syntax/token...
-        get -> $category-id where 'routine' | 'reference' | 'syntax', $name {
+        get -> $category-id where 'routine' | 'reference' | 'syntax', $name, :$color-scheme is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
-                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
+                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
+                                           color-scheme => $color-scheme // 'light' }
             } else {
                 my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
                 if @docs.elems {
@@ -137,7 +141,8 @@ sub routes(Docky::Host $host) is export {
                                 pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
                             }));
                     my $page = $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
-                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value }
+                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
+                                               color-scheme => $color-scheme // 'light' }
                 }
                 else {
                     not-found;
@@ -166,8 +171,9 @@ sub routes(Docky::Host $host) is export {
         }
 
         # Statics
-        get -> 'about' {
-            template 'about.crotmp', { title => 'About - Raku Documentation', |$host.config.config }
+        get -> 'about', :$color-scheme is cookie {
+            template 'about.crotmp', { title => 'About - Raku Documentation', |$host.config.config,
+                                       color-scheme => $color-scheme // 'light' }
         }
         get -> 'css', *@path { static "static/css/", @path }
         get -> 'js',  *@path { static "static/js/", @path }
