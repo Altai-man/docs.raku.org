@@ -25,24 +25,19 @@ class Docky::Renderer::Node is Node::To::HTML {
     multi method node2html(Pod::Block::Code $node) {
         my $lang = $node.config<lang> ?? '' !! ' raku-lang';
         $lang = '' with $node.config<skip-test>;
-        my $header = $lang ??
+        my $code-runner = $lang ??
         q:to/END/
-        <div class="code-header">
-          <p class="code-name">example-name.pm6</p>
-          <button class="button code-button" aria-label="run">Run</button>
-        </div>
+          <div class="code-output">
+            <button class="button code-button" aria-label="run">Run</button>
+            <div></div>
+          </div>
         END
         !! '';
         # TODO get back %*POD2HTML-CALLBACKS from Documentable (?)
         qq:to/END/;
         <div class="raku-code$lang">
           <pre><code>{ self.node2inline($node.contents) }</code></pre>
-          <div class="code-output">
-            <!-- <p class="code-output-title">Output</p> -->
-
-            <button class="button code-button" aria-label="run">Run</button>
-
-          </div>
+          $code-runner
         </div>
         END
     }

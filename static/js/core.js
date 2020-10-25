@@ -31,18 +31,21 @@ function setup_glot_io() {
             var code = '';
             var output_top = '<p class="code-output-title">Output</p>';
             $(this).closest('.raku-code').find('.CodeMirror-code .CodeMirror-line').each(function(i, el){ code += $(el).text() + "\n"; });
+            if (code.length == 0) {
+                $(this).closest('.raku-code').find('code').each(function(i, el){ code += $(el).text() + "\n"; });
+            }
 
             jQuery.ajax('/run', {
                 method: 'POST',
                 success: function(data) {
-                    $(el).closest('.raku-code').find('.code-output').each(function(i, el){
-                        $(el).html(output_top + data); $(el).show();
+                    $(el).closest('.raku-code').find('.code-output').each(function(i, el) {
+                        $(el).find('div').html(output_top + data);
                     });
                 },
                 data: { code: code },
                 error: function(req, error) {
-                    $(el).closest('.raku-code').find('.code-output').each(function(i, el){
-                        $(el).html(output_top + 'Error occurred: ' + error); $(el).show();
+                    $(el).closest('.raku-code').find('.code-output').each(function(i, el) {
+                        $(el).find('div').html(output_top + 'Error occurred: ' + error);
                     });
                 }
             });
