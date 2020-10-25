@@ -64,16 +64,13 @@ function setup_glot_io() {
     });
 }
 
-var base_width, toggle_width, sidebar_is_shown;
+var sidebar_is_shown;
 
 function setup_sidebar() {
-    sidebar_is_shown = JSON.parse(window.localStorage.getItem('raku-docs-sidebar'));
+    sidebar_is_shown = JSON.parse(cookie.get('sidebar', null));
     if (sidebar_is_shown === null) {
         sidebar_is_shown = true;
-        window.localStorage.setItem('raku-docs-sidebar', sidebar_is_shown);
-    }
-    else if (!sidebar_is_shown) {
-        hide_sidebar($('.raku-sidebar-toggle')[0]);
+        cookie.set({sidebar: sidebar_is_shown}, { expires: 30, path: '/', sameSite: true });
     }
 
     function hide_sidebar(el) {
@@ -81,10 +78,8 @@ function setup_sidebar() {
         if (svg !== undefined) {
             svg.setAttribute('data-icon', 'chevron-right');
         }
-        base_width = $("#mainSidebar").css('width');
         $("#mainSidebar").css('width', '0');
         $("#mainSidebar").css('display', 'none');
-        toggle_width = $(el).css('left');
         $(el).css('left', '0');
     }
 
@@ -93,9 +88,9 @@ function setup_sidebar() {
         if (svg !== undefined) {
             svg.setAttribute('data-icon', 'chevron-left');
         }
-        $("#mainSidebar").css('width', base_width);
+        $("#mainSidebar").css('width', '');
         $("#mainSidebar").css('display', 'block');
-        $(el).css('left', toggle_width);
+        $(el).css('left', '');
     }
 
     // Sidebar toggle
@@ -108,7 +103,7 @@ function setup_sidebar() {
                 sidebar_is_shown = true;
                 show_sidebar(el);
             }
-            window.localStorage.setItem('raku-docs-sidebar', sidebar_is_shown);
+            cookie.set({sidebar: sidebar_is_shown}, { expires: 30, path: '/', sameSite: true });
         });
     });
 

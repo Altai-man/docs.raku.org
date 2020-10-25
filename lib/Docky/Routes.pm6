@@ -88,7 +88,7 @@ sub routes(Docky::Host $host) is export {
             }
         }
 
-        sub render-pod($category-id, $name, $pod) {
+        my sub render-pod($category-id, $name, $pod) {
             my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,
                     prettyPodPath => "$category-id.tc()/$name.subst('::', '/', :g).pod6",
                     podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
@@ -98,11 +98,30 @@ sub routes(Docky::Host $host) is export {
             "$renderer.metadata()<title> - Raku Documentation" => $html;
         }
 
+        my sub serve-cached-page($page, Str $sidebar, $color-scheme) {
+            my $html = $page.value.clone;
+            $html .= subst('SIDEBAR_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="width:0px; display:none;"');
+            $html .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
+            $html .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
+            template 'entry.crotmp', { title => $page.key, |$host.config.config, :$html,
+                                       color-scheme => $color-scheme // 'light' }
+        }
+
+        my sub cache-and-serve-pod(Str $category-id, Str $name, $pod, $sidebar, $color-scheme) {
+            $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
+            my $page = $host.render-cache{$category-id}{$name}.clone;
+            $page.value .= subst('SIDEBAR_STYLE',
+            ($sidebar // 'true') eq 'true' ?? '' !! 'style="width:0px; display:none;"');
+            $page.value .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
+            $page.value .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
+            template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
+                                       color-scheme => $color-scheme // 'light' }
+        }
+
         # /type/Int
-        get -> $category-id where 'type'|'language'|'programs', $name, :$color-scheme is cookie {
+        get -> $category-id where 'type'|'language'|'programs', $name, :$color-scheme is cookie, :$sidebar is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
-                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
-                                           color-scheme => $color-scheme // 'light' }
+                serve-cached-page($page, $sidebar, $color-scheme);
             } else {
                 my $kind = do given $category-id {
                     when 'type'     { Kind::Type     }
@@ -114,9 +133,7 @@ sub routes(Docky::Host $host) is export {
                     my $pod = $kind eq Kind::Type
                             ?? Documentable::DocPage::Primary::Type.compose-type($host.registry, $_).pod
                             !! $_.pod;
-                    my $page = $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
-                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
-                                               color-scheme => $color-scheme // 'light' }
+                    cache-and-serve-pod($category-id, $name, $pod, $sidebar, $color-scheme);
                 } else {
                     not-found;
                 }
@@ -124,10 +141,9 @@ sub routes(Docky::Host $host) is export {
         }
 
         # /syntax/token...
-        get -> $category-id where 'routine' | 'reference' | 'syntax', $name, :$color-scheme is cookie {
+        get -> $category-id where 'routine' | 'reference' | 'syntax', $name, :$color-scheme is cookie, :$sidebar is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
-                template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
-                                           color-scheme => $color-scheme // 'light' }
+                serve-cached-page($page, $sidebar, $color-scheme);
             } else {
                 my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
                 if @docs.elems {
@@ -140,9 +156,7 @@ sub routes(Docky::Host $host) is export {
                                 pod-heading("{ .origin.human-kind } { .origin.name }"),
                                 pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
                             }));
-                    my $page = $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
-                    template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
-                                               color-scheme => $color-scheme // 'light' }
+                    cache-and-serve-pod($category-id, $name, $pod, $sidebar, $color-scheme);
                 }
                 else {
                     not-found;

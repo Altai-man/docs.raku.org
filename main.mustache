@@ -1,30 +1,25 @@
-<div class="raku-sidebar-toggle">
+<div class="raku-sidebar-toggle" SIDEBAR_TOGGLE_STYLE>
   <a class="button is-primary">
     <span class="icon">
-      <i class="fas fa-chevron-left is-medium"></i>
+      <i class="fas fa-chevron-SIDEBAR_SHEVRON is-medium"></i>
     </span>
   </a>
 </div>
 
-<div id="mainSidebar" class="raku-sidebar">
-
-      <div class="field">
-        <label class="label has-text-centered">Table of Contents</label>
-        <div class="control has-icons-right">
-          <input id="toc-filter" class="input" type="text" placeholder="Filter">
-          <span class="icon is-right has-text-grey">
-            <i class="fas fa-search is-medium"></i>
-          </span>
-        </div>
-      </div>
-      <div class="raku-sidebar-body">
-
-          {{{toc}}}
-
-      </div>
-
+<div id="mainSidebar" class="raku-sidebar" SIDEBAR_STYLE>
+  <div class="field">
+    <label class="label has-text-centered">Table of Contents</label>
+    <div class="control has-icons-right">
+      <input id="toc-filter" class="input" type="text" placeholder="Filter">
+        <span class="icon is-right has-text-grey">
+          <i class="fas fa-search is-medium"></i>
+        </span>
     </div>
-
+  </div>
+  <div class="raku-sidebar-body">
+    {{{toc}}}
+  </div>
+</div>
 
 <div id="wrapper">
   <section class="raku page-header">
