@@ -80,7 +80,7 @@ function setup_sidebar() {
         }
         $("#mainSidebar").css('width', '0');
         $("#mainSidebar").css('display', 'none');
-        $(el).css('left', '0');
+        $(el).css('left', '-5px');
     }
 
     function show_sidebar(el) {
