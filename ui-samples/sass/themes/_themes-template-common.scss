@@ -19,16 +19,39 @@ body {
   border-bottom: 1px solid $border-light;
 }
 
+// TODO: mono links?
 .navbar a {
   color: $link;
 }
 
 .navbar a:hover {
-  color: $link-hover;
+  color: $link;
 }
 
-a.navbar-item:hover {
+a.navbar-item:hover, {
   background: $navbar-item-hover-background-color;
+}
+
+.navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
+  background-color: $navbar-item-hover-background-color;
+}
+
+.navbar-dropdown {
+  background-color: $navbar-dropdown-background-color;
+  border-top: $navbar-dropdown-border-top;
+}
+
+.navbar-link:not(.is-arrowless)::after {
+  border-color: $navbar-dropdown-arrow;
+}
+
+.navbar-divider {
+  background-color: $navbar-divider-background-color;
+}
+
+.navbar-dropdown a.navbar-item:focus, .navbar-dropdown a.navbar-item:hover {
+  background-color: $navbar-dropdown-item-hover-background-color;
+  color:  $navbar-dropdown-item-hover-color;
 }
 
 a {
@@ -49,9 +72,19 @@ a:hover {
   background-color: $primary-dark !important;
 }
 
+.label {
+  color: $label-color;
+}
+
 .input, .textarea, .select select {
-  background-color: $scheme-main-bis;
+  // background-color: $scheme-main-ter;
+  background-color: $form-background;
   border-color: $border;
+  color: $text;
+}
+
+.input:hover, .textarea:hover, .select select:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered {
+  border-color: $border-hover;
 }
 
 /* Site footer */
@@ -256,22 +289,34 @@ a.raku-anchor,
 
 // Tabs
 .raku.tabs {
-  background: $grey-lightest;
-  border: 1px solid $grey-light;
+  background: $scheme-main-ter;
+  border: 1px solid $border;
   border-bottom: unset;
+  color: $tabs-link-color;
+
+  ul {
+    border-color: $border;
+  }
 
   a {
-    color: $grey-darker;
+    color: $tabs-link-color;
+  }
+
+  &.is-boxed a:hover {
+    background-color: $tabs-boxed-link-hover-background-color;
+    color: $tabs-link-hover-color;
   }
 
   &.is-boxed a {
-    border-right: 1px solid $grey-light;
+    border-right: 1px solid $border;
   }
 
   &.is-boxed li.is-active a {
-    color: $grey-darker;
+    background: $tabs-boxed-link-active-background-color;
+    color: $tabs-link-active-color;
     border-top: 1px solid transparent;
-    border-bottom: 1px solid $white;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
   }
 }
 
@@ -307,8 +352,7 @@ p > code {
       color: $text;
 
       &:hover {
-        // TODO: change
-        background: $scheme-main-ter;
+        background: $menu-item-hover-background-color;
       }
     }
   }

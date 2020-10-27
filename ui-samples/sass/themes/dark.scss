@@ -41,7 +41,7 @@ $body-background-color: $black-bis;
 $background: $black-bis;
 
 $border: $grey-darker;
-$border-hover: $grey-light;
+$border-hover: $grey-dark;
 $border-light: lighten($border, 5);
 $border-light-hover: $grey-light;
 
@@ -82,16 +82,21 @@ $footer-background-color: $black-ter;
 $input-placeholder-color: $grey-darker;
 
 $navbar-background-color: $black-ter;
-$navbar-dropdown-arrow: $primary;
 $navbar-item-hover-background-color: lighten($black-ter, 5);
-$navbar-dropdown-item-hover-background-color: $grey-lighter;
-// $navbar-dropdown-background-color: $bg2;
+
+$navbar-dropdown-item-hover-background-color: $grey-darker;
+$navbar-dropdown-arrow: $primary;
+
+$navbar-dropdown-background-color: $scheme-main-bis;
+$navbar-dropdown-border-top: 2px solid $border;
+
+$navbar-divider-background-color: $background;
+$navbar-dropdown-item-hover-color: $text;
 
 $menu-label-color: $black;
 
-
 $menu-item-hover-color: $black;
-$menu-item-hover-background-color: $grey-light;
+$menu-item-hover-background-color: $grey-darker;
 $menu-list-border-left: 1px solid $grey;
 
 $table-color: $text-strong;
@@ -99,9 +104,21 @@ $table-head-cell-color: $text-strong;
 $table-head-background-color: $grey-lightest;
 $table-cell-border: $border;
 
+$label-color: $grey-light;
+
+// Tabs
+$tabs-link-color: $text;
+$tabs-border-bottom-color: $border;
+$tabs-boxed-link-active-background-color: $scheme-main;
+$tabs-link-active-color: $text-dark;
+$tabs-link-hover-color: $text-strong;
+
+$tabs-boxed-link-hover-background-color: $grey-darker;
+
 // Raku vars
 $heading: $yellow;
 $heading-mono: $grey;
+$form-background: lighten($black-ter, 5);
 
 $block-heading-background: $black-ter;
 
@@ -111,6 +128,12 @@ $code-output-background: $scheme-main-ter;
 
 $homepage-gradient: linear-gradient(180deg, #030303 0.2%, #170F44 1%, #35229E 82.29%, #271974 100%);
 
-// TODO: tabs support & menu [in sidebar]
-
 @import "./_themes-template-common";
+
+a.button strong {
+  color: $scheme-main-ter;
+}
+
+a.button.is-primary .icon {
+  color: $scheme-main-ter;
+}

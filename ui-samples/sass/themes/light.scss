@@ -85,10 +85,14 @@ $navbar-background-color: $scheme-main-bis;
 $navbar-dropdown-arrow: $primary;
 $navbar-item-hover-background-color: darken($navbar-background-color, 5);
 $navbar-dropdown-item-hover-background-color: $grey-lighter;
-// $navbar-dropdown-background-color: $bg2;
+
+$navbar-dropdown-background-color: $scheme-main-bis;
+$navbar-dropdown-border-top: 2px solid $border;
+
+$navbar-divider-background-color: $background;
+$navbar-dropdown-item-hover-color: $text;
 
 $menu-label-color: $black;
-
 
 $menu-item-hover-color: $black;
 $menu-item-hover-background-color: $grey-light;
@@ -99,9 +103,21 @@ $table-head-cell-color: $grey-darker;
 $table-head-background-color: $grey-lightest;
 $table-cell-border: $border;
 
+$label-color: $grey-darker;
+
+// Tabs
+$tabs-link-color: $text;
+$tabs-border-bottom-color: $border;
+$tabs-boxed-link-active-background-color: $scheme-main;
+$tabs-link-active-color: $text-dark;
+$tabs-link-hover-color: $text-strong;
+
+$tabs-boxed-link-hover-background-color: $grey-darker;
+
 // Raku vars
 $heading: $red;
 $heading-mono: $grey-dark;
+$form-background: $white;
 
 $block-heading-background: $grey-lightest;
 

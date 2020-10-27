@@ -17,10 +17,27 @@ body {
   color: #004FB3; }
 
 .navbar a:hover {
-  color: #002d67; }
+  color: #004FB3; }
 
 a.navbar-item:hover {
   background: #e5e5e5; }
+
+.navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
+  background-color: #e5e5e5; }
+
+.navbar-dropdown {
+  background-color: #f2f2f2;
+  border-top: 2px solid #cccccc; }
+
+.navbar-link:not(.is-arrowless)::after {
+  border-color: #004FB3; }
+
+.navbar-divider {
+  background-color: #fafafa; }
+
+.navbar-dropdown a.navbar-item:focus, .navbar-dropdown a.navbar-item:hover {
+  background-color: #e5e5e5;
+  color: #030303; }
 
 a {
   color: #004FB3; }
@@ -34,9 +51,16 @@ a:hover {
 .button.is-primary:hover {
   background-color: #003880 !important; }
 
+.label {
+  color: #3A3D4E; }
+
 .input, .textarea, .select select {
-  background-color: #f2f2f2;
-  border-color: #cccccc; }
+  background-color: #fafafa;
+  border-color: #cccccc;
+  color: #030303; }
+
+.input:hover, .textarea:hover, .select select:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered {
+  border-color: #d8d8d8; }
 
 /* Site footer */
 .footer {
@@ -180,17 +204,25 @@ a.raku-anchor,
   box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.07); }
 
 .raku.tabs {
-  background: #f2f2f2;
-  border: 1px solid #d8d8d8;
-  border-bottom: unset; }
+  background: #f5f5f5;
+  border: 1px solid #cccccc;
+  border-bottom: unset;
+  color: #030303; }
+  .raku.tabs ul {
+    border-color: #cccccc; }
   .raku.tabs a {
-    color: #3A3D4E; }
+    color: #030303; }
+  .raku.tabs.is-boxed a:hover {
+    background-color: #3A3D4E;
+    color: black; }
   .raku.tabs.is-boxed a {
-    border-right: 1px solid #d8d8d8; }
+    border-right: 1px solid #cccccc; }
   .raku.tabs.is-boxed li.is-active a {
-    color: #3A3D4E;
+    background: #fafafa;
+    color: black;
     border-top: 1px solid transparent;
-    border-bottom: 1px solid #fafafa; }
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc; }
 
 p > code {
   background-color: #f2f2f2;
@@ -209,7 +241,7 @@ p > code {
   .raku-sidebar .menu-list a {
     color: #030303; }
     .raku-sidebar .menu-list a:hover {
-      background: #f5f5f5; }
+      background: #d8d8d8; }
 
 a > code {
   color: #004FB3; }

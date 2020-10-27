@@ -17,10 +17,27 @@ body {
   color: #8DB2EB; }
 
 .navbar a:hover {
-  color: #4c86e0; }
+  color: #8DB2EB; }
 
 a.navbar-item:hover {
   background: #2d3134; }
+
+.navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
+  background-color: #2d3134; }
+
+.navbar-dropdown {
+  background-color: #212426;
+  border-top: 2px solid #3A3D4E; }
+
+.navbar-link:not(.is-arrowless)::after {
+  border-color: #8DB2EB; }
+
+.navbar-divider {
+  background-color: #1B1D1E; }
+
+.navbar-dropdown a.navbar-item:focus, .navbar-dropdown a.navbar-item:hover {
+  background-color: #3A3D4E;
+  color: #f5f5f5; }
 
 a {
   color: #8DB2EB; }
@@ -34,9 +51,16 @@ a:hover {
 .button.is-primary:hover {
   background-color: #4c86e0 !important; }
 
+.label {
+  color: #d8d8d8; }
+
 .input, .textarea, .select select {
-  background-color: #212426;
-  border-color: #3A3D4E; }
+  background-color: #2d3134;
+  border-color: #3A3D4E;
+  color: #f5f5f5; }
+
+.input:hover, .textarea:hover, .select select:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered {
+  border-color: #83858D; }
 
 /* Site footer */
 .footer {
@@ -180,17 +204,25 @@ a.raku-anchor,
   box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.07); }
 
 .raku.tabs {
-  background: #f2f2f2;
-  border: 1px solid #d8d8d8;
-  border-bottom: unset; }
+  background: #282c2e;
+  border: 1px solid #3A3D4E;
+  border-bottom: unset;
+  color: #f5f5f5; }
+  .raku.tabs ul {
+    border-color: #3A3D4E; }
   .raku.tabs a {
-    color: #3A3D4E; }
+    color: #f5f5f5; }
+  .raku.tabs.is-boxed a:hover {
+    background-color: #3A3D4E;
+    color: #e8e8e8; }
   .raku.tabs.is-boxed a {
-    border-right: 1px solid #d8d8d8; }
+    border-right: 1px solid #3A3D4E; }
   .raku.tabs.is-boxed li.is-active a {
-    color: #3A3D4E;
+    background: #1B1D1E;
+    color: gainsboro;
     border-top: 1px solid transparent;
-    border-bottom: 1px solid #fafafa; }
+    border-right: 1px solid #3A3D4E;
+    border-bottom: 1px solid #3A3D4E; }
 
 p > code {
   background-color: #f2f2f2;
@@ -209,7 +241,7 @@ p > code {
   .raku-sidebar .menu-list a {
     color: #f5f5f5; }
     .raku-sidebar .menu-list a:hover {
-      background: #282c2e; }
+      background: #3A3D4E; }
 
 a > code {
   color: #8DB2EB; }
@@ -237,3 +269,9 @@ code {
   .raku-code pre {
     background-color: #212426;
     color: #f5f5f5; }
+
+a.button strong {
+  color: #282c2e; }
+
+a.button.is-primary .icon {
+  color: #282c2e; }
