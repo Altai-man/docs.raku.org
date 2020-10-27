@@ -405,7 +405,24 @@ p {
   padding-bottom: $size-7 !important;
 }
 
+// Error pages.
+
+h1.error-title {
+  font-size: 168px;
+}
+
+.error-icon {
+  font-size: 240px;
+  position: absolute;
+  right: 25%;
+}
+
 // Workaround
+// .field, .fields {
+//   .button, .input, .textarea, .select select, .file-cta, .file-name, .pagination-previous, .pagination-next, .pagination-link, .pagination-ellipsis {
+//     display: inline-table;
+//   }
+// }
 
 // @include mobile {
 //   // to fix 'too wide' bug on mobile

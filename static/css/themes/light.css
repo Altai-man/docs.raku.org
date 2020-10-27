@@ -62,6 +62,9 @@ a:hover {
 .input:hover, .textarea:hover, .select select:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered {
   border-color: #d8d8d8; }
 
+.input:focus, .textarea:focus, .select select:focus, .is-focused.input, .is-focused.textarea, .select select.is-focused, .input:active, .textarea:active, .select select:active, .is-active.input, .is-active.textarea, .select select.is-active {
+  border-color: #004FB3; }
+
 .select:not(.is-multiple):not(.is-loading)::after {
   border-color: #004FB3; }
 
@@ -78,6 +81,12 @@ a:hover {
 
 .has-text-dark {
   color: #3A3D4E !important; }
+
+.button.is-link {
+  background-color: #004FB3; }
+
+.button.is-link:hover {
+  background-color: #002d67; }
 
 strong {
   color: black; }
@@ -281,3 +290,12 @@ code {
   .raku-code pre {
     background-color: #fafafa;
     color: #030303; }
+
+.hero.error-page .hero-body {
+  background: #fafafa; }
+
+.error-icon .icon {
+  color: #030303; }
+
+.hero .error-title {
+  color: #A30031; }

@@ -87,6 +87,10 @@ a:hover {
   border-color: $border-hover;
 }
 
+.input:focus, .textarea:focus, .select select:focus, .is-focused.input, .is-focused.textarea, .select select.is-focused, .input:active, .textarea:active, .select select:active, .is-active.input, .is-active.textarea, .select select.is-active {
+  border-color: $link;
+}
+
 // Arrow
 .select:not(.is-multiple):not(.is-loading)::after {
   border-color: $primary;
@@ -111,6 +115,15 @@ a:hover {
 .has-text-dark {
   color: $dark !important;
 }
+
+.button.is-link {
+  background-color: $link;
+}
+
+.button.is-link:hover {
+  background-color: $link-hover;
+}
+
 
 strong {
   color: $text-strong;
@@ -416,4 +429,18 @@ code {
     background-color: $code-background;
     color: $code-foreground;
   }
+}
+
+// Error pages.
+.hero.error-page .hero-body {
+  background: $background;
+
+}
+
+.error-icon .icon {
+  color: $text;
+}
+
+.hero .error-title {
+  color: $red;
 }
