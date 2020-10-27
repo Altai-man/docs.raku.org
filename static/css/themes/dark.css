@@ -62,6 +62,12 @@ a:hover {
 .input:hover, .textarea:hover, .select select:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered {
   border-color: #83858D; }
 
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #8DB2EB; }
+
+.select:not(.is-multiple):not(.is-loading):hover::after {
+  border-color: #8DB2EB; }
+
 /* Site footer */
 .footer {
   background: #212426;
@@ -104,11 +110,13 @@ strong {
 
 /* Raku search page */
 .raku-search .search-category {
-  border: 1px solid #cccccc;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07); }
+  background: #282c2e;
+  border: 1px solid #3A3D4E;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
+  color: #f5f5f5; }
 
 .raku-search .search-match {
-  background: #EED891; }
+  background: #1C6301; }
 
 .raku-search .search-category-title {
   color: #EED891;
@@ -242,6 +250,10 @@ p > code {
     color: #f5f5f5; }
     .raku-sidebar .menu-list a:hover {
       background: #3A3D4E; }
+
+.raku-sidebar.category-sidebar li a.is-active {
+  background-color: #2f323f;
+  border-left: 3px solid #8DB2EB; }
 
 a > code {
   color: #8DB2EB; }

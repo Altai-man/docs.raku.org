@@ -97,6 +97,7 @@ $menu-label-color: $black;
 $menu-item-hover-color: $black;
 $menu-item-hover-background-color: $grey-light;
 $menu-list-border-left: 1px solid $grey;
+$menu-item-active-background-color: $grey-light;
 
 $table-color: $text-strong;
 $table-head-cell-color: $grey-darker;
@@ -124,6 +125,8 @@ $block-heading-background: $grey-lightest;
 $code-background: $scheme-main;
 $code-foreground: $text;
 $code-output-background: $scheme-main-ter;
+
+$search-match: $yellow;
 
 $homepage-gradient: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
 

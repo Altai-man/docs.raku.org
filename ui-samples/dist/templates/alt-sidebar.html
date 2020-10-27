@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Search - Raku Docs</title>
+    <title>Mine sandbox - Raku Docs</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/themes/dark.css">
+    <link rel="stylesheet" href="/css/themes/light.css">
 
     <script type="text/javascript" src="../js/core.js"></script>
 
@@ -114,6 +114,53 @@
     </nav>
     <!-- Header ends -->
 
+   <div class="raku-sidebar-toggle">
+        <a class="button is-primary">
+          <span class="icon">
+            <!-- <i class="fas fa-chevron-right"></i> -->
+            <i class="fas fa-chevron-left is-medium"></i>
+          </span>
+        </a>
+      </div>
+
+    <div id="mainSidebar" class="raku-sidebar category-sidebar">
+
+
+      <div class="field">
+        <label class="label has-text-centered">Title</label>
+
+        <!-- <div class="control has-icons-right">
+             <input class="input" type="text" placeholder="Filter">
+             <span class="icon is-right has-text-grey">
+             <i class="fas fa-search is-medium"></i>
+             </span>
+             </div> -->
+      </div>
+
+      <div class="raku-sidebar-body">
+
+          <aside class="menu">
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a class="is-active">Here</a></li>
+
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+
+
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+            </ul>
+
+          </aside>
+
+
+      </div>
+
+    </div>
 
     <div id="wrapper">
 
@@ -121,80 +168,48 @@
 
         <section class="raku page-header">
           <div class="container px-4">
-            <div class="raku page-title has-text-centered">Search</div>
-            <!-- <div class="raku page-subtitle has-text-centered">Page subtitle</div> -->
+            <div class="raku page-title has-text-centered">Raku Programs Documentation</div>
+            <!-- <div class="raku page-subtitle has-text-centered">Desctiption</div> -->
           </div>
         </section>
 
 
         <section class="raku page-content">
+
           <div class="container px-4">
 
-            <div class="search-form mb-4">
-              <div class="field">
-                <p class="control has-icons-right">
-                  <input class="input" type="text" placeholder="Search">
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-search"></i>
-                  </span>
-                </p>
-              </div>
+                <div class="raku-programs">
 
-
-              <nav class="level">
-                <!-- Left side -->
-                <div class="level-left">
-                  <div class="level-item">
-
-                    <div class="field">
-                      <div class="control">
-                        <div class="select">
-                          <select>
-                            <option>Select category</option>
-                            <option>Category</option>
-                          </select>
-                        </div>
+                  <div class="programs-items">
+                    <div class="programs-item">
+                      <div class="programs-item-title">
+                        <a href="#" class="search-item-title">Shell environment variables used by Raku</a>
                       </div>
+                      <p>
+                        The variables you can declare to alter its behavior or gather additional information.
+                      </p>
+                    </div>
+
+                    <div class="programs-item">
+                      <div class="programs-item-title">
+                        <a href="#" class="search-item-title">Debugging</a>
+                      </div>
+                      <p>
+                        Modules and applications used to debug Raku programs.
+                      </p>
+                    </div>
+
+                    <div class="programs-item">
+                      <div class="programs-item-title">
+                        <a href="#" class="search-item-title">Reading the docs</a>
+                      </div>
+                      <p>
+                        p6doc - the Raku pod reader
+                      </p>
                     </div>
 
                   </div>
                 </div>
-
-                <div class="level-right">
-                  <div class="level-item">
-                    <div class="raku search-result-amount">123421 results</div>
-                  </div>
-                </div>
-              </nav>
-
-            </div>
-
-
-            <div class="raku-search results">
-              <div class="box search-category">
-                <div class="search-category-title has-text-centered subtitle">Category</div>
-
-                <article class="search-item">
-                  <div class="search-item-title">
-                    <a href="#" class="search-item-title">$some_method</a>
-                  </div>
-
-                  <p>Placerat orci <span class="search-match">nulla pellentesque</span> dignissim enim, sit amet venenatis urna cursus eget? Neque ornare aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl rhoncus mattis rhoncus, urna!</p>
-                </article>
-
-                <article class="search-item">
-                  <div class="search-item-title">
-                    <a href="#" >$some_method</a>
-                  </div>
-
-                  <p>Placerat orci nulla pellentesque dignissim enim, sit amet venenatis urna cursus eget? Neque ornare aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl rhoncus mattis rhoncus, urna!</p>
-                </article>
-
-              </div>
-
-
-            </div>
-
           </div>
         </section>
 

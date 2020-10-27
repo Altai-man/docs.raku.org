@@ -116,5 +116,31 @@ $sidebar-divider: 1px solid $grey-lighter !default;
   position: fixed;
   top: 125px;
   left: 295px;
+
   box-shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.25 );
+}
+
+.raku-sidebar.category-sidebar {
+  padding: 0.5rem;
+  padding-top: 5rem;
+
+  .menu-list {
+    list-style: none;
+    padding-left: 0px;
+
+    a {
+      margin: 0.25rem 0;
+      padding: 1em 0.75em;
+      border-radius: 3px;
+      // border-bottom: 1px solid grey;
+    }
+
+    li a.is-active {
+      font-weight: $weight-bold;
+    }
+  }
+}
+
+.raku-sidebar.category-sidebar .menu-list ::marker {
+  font-size: 0;
 }
