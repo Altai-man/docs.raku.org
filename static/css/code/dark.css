@@ -12,6 +12,10 @@
 .CodeMirror-linenumber {
   color: #f2f2f2; }
 
+.CodeMirror-selected,
+.CodeMirror-focused .CodeMirror-selected {
+  background: #393e41; }
+
 .cm-s-ayaya span.cm-comment {
   color: #6C7292; }
 
@@ -44,3 +48,9 @@
 
 .cm-s-ayaya span.cm-operator {
   color: #E05C4C; }
+
+textarea::-moz-selection {
+  background: #212426; }
+
+textarea::selection {
+  background: #212426; }

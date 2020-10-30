@@ -1,6 +1,9 @@
+@import "../../../node_modules/bulma/sass/utilities/functions.sass";
+
 /* Basic code colors */
 $code-background: #212426;
 $code-foreground: #f2f2f2;
+$code-selection: lighten($code-background, 10);
 
 $code-callable-color: #978DEB;
 $code-comment-color:  #6C7292;
@@ -10,9 +13,6 @@ $code-operator-color: #E05C4C;
 $code-string-color:   #68F3CA;
 $code-type-color:     #E04C86;
 $code-variable-color: #EED891;
-
-// Callable: 978DEB
-// Class: E04C86
 
 /* Dark color theme */
 .cm-s-ayaya.CodeMirror {
@@ -30,6 +30,26 @@ $code-variable-color: #EED891;
   color: $code-foreground;
 }
 
+
+.CodeMirror-selected,
+.CodeMirror-focused .CodeMirror-selected {
+  background: $code-selection;
+}
+
+// .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection {
+//   background: yellow;
+// }
+
+// .CodeMirror-line,
+// .CodeMirror-line > span,
+// .CodeMirror-line > span > span,
+// {
+//   ::selection, ::-moz-selection {
+//     background: red;
+//   }
+// }
+
+
 .cm-s-ayaya {
   span.cm-comment { color: $code-comment-color; }
   span.cm-number { color: $code-number-color }
@@ -46,3 +66,7 @@ $code-variable-color: #EED891;
   span.cm-def { color: $code-keyword-color; }
   span.cm-operator { color: $code-operator-color; }
 }
+
+// Fix selection background
+textarea::-moz-selection { background: $code-background}
+textarea::selection { background: $code-background; }
