@@ -39,6 +39,18 @@ a.navbar-item:hover {
   background-color: #e5e5e5;
   color: #030303; }
 
+.navbar-search-autocompletion {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07); }
+  .navbar-search-autocompletion li {
+    padding: 8px 5px; }
+    .navbar-search-autocompletion li:hover {
+      background-color: #e8e8e8; }
+  .navbar-search-autocompletion li.autocompletion-category {
+    color: #A30031; }
+    .navbar-search-autocompletion li.autocompletion-category:hover {
+      background-color: unset; }
+
 a {
   color: #004FB3; }
 
@@ -142,7 +154,7 @@ strong {
   border-bottom: 1px solid #cccccc;
   color: #83858D; }
 
-.raku-category .category-item {
+.raku-category .category-item:not(:last-child) {
   border-bottom: 1px solid #cccccc; }
 
 /* Programs page template */

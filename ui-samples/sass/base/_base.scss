@@ -42,6 +42,7 @@ body {
 
 /* Resize search box */
 .navbar-item input {
+  // width: 200px;
   width: 200px;
 }
 
@@ -51,6 +52,26 @@ body {
 
 .navbar-search {
   height: 30px;
+}
+
+// Autocompletion popup
+.navbar-search-autocompletion {
+  position: fixed;
+  width: 240px;
+  top: 45px;
+  left: 1255px;
+  z-index: 100;
+  overflow: scroll;
+
+  font-size: 0.875rem;
+
+  li {
+      padding: 8px 5px;
+  }
+
+  li.autocompletion-category {
+    font-weight: $weight-semibold;
+  }
 }
 
 .navbar > .container {

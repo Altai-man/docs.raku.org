@@ -34,6 +34,19 @@ body {
 .navbar-search {
   height: 30px; }
 
+.navbar-search-autocompletion {
+  position: fixed;
+  width: 240px;
+  top: 45px;
+  left: 1255px;
+  z-index: 100;
+  overflow: scroll;
+  font-size: 0.875rem; }
+  .navbar-search-autocompletion li {
+    padding: 8px 5px; }
+  .navbar-search-autocompletion li.autocompletion-category {
+    font-weight: 600; }
+
 .navbar > .container {
   margin: 0 auto;
   max-width: 1140px;

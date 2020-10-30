@@ -54,6 +54,33 @@ a.navbar-item:hover, {
   color:  $navbar-dropdown-item-hover-color;
 }
 
+
+// Autocompletion popup
+.navbar-search-autocompletion {
+  background-color: $scheme-main-ter;
+  box-shadow: $shadow-below;
+
+  li {
+      padding: 8px 5px;
+
+    &:hover {
+      background-color: darken($scheme-main-ter, 5);
+    }
+  }
+
+  li.autocompletion-category {
+    // background-color: $heading;
+    color: $heading;
+    // border-top: 1px solid $border;
+    // border-bottom: 2px solid $border;
+
+    &:hover {
+      background-color: unset;
+    }
+  }
+}
+
+
 a {
   color: $link;
 }
@@ -206,7 +233,7 @@ strong {
   }
 
 
-  .category-item {
+  .category-item:not(:last-child) {
     border-bottom: 1px solid $border;
   }
 }
@@ -382,6 +409,7 @@ p > code {
   }
 }
 
+// Alt sidebar
 .raku-sidebar.category-sidebar {
 
  li a.is-active {
@@ -389,6 +417,20 @@ p > code {
    border-left: 3px solid $link;
   }
 }
+
+// Alt sidebar with bottom border
+// .raku-sidebar.category-sidebar {
+
+//  li a {
+//    border-bottom: 1px solid $border;
+//  }
+
+//  li a.is-active {
+//    background-color: $scheme-main-bis;
+//    // border-bottom: 3px solid $link;
+//   }
+// }
+
 
 // Raku code
 a > code {
