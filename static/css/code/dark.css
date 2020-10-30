@@ -1,0 +1,46 @@
+/* Basic code colors */
+/* Dark color theme */
+.cm-s-ayaya.CodeMirror {
+  background: #212426;
+  color: #f2f2f2; }
+
+.CodeMirror-gutters {
+  background-color: #212426;
+  color: #6C7292;
+  border-right: 0; }
+
+.CodeMirror-linenumber {
+  color: #f2f2f2; }
+
+.cm-s-ayaya span.cm-comment {
+  color: #6C7292; }
+
+.cm-s-ayaya span.cm-number {
+  color: #6295E3; }
+
+.cm-s-ayaya span.cm-comment.cm-type {
+  color: #5998a6; }
+
+.cm-s-ayaya span.cm-keyword {
+  color: #8DE1EB; }
+
+.cm-s-ayaya span.cm-string {
+  color: #68F3CA; }
+
+.cm-s-ayaya span.cm-variable {
+  color: #EED891; }
+
+.cm-s-ayaya span.cm-variable-2 {
+  color: #EED891; }
+
+.cm-s-ayaya span.cm-variable-3 {
+  color: #EED891; }
+
+.cm-s-ayaya span.cm-type {
+  color: #E04C86; }
+
+.cm-s-ayaya span.cm-def {
+  color: #8DE1EB; }
+
+.cm-s-ayaya span.cm-operator {
+  color: #E05C4C; }

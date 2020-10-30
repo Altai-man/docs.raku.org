@@ -14,7 +14,7 @@
         "css-build": "npx node-sass --omit-source-map-url sass/main.scss ../static/css/main.css",
         "css-themes": "npx node-sass --omit-source-map-url sass/themes/ --output ../static/css/themes/",
         "css-all": "npm run css-build && npm run css-themes",
-        "css-code": "npx node-sass --omit-source-map-url sass/code-theme.scss ../static/css/ayaya.css",
+        "css-code": "npx node-sass --omit-source-map-url sass/modules/code/ --output ../static/css/code/",
         "css-postcss": "npx postcss --use autoprefixer --map true --output dist/css/main.css dist/css/main.css",
         "css-minify": "npx cleancss --level 2 dist/css/main.css -o dist/css/main.min.css",
         "css-watch": "npm run css-build -- --watch",
