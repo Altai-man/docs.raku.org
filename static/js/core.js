@@ -107,17 +107,18 @@ function setup_sidebar() {
         });
     });
 
-    $(".tab-switch").each(function(i, el) {
-        $(el).click(function () {
-            $('.tab-switch').each(function(i, el) {
-                $(el).removeClass('is-active');
+    $(".menu-list li").each(function(i, elLi) {
+        $(elLi).find('a').each(function(i, elA) {
+            $(elA).click(function() {
+                $(".menu-list li").each(function(i, el) {
+                    $(el).find('a').each(function(i, el) { console.log(el); $(el).removeClass('is-active'); });
+                });
+                $(this).addClass('is-active');
+                var tab_id = 'tab-' + $(elLi).attr('id').substring(7);
+                $('.tabcontent').each(function(i, el) { $(el).css('display', 'none'); });
+                $('#' + tab_id).css('display', 'block');
+
             });
-            var tab_id = 'tab-' + $(el).attr('id').substring(7);
-            $('.tabcontent').each(function(i, el) {
-                $(el).css('display', 'none');
-            });
-            $(el).addClass('is-active');
-            $('#' + tab_id).css('display', 'block');
         });
     });
 
