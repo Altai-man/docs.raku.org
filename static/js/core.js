@@ -153,10 +153,14 @@ function setup_sidebar() {
                     $(el).find('a').each(function(i, el) { console.log(el); $(el).removeClass('is-active'); });
                 });
                 $(this).addClass('is-active');
-                var tab_id = 'tab-' + $(elLi).attr('id').substring(7);
+                var category = $(elLi).attr('id').substring(7);
+                var tab_id = 'tab-' + category;
                 $('.tabcontent').each(function(i, el) { $(el).css('display', 'none'); });
                 $('#' + tab_id).css('display', 'block');
-
+                // Update URL as well to follow convention of static pages like `type-basic.html` we rendered
+                // since forever, so backward-compat-y thing
+                let prefix = window.location.href;
+                history.pushState(null, null, prefix.substr(0, prefix.lastIndexOf('type') + 4) + (category === 'all' ? '' : '-' + category));
             });
         });
     });

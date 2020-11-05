@@ -5,6 +5,7 @@ use Docky::Constants;
 use Docky::Host;
 use Docky::Renderer::TOC;
 use Docky::Renderer::Node;
+use Docky::Routes::BackwardCompat;
 use Docky::Routes::Index;
 use Documentable;
 use Documentable::Registry;
@@ -137,10 +138,6 @@ sub routes(Docky::Host $host) is export {
         get -> 'images', $svg-path { static "doc/html/images/$svg-path" }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
 
-        # Saint redirects for everyone, to cover as many links as possible...
-        # First, just redirect folks with `.html` to extension-less pages
-        get -> $page where $page.ends-with('.html') {
-            redirect $page.subst('.html'), :permanent;
-        }
+        include backward-compatibility-redirects($host);
     }
 }

@@ -7,7 +7,8 @@ use Pod::Utilities::Build;
 enum TemplateKind <small medium large>;
 
 # FIXME caching of all this...
-sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind, Kind $doc-kind) {
+sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
+                         Kind $doc-kind, :$category-kind = 'all') is export {
     my %render-data;
     my $OPERATOR-NAMES = 'prefix' | 'listop' | 'infix' | 'postcircumfix' | 'postfix' | 'postcircumfix' | 'circumfix';
 
@@ -58,10 +59,10 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind, Kind $doc-k
             } else {
                 @rows = $all.grep($doc-kind ~~ Kind::Type ?? *[3] eq $kind<name> !! *[1].contains($kind<name>)).map(*[^3]);
             }
-            @tabs.push: %( name => $kind<name>, :!is-active, :@rows, :@columns, display-text => $kind<display-text>);
+            @tabs.push: %( name => $kind<name>, :is-active($category-kind eq $kind<name>), :@rows, :@columns, display-text => $kind<display-text>);
         };
         # Add first 'All' tab
-        @tabs.unshift: %( name => 'all', :is-active, :@columns, rows => $all.map(*[^3]), display-text => 'All');
+        @tabs.unshift: %( name => 'all', :is-active($category-kind eq 'all'), :@columns, rows => $all.map(*[^3]), display-text => 'All');
 
         # Now let's pack this table with additional data into our render data
         %render-data<tabs> = @tabs;
@@ -92,6 +93,6 @@ sub index-routes($host) is export {
                 category-description => $category<description>,
                 |calculate-categories($host, $template, (Kind::{$category-id.tc}))
             );
-        };
+        }
     }
 }
