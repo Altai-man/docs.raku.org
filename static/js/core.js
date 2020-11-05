@@ -36,7 +36,20 @@ function setup_theme() {
         $(el).click(function() {
             var theme = cookie.get('color-scheme', 'light');
             cookie.set({'color-scheme' : theme === 'light' ? 'dark' : 'light'}, { expires: 30, path: '/', sameSite: true });
-            location.reload();
+            let links = document.getElementsByTagName('link');
+            for (let i = 0; i < links.length; i++) {
+                if (links[i].getAttribute('rel') == 'stylesheet') {
+                    let href = links[i].getAttribute('href');
+                    var replacer = undefined;
+                    if (href.includes('light')) {
+                        replacer = href.replace('light', 'dark');
+                    } else if (href.includes('dark')) {
+                        replacer = href.replace('dark', 'light');
+                    }
+                    if (replacer !== undefined)
+                        links[i].setAttribute('href', replacer);
+                }
+            }
         });
     });
 }
