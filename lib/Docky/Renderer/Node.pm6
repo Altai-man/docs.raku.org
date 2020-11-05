@@ -22,10 +22,20 @@ class Docky::Renderer::Node is Node::To::HTML {
         "<h$level class=\"raku-h$level\" id={ "\"%escaped<id>\"" }>$content\</h$level>\n";
     }
 
+    sub detect-declaration(Str $code) {
+        # A very hole-y number of heuristics to check if it is a signature
+        # and we don't want to have 'Run' button there...
+        # If there is only a single line and it starts with `class`
+        $code.indices("\n").elems == 0 && $code.starts-with('class'|'role') ||
+                # There are multiple lines and all start from either multi, sub
+                so $code.lines.map(*.starts-with('multi'|'sub'|'method'|'proto')).all;
+    }
+
     multi method node2html(Pod::Block::Code $node) {
         my $lang = $node.config<lang> ?? '' !! ' raku-lang';
         $lang = '' with $node.config<skip-test>;
-        my $code-runner = $lang ??
+        my $content = self.node2inline($node.contents);
+        my $code-runner = $lang && !detect-declaration($content) ??
         q:to/END/
           <div class="code-output">
             <button class="button code-button" aria-label="run">Run</button>
@@ -36,7 +46,7 @@ class Docky::Renderer::Node is Node::To::HTML {
         # TODO get back %*POD2HTML-CALLBACKS from Documentable (?)
         qq:to/END/;
         <div class="raku-code$lang">
-          <pre><code>{ self.node2inline($node.contents) }</code></pre>
+          <pre><code>$content\</code></pre>
           $code-runner
         </div>
         END
