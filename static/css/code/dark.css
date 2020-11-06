@@ -16,6 +16,9 @@
 .CodeMirror-focused .CodeMirror-selected {
   background: #393e41; }
 
+.cm-s-ayaya span.cm-atom {
+  color: #978DEB; }
+
 .cm-s-ayaya span.cm-comment {
   color: #6C7292; }
 

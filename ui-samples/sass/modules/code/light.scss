@@ -18,8 +18,9 @@ $code-variable-color: #5503B3;
 }
 
 .cm-s-ayaya {
+  span.cm-atom { color: $code-callable-color; }
   span.cm-comment { color: $code-comment-color; }
-  span.cm-number { color: $code-number-color }
+  span.cm-number { color: $code-number-color; }
 
   span.cm-comment.cm-type { color: #5998a6; }
 
