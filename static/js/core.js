@@ -5,12 +5,51 @@ $(function(){
     setup_theme();
 });
 
+// Open navbar menu via burger button on mobiles
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+            el.addEventListener('click', () => {
+
+                // Get the target from the "data-target" attribute
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
+
+                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+
+            });
+        });
+    }
+});
+
 function setup_theme() {
     $('#toggle-theme').each(function(i, el) {
         $(el).click(function() {
             var theme = cookie.get('color-scheme', 'light');
             cookie.set({'color-scheme' : theme === 'light' ? 'dark' : 'light'}, { expires: 30, path: '/', sameSite: true });
-            location.reload();
+            let links = document.getElementsByTagName('link');
+            for (let i = 0; i < links.length; i++) {
+                if (links[i].getAttribute('rel') == 'stylesheet') {
+                    let href = links[i].getAttribute('href');
+                    var replacer = undefined;
+                    if (href.includes('light')) {
+                        replacer = href.replace('light', 'dark');
+                    } else if (href.includes('dark')) {
+                        replacer = href.replace('dark', 'light');
+                    }
+                    if (replacer !== undefined)
+                        links[i].setAttribute('href', replacer);
+                }
+            }
         });
     });
 }
@@ -107,17 +146,22 @@ function setup_sidebar() {
         });
     });
 
-    $(".tab-switch").each(function(i, el) {
-        $(el).click(function () {
-            $('.tab-switch').each(function(i, el) {
-                $(el).removeClass('is-active');
+    $(".menu-list li").each(function(i, elLi) {
+        $(elLi).find('a').each(function(i, elA) {
+            $(elA).click(function() {
+                $(".menu-list li").each(function(i, el) {
+                    $(el).find('a').each(function(i, el) { console.log(el); $(el).removeClass('is-active'); });
+                });
+                $(this).addClass('is-active');
+                var category = $(elLi).attr('id').substring(7);
+                var tab_id = 'tab-' + category;
+                $('.tabcontent').each(function(i, el) { $(el).css('display', 'none'); });
+                $('#' + tab_id).css('display', 'block');
+                // Update URL as well to follow convention of static pages like `type-basic.html` we rendered
+                // since forever, so backward-compat-y thing
+                let prefix = window.location.href;
+                history.pushState(null, null, prefix.substr(0, prefix.lastIndexOf('type') + 4) + (category === 'all' ? '' : '-' + category));
             });
-            var tab_id = 'tab-' + $(el).attr('id').substring(7);
-            $('.tabcontent').each(function(i, el) {
-                $(el).css('display', 'none');
-            });
-            $(el).addClass('is-active');
-            $('#' + tab_id).css('display', 'block');
         });
     });
 

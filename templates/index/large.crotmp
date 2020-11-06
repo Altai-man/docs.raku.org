@@ -1,0 +1,60 @@
+<:use 'layout.crotmp'>
+<|layout(.title, .kinds, .irc-link, .color-scheme)>
+   <div class="raku-sidebar-toggle">
+        <a class="button is-primary">
+          <span class="icon">
+            <i class="fas fa-chevron-left is-medium"></i>
+          </span>
+        </a>
+      </div>
+
+    <div id="mainSidebar" class="raku-sidebar category-sidebar">
+
+      <div class="field">
+        <label class="label has-text-centered">Categories</label>
+      </div>
+
+      <div class="raku-sidebar-body">
+          <aside class="menu">
+            <ul class="menu-list">
+              <@tabs>
+              <li id="switch-<.name>"><a class="<?.is-active>is-active</?>"><.display-text></a></li>
+              </@>
+            </ul>
+          </aside>
+      </div>
+
+    </div>
+
+    <div id="wrapper">
+
+      <div class="raku page">
+
+        <section class="raku page-header">
+          <div class="container px-4">
+            <div class="raku page-title has-text-centered"><.section-title></div>
+            <div class="raku page-subtitle has-text-centered"><.section-description></div>
+          </div>
+        </section>
+
+        <section class="raku page-content">
+
+          <div class="container px-4">
+                <!-- Table -->
+                <@tabs>
+                    <div id="tab-<.name>" class="raku tabcontent" <?.is-active>style="display: block;"</?>>
+                        <table class="pod-table table is-bordered centered">
+                            <thead><tr><@columns><th><$_></th></@></tr></thead>
+                            <tbody><@rows><tr><@$_><td><&HTML($_)></td></@></tr></@></tbody>
+                        </table>
+                    </div>
+                </@>
+          </div>
+        </section>
+
+      </div>
+
+
+    </div>
+    <!-- Wrapper ends -->
+</|>

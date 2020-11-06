@@ -5,6 +5,8 @@ use Docky::Constants;
 use Docky::Host;
 use Docky::Renderer::TOC;
 use Docky::Renderer::Node;
+use Docky::Routes::BackwardCompat;
+use Docky::Routes::Index;
 use Documentable;
 use Documentable::Registry;
 use Documentable::DocPage::Factory;
@@ -17,51 +19,6 @@ sub routes(Docky::Host $host) is export {
     my $UI-PREFIX = "ui-samples/dist";
     template-location 'templates';
 
-    sub calculate-categories(Str $kind) {
-        # FIXME this is very temporary, as index page design is not established yet
-        given $kind {
-            when Kind::Language.Str {
-                my @categories-a = $host.get-index-page-data(Kind::Language)[0, 1, 2, 4].cache;
-                my @categories-b = $host.get-index-page-data(Kind::Language)[3, 5].cache;
-                return { :@categories-a, :@categories-b }
-            }
-            when Kind::Programs.Str {
-                my @categories-a = $host.get-index-page-data(Kind::Programs).cache;
-                my @categories-b = $host.get-index-page-data(Kind::Programs).cache;
-                return { :@categories-a, :@categories-b }
-            }
-            when Kind::Type.Str {
-                my @docs = $host.registry.lookup(Kind::Type.Str, :by<kind>)
-                        .categorize(*.name).sort(*.key).map(*.value)
-                        .map({%(
-                    name     => .[0].name,
-                    url      => .[0].url,
-                    subkinds => .map({.subkinds // Nil}).flat.unique.List,
-                    summary  => .[0].summary,
-                    subkind  => .[0].subkinds[0]
-                )}).cache;
-
-                my @columns = <name Type Description>;
-                my @rows = @docs.map({
-                    ["<a href=\"$_.<url>\">$_.<name>\</a>", .<subkinds>, .<summary>]
-                }).cache;
-                my @tabs;
-                @tabs.push: %( :is-active, :display-text<All>, :name<all>, :@columns, :@rows );
-                @tabs.append: $host.config.get-categories(Kind::Type).map({ %( name => .<name>, display-text => .<display-text>, :!is-active, :@columns, :@rows ) });
-                return @( :@tabs, :section-title('Raku Types'), :section-description('This is a list of all built-in Types that are documented here as part of the Raku language.') );
-            }
-            when Kind::Routine.Str {
-                my @tabs;
-                @tabs.push: %( :is-active, :display-text<All>, :title('This is a list of all built-in Types that are documented here as part of the Raku language. Use the above menu to narrow it down topically.') );
-                @tabs.append: $host.config.get-categories(Kind::Routine).map({ %( display-text => .<display-text>, :!is-active ) });
-                return :@tabs;
-            }
-            default {
-                die "'$kind'";
-            }
-        }
-    }
-
     route {
         # Index
         get -> :$color-scheme is cookie {
@@ -72,21 +29,7 @@ sub routes(Docky::Host $host) is export {
             )
         }
 
-        # Category indexes
-        get -> $category-id where 'language' | 'type' | 'routine' | 'programs', :$color-scheme is cookie {
-            with $host.config.kinds.first(*<kind> eq $category-id) -> $category {
-                my $template = $category-id eq 'language' | 'programs' ?? 'category' !! 'tabbed';
-                template "$template.crotmp", %(
-                    |$host.config.config, color-scheme => $color-scheme // 'light',
-                    title => "$category<display-text> - Raku Documentation",
-                    category-title => $category<display-text>,
-                    category-description => $category<description>,
-                    |calculate-categories($category-id)
-                )
-            } else {
-                not-found;
-            }
-        }
+        include index-routes($host);
 
         my sub render-pod($category-id, $name, $pod) {
             my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,
@@ -195,10 +138,6 @@ sub routes(Docky::Host $host) is export {
         get -> 'images', $svg-path { static "doc/html/images/$svg-path" }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
 
-        # Saint redirects for everyone, to cover as many links as possible...
-        # First, just redirect folks with `.html` to extension-less pages
-        get -> $page where $page.ends-with('.html') {
-            redirect $page.subst('.html'), :permanent;
-        }
+        include backward-compatibility-redirects($host);
     }
 }

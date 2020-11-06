@@ -55,6 +55,14 @@
         {
           "name": "exception",
           "display-text": "Exceptions"
+        },
+        {
+          "name": "module",
+          "display-text": "Modules"
+        },
+        {
+          "name": "metamodel",
+          "display-text": "Metamodel related types"
         }
       ]
     },

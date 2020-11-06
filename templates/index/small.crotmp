@@ -1,0 +1,42 @@
+<:use 'layout.crotmp'>
+<|layout(.title, .kinds, .irc-link, .color-scheme)>
+<div id="wrapper">
+
+  <div class="raku page">
+
+    <section class="raku page-header">
+      <div class="container px-4">
+        <div class="raku page-title has-text-centered">Raku Programs Documentation</div>
+      </div>
+    </section>
+
+
+    <section class="raku page-content">
+
+      <div class="container px-4">
+
+            <div class="raku-programs">
+
+              <@items>
+              <div class="programs-items">
+                <div class="programs-item">
+                  <div class="programs-item-title">
+                    <a href="<.url>" class="search-item-title"><.name></a>
+                  </div>
+                  <p>
+                    <.summary>
+                  </p>
+                </div>
+              </div>
+              </@>
+
+            </div>
+      </div>
+    </section>
+
+  </div>
+
+
+</div>
+<!-- Wrapper ends -->
+</|>
