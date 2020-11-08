@@ -188,7 +188,7 @@ body {
   text-align: center;
   margin-top: 0.75rem;
   margin-bottom: 1rem;
-  scroll-margin-top: 5rem; }
+  scroll-margin-top: 4.625rem; }
 
 .raku-h2 {
   font-size: 1.375rem;
@@ -196,7 +196,7 @@ body {
   padding: 0.25rem;
   margin-top: 0.75rem;
   margin-bottom: 1rem;
-  scroll-margin-top: 5rem; }
+  scroll-margin-top: 4rem; }
 
 .raku-h3 {
   font-size: 1.25rem;
@@ -280,6 +280,10 @@ table.centered {
 p {
   padding-top: 0.75rem !important;
   padding-bottom: 0.75rem !important; }
+
+figure svg {
+  max-width: 100%;
+  height: auto; }
 
 h1.error-title {
   font-size: 168px; }

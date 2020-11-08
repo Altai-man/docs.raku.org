@@ -288,7 +288,7 @@ body {
   margin-top: $size-7;
   margin-bottom: 1rem;
 
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 4.625rem;
 }
 
 
@@ -299,7 +299,7 @@ body {
   margin-top: $size-7;
   margin-bottom: 1rem;
 
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 4rem;
 }
 
 .raku-h3 {
@@ -426,6 +426,11 @@ p {
   padding-bottom: $size-7 !important;
 }
 
+figure svg {
+  max-width: 100%;
+  height: auto;
+}
+
 // Error pages.
 
 h1.error-title {
@@ -437,7 +442,6 @@ h1.error-title {
   position: absolute;
   right: 25%;
 }
-
 // Workaround
 // .field, .fields {
 //   .button, .input, .textarea, .select select, .file-cta, .file-name, .pagination-previous, .pagination-next, .pagination-link, .pagination-ellipsis {

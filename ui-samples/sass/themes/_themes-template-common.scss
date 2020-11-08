@@ -399,12 +399,23 @@ p > code {
     li ul {
       border-left: 1px solid $border;
     }
+
     a {
       color: $text;
+
 
       &:hover {
         background: $menu-item-hover-background-color;
       }
+
+      &.is-active {
+        color: $text-invert;
+
+        &:hover {
+          background: $primary;
+        }
+      }
+
     }
   }
 }
@@ -412,10 +423,20 @@ p > code {
 // Alt sidebar
 .raku-sidebar.category-sidebar {
 
- li a.is-active {
-   background-color: $menu-item-active-background-color;
-   border-left: 3px solid $link;
+  li a.is-active {
+    background-color: $menu-item-active-background-color;
+    border-left: 3px solid $link;
   }
+
+    a {
+      &.is-active {
+        color: $text;
+
+        &:hover {
+          background: $menu-item-active-background-color;
+        }
+      }
+    }
 }
 
 // Alt sidebar with bottom border

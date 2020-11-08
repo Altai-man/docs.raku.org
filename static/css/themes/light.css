@@ -271,10 +271,19 @@ p > code {
     color: #030303; }
     .raku-sidebar .menu-list a:hover {
       background: #d8d8d8; }
+    .raku-sidebar .menu-list a.is-active {
+      color: #f7f7f7; }
+      .raku-sidebar .menu-list a.is-active:hover {
+        background: #004FB3; }
 
 .raku-sidebar.category-sidebar li a.is-active {
   background-color: #d8d8d8;
   border-left: 3px solid #004FB3; }
+
+.raku-sidebar.category-sidebar a.is-active {
+  color: #030303; }
+  .raku-sidebar.category-sidebar a.is-active:hover {
+    background: #d8d8d8; }
 
 a > code {
   color: #004FB3; }

@@ -52,7 +52,7 @@ $primary-dark: darken($primary, 15);
 
 // Text colors
 $text: $white-ter;
-$text-invert: findColorInvert($text);
+$text-invert: $black-ter;
 $text-light: lighten($text, 10);
 $text-dark: darken($text, 10);
 $text-strong: darken($text, 5);
