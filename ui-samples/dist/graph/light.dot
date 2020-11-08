@@ -1,0 +1,50 @@
+// Light graphviz theme
+digraph "perl6-type-graph" {
+    rankdir=BT;
+    splines=polyline;
+    overlap=false;
+    // Common
+    graph [truecolor=true bgcolor="#fafafa"];
+    node [style=filled margin=0.2 fillcolor="#f2f2f2" shape=rectangle fontsize=16];
+    // COLORS:
+    // #5503B3
+    // #A30031
+
+    // Types
+    "Int" [color="#030303", fontcolor="#030303", href="/type/Int", fontname="FreeSans"];
+    "Mu" [color="#030303", fontcolor="#030303", href="/type/Mu", fontname="FreeSans"];
+    "Any" [color="#030303", fontcolor="#030303", href="/type/Any", fontname="FreeSans"];
+    "Cool" [color="#030303", fontcolor="#030303", href="/type/Cool", fontname="FreeSans"];
+    "Numeric" [color="#5503B3", fontcolor="#5503B3", href="/type/Numeric", fontname="FreeSans"];
+    "Real" [color="#5503B3", fontcolor="#5503B3", href="/type/Real", fontname="FreeSans"];
+    "int" [color="#030303", fontcolor="#030303", href="/type/int", fontname="FreeSans"];
+    "Order" [color="#A30031", fontcolor="#A30031", href="/type/Order", fontname="FreeSans"];
+    "atomicint" [color="#030303", fontcolor="#030303", href="/type/atomicint", fontname="FreeSans"];
+    "Signal" [color="#A30031", fontcolor="#A30031", href="/type/Signal", fontname="FreeSans"];
+    "Bool" [color="#A30031", fontcolor="#A30031", href="/type/Bool", fontname="FreeSans"];
+    "Stringy" [color="#5503B3", fontcolor="#5503B3", href="/type/Stringy", fontname="FreeSans"];
+    "Str" [color="#030303", fontcolor="#030303", href="/type/Str", fontname="FreeSans"];
+    "IntStr" [color="#030303", fontcolor="#030303", href="/type/IntStr", fontname="FreeSans"];
+    "PromiseStatus" [color="#A30031", fontcolor="#A30031", href="/type/PromiseStatus", fontname="FreeSans"];
+    "Endian" [color="#A30031", fontcolor="#A30031", href="/type/Endian", fontname="FreeSans"];
+
+    // Superclasses
+    "Int" -> "Cool" [color="#030303"];
+    "Any" -> "Mu" [color="#030303"];
+    "Cool" -> "Any" [color="#030303"];
+    "int" -> "Int" [color="#030303"];
+    "Order" -> "Int" [color="#030303"];
+    "atomicint" -> "Int" [color="#030303"];
+    "Signal" -> "Int" [color="#030303"];
+    "Bool" -> "Int" [color="#030303"];
+    "Str" -> "Cool" [color="#030303"];
+    "IntStr" -> "Int" [color="#030303"];
+    "IntStr" -> "Str" [color="#030303"];
+    "PromiseStatus" -> "Int" [color="#030303"];
+    "Endian" -> "Int" [color="#030303"];
+
+    // Roles
+    "Int" -> "Real" [color="#5503B3"];
+    "Real" -> "Numeric" [color="#5503B3"];
+    "Str" -> "Stringy" [color="#5503B3"];
+}
