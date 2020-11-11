@@ -23,6 +23,7 @@
     "Docky::Renderer::TOC": "lib/Docky/Renderer/TOC.pm6",
     "Docky::Routes::BackwardCompat": "lib/Docky/Routes/BackwardCompat.pm6",
     "Docky::Routes::Index": "lib/Docky/Routes/Index.pm6",
+    "Docky::Search": "lib/Docky/Search.pm6",
     "Renderer": "lib/Renderer.pm6",
     "Routes": "lib/Routes.pm6"
   },

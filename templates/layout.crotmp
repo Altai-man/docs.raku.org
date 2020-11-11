@@ -18,6 +18,7 @@
     <script src="/js/lib/codemirror.min.js"></script>
     <script src="/js/lib/raku-mode.js"></script>
     <script type="text/javascript" src="/js/core.js"></script>
+    <script type="text/javascript" src="/js/search.js"></script>
   </head>
 
 
@@ -92,6 +93,7 @@
               </div>
             </div>
           </div>
+          <div id="navbar-search" class="navbar-search-autocompletion"></div>
         </div>
       </div>
     </nav>

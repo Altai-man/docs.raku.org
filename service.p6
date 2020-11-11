@@ -6,8 +6,11 @@ use Cro::HTTP::Log::File;
 use Cro::HTTP::Server;
 use Docky::Host;
 use Docky::Routes;
+use Docky::Search;
 
 my $host = Docky::Host.new;
+
+init-search($host);
 
 unless 'html/images'.IO.e {
     mkdir 'html/images';

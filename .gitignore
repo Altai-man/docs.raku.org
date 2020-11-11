@@ -16,3 +16,5 @@ node_modules/
 # Backup files
 *~
 
+# Generated files
+static/js/search.js
