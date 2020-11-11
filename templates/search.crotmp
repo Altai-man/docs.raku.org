@@ -1,0 +1,91 @@
+<:use 'layout.crotmp'>
+<|layout(.title, .kinds, .irc-link, .color-scheme)>
+    <div id="wrapper">
+
+      <div class="raku page">
+
+        <section class="raku page-header">
+          <div class="container px-4">
+            <div class="raku page-title has-text-centered">Search</div>
+            <!-- <div class="raku page-subtitle has-text-centered">Page subtitle</div> -->
+          </div>
+        </section>
+
+
+        <section class="raku page-content">
+          <div class="container px-4">
+
+            <div class="search-form mb-4">
+              <div class="field">
+                <p class="control has-icons-right">
+                  <input class="input" type="text" placeholder="Search">
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </p>
+              </div>
+
+
+              <nav class="level">
+                <!-- Left side -->
+                <div class="level-left">
+                  <div class="level-item">
+
+                    <div class="field">
+                      <div class="control">
+                        <div class="select">
+                          <select>
+                            <option>Select category</option>
+                            <option>Category</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="level-right">
+                  <div class="level-item">
+                    <div class="raku search-result-amount">123421 results</div>
+                  </div>
+                </div>
+              </nav>
+
+            </div>
+
+
+            <div class="raku-search results">
+              <div class="box search-category">
+                <div class="search-category-title has-text-centered subtitle">Category</div>
+
+                <article class="search-item">
+                  <div class="search-item-title">
+                    <a href="#" class="search-item-title">$some_method</a>
+                  </div>
+
+                  <p>Placerat orci <span class="search-match">nulla pellentesque</span> dignissim enim, sit amet venenatis urna cursus eget? Neque ornare aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl rhoncus mattis rhoncus, urna!</p>
+                </article>
+
+                <article class="search-item">
+                  <div class="search-item-title">
+                    <a href="#" >$some_method</a>
+                  </div>
+
+                  <p>Placerat orci nulla pellentesque dignissim enim, sit amet venenatis urna cursus eget? Neque ornare aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl rhoncus mattis rhoncus, urna!</p>
+                </article>
+
+              </div>
+
+
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+
+
+    </div>
+    <!-- Wrapper ends -->
+</|>
