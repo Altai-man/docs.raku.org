@@ -34,7 +34,7 @@ body {
 .navbar-search {
   height: 30px; }
 
-.navbar-search-autocompletion {
+.navbar-search-autocomplete {
   position: fixed;
   width: 240px;
   top: 45px;
@@ -42,9 +42,9 @@ body {
   z-index: 100;
   overflow: scroll;
   font-size: 0.875rem; }
-  .navbar-search-autocompletion li {
+  .navbar-search-autocomplete li {
     padding: 8px 5px; }
-  .navbar-search-autocompletion li.autocompletion-category {
+  .navbar-search-autocomplete li.ui-autocomplete-category {
     font-weight: 600; }
 
 .navbar > .container {
@@ -292,6 +292,10 @@ h1.error-title {
   font-size: 240px;
   position: absolute;
   right: 25%; }
+
+.ui-helper-hidden-accessible {
+  position: absolute;
+  left: -999em; }
 
 .raku-sidebar {
   max-width: calc(100% - 50px);

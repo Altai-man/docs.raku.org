@@ -55,7 +55,7 @@ body {
 }
 
 // Autocompletion popup
-.navbar-search-autocompletion {
+.navbar-search-autocomplete {
   position: fixed;
   width: 240px;
   top: 45px;
@@ -69,7 +69,7 @@ body {
       padding: 8px 5px;
   }
 
-  li.autocompletion-category {
+  li.ui-autocomplete-category {
     font-weight: $weight-semibold;
   }
 }
@@ -456,3 +456,5 @@ h1.error-title {
 //     margin-right: 0;
 //   }
 // }
+
+.ui-helper-hidden-accessible { position: absolute; left:-999em; }

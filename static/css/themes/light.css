@@ -46,9 +46,9 @@ a.navbar-item:hover {
     padding: 8px 5px; }
     .navbar-search-autocompletion li:hover {
       background-color: #e8e8e8; }
-  .navbar-search-autocompletion li.autocompletion-category {
+  .navbar-search-autocompletion li.ui-autocomplete-category {
     color: #A30031; }
-    .navbar-search-autocompletion li.autocompletion-category:hover {
+    .navbar-search-autocompletion li.ui-autocomplete-category:hover {
       background-color: unset; }
 
 a {
