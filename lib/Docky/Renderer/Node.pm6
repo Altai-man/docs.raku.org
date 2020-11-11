@@ -52,11 +52,11 @@ class Docky::Renderer::Node is Node::To::HTML {
         my ($tmp_fname, $tmp_io) = tempfile;
         $tmp_io.spurt: $code, :close;
 
-        say "Starting for $tmp_fname...";
         my $p = %!code-cache{$tmp_fname} = Promise.new;
         $!hl-proc.say($tmp_fname);
         my $res = $p.result;
         %!code-cache{$tmp_fname}:delete;
+        unlink $tmp_fname;
         %!code-cache{$code} = $res;
         $res;
     }
