@@ -1,7 +1,12 @@
-use URI::Escape;
+use File::Temp;
+use JSON::Fast;
 use Pod::To::HTML;
+use URI::Escape;
 
 class Docky::Renderer::Node is Node::To::HTML {
+    has $.hl-proc = Proc::Async.new('coffee', 'doc/highlights/highlight-filename-from-stdin.coffee', :r, :w);
+    has %!code-cache;
+
     multi method node2html(Pod::List $node) {
         "<div class=\"content\"><ul>" ~ self.node2html($node.contents) ~ "</ul></div>\n";
     }
@@ -29,13 +34,39 @@ class Docky::Renderer::Node is Node::To::HTML {
         $code.indices("\n").elems == 0 && $code.starts-with('class'|'role') ||
                 # There are multiple lines and all start from either multi, sub
                 so $code.lines.map(*.starts-with('multi'|'sub'|'method'|'proto')).all;
+        # Extend rules here if necessary...
+    }
+
+    method highlight-code($node) {
+        my $code = $node.contents.join;
+        return $_ with %!code-cache{$code};
+
+        unless $!hl-proc.started {
+            $!hl-proc.stdout.lines.tap(-> $json {
+                my $parsed-json = from-json($json);
+                %!code-cache{$parsed-json<file>}.keep($parsed-json<html>);
+            });
+            $!hl-proc.start;
+        }
+
+        my ($tmp_fname, $tmp_io) = tempfile;
+        $tmp_io.spurt: $code, :close;
+
+        say "Starting for $tmp_fname...";
+        my $p = %!code-cache{$tmp_fname} = Promise.new;
+        $!hl-proc.say($tmp_fname);
+        my $res = $p.result;
+        %!code-cache{$tmp_fname}:delete;
+        %!code-cache{$code} = $res;
+        $res;
     }
 
     multi method node2html(Pod::Block::Code $node) {
         my $lang = $node.config<lang> ?? '' !! ' raku-lang';
         $lang = '' with $node.config<skip-test>;
-        my $content = self.node2inline($node.contents);
-        my $code-runner = $lang && !detect-declaration($content) ??
+        my $content = self.highlight-code($node).subst('<pre class="editor editor-colors">', '<pre class="editor editor-colors cm-s-ayaya"><code>')
+                .subst('</pre>', '</code></pre>').subst("\n", '<br>');
+        my $code-runner = $lang && !detect-declaration($node.contents.join) ??
         q:to/END/
           <div class="code-output">
             <button class="button code-button" aria-label="run">Run</button>
@@ -43,10 +74,9 @@ class Docky::Renderer::Node is Node::To::HTML {
           </div>
         END
         !! '';
-        # TODO get back %*POD2HTML-CALLBACKS from Documentable (?)
         qq:to/END/;
         <div class="raku-code$lang">
-          <pre><code>$content\</code></pre>
+          $content
           $code-runner
         </div>
         END
