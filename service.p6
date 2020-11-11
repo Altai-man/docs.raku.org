@@ -12,11 +12,18 @@ my $host = Docky::Host.new;
 
 init-search($host);
 
-unless 'html/images'.IO.e {
-    mkdir 'html/images';
-    my $viz = Perl6::TypeGraph::Viz.new;
+unless 'static/images'.IO.e {
+    mkdir 'static/images/light';
+    mkdir 'static/images/dark';
     my $tg = Perl6::TypeGraph.new-from-file;
-    $viz.write-type-graph-images(path => "html/images", :force, type-graph => $tg);
+    # Write light colors
+    my $viz = Perl6::TypeGraph::Viz.new(class-color => '#030303', role-color => '#5503B3', enum-color => '#A30031',
+            bg-color => '#fafafa', node-style => 'filled margin=0.2 fillcolor="#f2f2f2" shape=rectangle fontsize=16');
+    $viz.write-type-graph-images(path => "static/images/light", :force, type-graph => $tg);
+    # Write dark colors
+    $viz = Perl6::TypeGraph::Viz.new(class-color => '#f7f7f7', role-color => '#8DB2EB', enum-color => '#EED891',
+            bg-color => '#1B1D1E', node-style => 'filled margin=0.2 fillcolor="#212426" shape=rectangle fontsize=16');
+    $viz.write-type-graph-images(path => "static/images/dark", :force, type-graph => $tg);
 }
 
 my Cro::Service $http = Cro::HTTP::Server.new(

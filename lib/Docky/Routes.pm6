@@ -135,7 +135,7 @@ sub routes(Docky::Host $host) is export {
         get -> 'css', *@path { static "static/css/", @path }
         get -> 'js',  *@path { static "static/js/", @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
-        get -> 'images', $svg-path { static "doc/html/images/$svg-path" }
+        get -> 'images', $svg-path, :$color-scheme is cookie { static "static/images/{ $color-scheme // 'light' }/$svg-path" }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
 
         include backward-compatibility-redirects($host);

@@ -8,6 +8,7 @@ doc/
 docs.raku.org/
 .idea/
 html/
+static/images/
 
 # Caches
 .precomp/
