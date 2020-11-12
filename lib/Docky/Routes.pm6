@@ -92,14 +92,15 @@ sub routes(Docky::Host $host) is export {
                 if @docs.elems {
                     my @subkinds = @docs.map({ slip .subkinds }).unique;
                     my $subkind = @subkinds == 1 ?? @subkinds[0] !! $category-id;
-                    my $pod = pod-with-title("$subkind $name",
-                            pod-block("Documentation for $subkind ", pod-code($name),
+                    my $doc-name = @docs[0].name;
+                    my $pod = pod-with-title("$subkind $doc-name",
+                            pod-block("Documentation for $subkind ", pod-code($doc-name),
                                     " assembled from the following pages:"),
                             @docs.map({
                                 pod-heading("{ .origin.human-kind } { .origin.name }"),
                                 pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
                             }));
-                    cache-and-serve-pod($category-id, $name, $pod, :$sidebar, :$color-scheme);
+                    cache-and-serve-pod($category-id, $doc-name, $pod, :$sidebar, :$color-scheme);
                 }
                 else {
                     not-found;
