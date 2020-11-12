@@ -16,53 +16,78 @@ Cro level redirect.
 
 * Website content updates https://github.com/Raku/doc/issues/2227
 
-* Search index anchors point a line too low https://github.com/Raku/doc/issues/1303
-
 * Automatic checks and deployment https://github.com/Raku/doc/issues/3451
 
-JS for scrolling.
+
+### To address
+
+* To think about ␤ replacement https://github.com/Raku/doc/issues/2670
 
 * Teach SE about `rakulang` keywords
 
-* Create templates https://github.com/Raku/doc/issues/2508
+???
 
-* Prohibit L<Foo> and L<foo> lone links instead of complete ones https://github.com/Raku/doc/issues/1488
+* Prohibit L<Foo> and L<foo> one links instead of complete ones https://github.com/Raku/doc/issues/1488
+
+Not a website issue.
 
 * Ensure Windows works https://github.com/Raku/doc/issues/1480
 
+Just nope.
+
 * Highlight Raku as Raku and others as others
+
+Raku part is done.
 
 * Sort TOC https://github.com/Raku/doc/issues/392
 
-### To address
+Different opinions.
+
+### Done
 
 * On types page render roles and classes differently https://github.com/Raku/doc/issues/2477
 
 Suggests to render role/class word on Types page in the same way, but we will have two sections instead.
 
+Done.
+
 * Add a button to execute code on glot.io https://github.com/Raku/doc/issues/1866
+
+Done.
 
 * New top level search page https://github.com/Raku/doc/issues/1099
 
+Done.
+
 * Special flags for versioned sections https://github.com/Raku/doc/issues/302
+
+Done.
 
 * Mobile version https://github.com/Raku/doc/issues/3470
 
+Done.
+
 * Dark theme https://github.com/Raku/doc/issues/3055
 
-* To think about ␤ replacement https://github.com/Raku/doc/issues/2670
-
-### Done
+Done.
 
 * Add sidebar https://github.com/Raku/doc/issues/2509 https://github.com/Raku/doc/issues/2138
 
-Done in a fixed way. Make sure mobile version will have a cool solution not to scroll sidebar as well.
+Done in a fixed way. Make sure mobile version will have a cool solution not to scroll the sidebar as well.
 
 * Improve UI https://github.com/Raku/doc/issues/2429 https://github.com/Raku/doc/issues/1090
 
 Done.
 
 * Language page is divided into columns https://github.com/Raku/doc/issues/2186
+
+Done.
+
+* Search index anchors point a line too low https://github.com/Raku/doc/issues/1303
+
+Done.
+
+* Create templates https://github.com/Raku/doc/issues/2508
 
 Done.
 
