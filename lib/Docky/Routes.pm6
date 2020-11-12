@@ -21,7 +21,7 @@ sub routes(Docky::Host $host) is export {
 
     route {
         # Index
-        get -> :$color-scheme is cookie {
+        get -> Str :$color-scheme is cookie {
             template 'index.crotmp', %(
                 |$host.config.config,
                 :@backup-cards, :@community-links, :@resource-links, :@explore-links,
@@ -41,16 +41,16 @@ sub routes(Docky::Host $host) is export {
             "$renderer.metadata()<title> - Raku Documentation" => $html;
         }
 
-        my sub serve-cached-page($page, Str $sidebar, $color-scheme) {
+        my sub serve-cached-page($page, Str :$sidebar, Str :$color-scheme) {
             my $html = $page.value.clone;
             $html .= subst('SIDEBAR_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="width:0px; display:none;"');
             $html .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
             $html .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
             template 'entry.crotmp', { title => $page.key, |$host.config.config, :$html,
-                                       color-scheme => $color-scheme // 'light' }
+                                       :color-scheme($color-scheme // 'light') }
         }
 
-        my sub cache-and-serve-pod(Str $category-id, Str $name, $pod, $sidebar, $color-scheme) {
+        my sub cache-and-serve-pod(Str $category-id, Str $name, $pod, Str :$sidebar, Str :$color-scheme) {
             $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
             my $page = $host.render-cache{$category-id}{$name}.clone;
             $page.value .= subst('SIDEBAR_STYLE',
@@ -58,13 +58,13 @@ sub routes(Docky::Host $host) is export {
             $page.value .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
             $page.value .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
             template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
-                                       color-scheme => $color-scheme // 'light' }
+                                       :color-scheme($color-scheme // 'light') }
         }
 
         # /type/Int
-        get -> $category-id where 'type'|'language'|'programs', $name, :$color-scheme is cookie, :$sidebar is cookie {
+        get -> $category-id where 'type'|'language'|'programs', $name, Str :$color-scheme is cookie, Str :$sidebar is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
-                serve-cached-page($page, $sidebar, $color-scheme);
+                serve-cached-page($page, :$sidebar, :$color-scheme);
             } else {
                 my $kind = do given $category-id {
                     when 'type'     { Kind::Type     }
@@ -76,7 +76,7 @@ sub routes(Docky::Host $host) is export {
                     my $pod = $kind eq Kind::Type
                             ?? Documentable::DocPage::Primary::Type.compose-type($host.registry, $_).pod
                             !! $_.pod;
-                    cache-and-serve-pod($category-id, $name, $pod, $sidebar, $color-scheme);
+                    cache-and-serve-pod($category-id, $name, $pod, :$sidebar, :$color-scheme);
                 } else {
                     not-found;
                 }
@@ -84,9 +84,9 @@ sub routes(Docky::Host $host) is export {
         }
 
         # /syntax/token...
-        get -> $category-id where 'routine' | 'reference' | 'syntax', $name, :$color-scheme is cookie, :$sidebar is cookie {
+        get -> $category-id where 'routine' | 'reference' | 'syntax', $name, Str :$color-scheme is cookie, Str :$sidebar is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
-                serve-cached-page($page, $sidebar, $color-scheme);
+                serve-cached-page($page, :$sidebar, :$color-scheme);
             } else {
                 my @docs = $host.registry.lookup($category-id, :by<kind>).grep(*.url eq "/$category-id/$name");
                 if @docs.elems {
@@ -99,7 +99,7 @@ sub routes(Docky::Host $host) is export {
                                 pod-heading("{ .origin.human-kind } { .origin.name }"),
                                 pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
                             }));
-                    cache-and-serve-pod($category-id, $name, $pod, $sidebar, $color-scheme);
+                    cache-and-serve-pod($category-id, $name, $pod, :$sidebar, :$color-scheme);
                 }
                 else {
                     not-found;
@@ -128,14 +128,14 @@ sub routes(Docky::Host $host) is export {
         }
 
         # Statics
-        get -> 'about', :$color-scheme is cookie {
+        get -> 'about', Str :$color-scheme is cookie {
             template 'about.crotmp', { title => 'About - Raku Documentation', |$host.config.config,
                                        color-scheme => $color-scheme // 'light' }
         }
         get -> 'css', *@path { static "static/css/", @path }
         get -> 'js',  *@path { static "static/js/", @path }
         get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
-        get -> 'images', $svg-path, :$color-scheme is cookie { static "static/images/{ $color-scheme // 'light' }/$svg-path" }
+        get -> 'images', $svg-path, Str :$color-scheme is cookie { static "static/images/{ $color-scheme // 'light' }/$svg-path" }
         get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
 
         include backward-compatibility-redirects($host);

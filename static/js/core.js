@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setup_theme() {
+    var theme = cookie.get('color-scheme', undefined);
+    if (theme === undefined) {
+        cookie.set({'color-scheme' : 'light'}, { expires: 30, path: '/', sameSite: true });
+    }
     $('#toggle-theme').each(function(i, el) {
         $(el).click(function() {
             var theme = cookie.get('color-scheme', 'light');
