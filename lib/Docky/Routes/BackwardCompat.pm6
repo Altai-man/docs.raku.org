@@ -27,7 +27,7 @@ sub backward-compatibility-redirects($host) is export {
                 category-description => $category<description>,
                 |calculate-categories(
                         $host, TemplateKind::large, Kind::{@category-kind[0].tc},
-                        category-kind => @category-kind[1])
+                        category-kind => @category-kind[1..*].join('-'))
             );
         }
     }

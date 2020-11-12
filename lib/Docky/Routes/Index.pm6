@@ -51,6 +51,7 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
         # This is not a terribly efficient way to do this as we have to grep the list O(@kinds) number of times,
         # and something smarter probably can be made with .categorize,
         # but since we most likely want to cache result of this anyway, the clarity wins
+        my $active-category;
         for @kinds -> $kind {
             my @rows;
             # This is a workaround because we do not have a separate "infix" etc categories on page, just "operators"...
@@ -59,15 +60,17 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
             } else {
                 @rows = $all.grep($doc-kind ~~ Kind::Type ?? *[3] eq $kind<name> !! *[1].contains($kind<name>)).map(*[^3]);
             }
-            @tabs.push: %( name => $kind<name>, :is-active($category-kind eq $kind<name>), :@rows, :@columns, display-text => $kind<display-text>);
+            my $is-active = $category-kind eq $kind<name>;
+            $active-category = $category-kind if $is-active;
+            @tabs.push: %( name => $kind<name>, :$is-active, :@rows, :@columns, display-text => $kind<display-text>);
         };
         # Add first 'All' tab
         @tabs.unshift: %( name => 'all', :is-active($category-kind eq 'all'), :@columns, rows => $all.map(*[^3]), display-text => 'All');
 
         # Now let's pack this table with additional data into our render data
         %render-data<tabs> = @tabs;
-        %render-data<section-title> = "Raku {$doc-kind.Str}s";
-        %render-data<section-description> = "This is a list of built-in {#`( need to have category here... )} {$doc-kind.Str.tc}s that are documented here as part of the Raku language.";
+        %render-data<section-title> = "Raku $active-category {$doc-kind.Str}s";
+        %render-data<section-description> = "This is a list of built-in { $active-category } {$doc-kind.Str.tc}s that are documented here as part of the Raku language.";
     }
     %render-data;
 }
