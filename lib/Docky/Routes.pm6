@@ -20,6 +20,10 @@ sub routes(Docky::Host $host) is export {
     template-location 'templates';
 
     route {
+        after {
+            template '404.crotmp', { title => '404' } if .status == 404;
+        }
+
         # Index
         get -> Str :$color-scheme is cookie {
             template 'index.crotmp', %(
