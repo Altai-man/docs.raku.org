@@ -39,16 +39,17 @@ a.navbar-item:hover {
   background-color: #3A3D4E;
   color: #f5f5f5; }
 
-.navbar-search-autocompletion {
+.navbar-search-autocomplete {
   background-color: #282c2e;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07); }
-  .navbar-search-autocompletion li {
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.07);
+  border: 1px solid #3A3D4E; }
+  .navbar-search-autocomplete li {
     padding: 8px 5px; }
-    .navbar-search-autocompletion li:hover {
+    .navbar-search-autocomplete li:hover {
       background-color: #1c1f21; }
-  .navbar-search-autocompletion li.ui-autocomplete-category {
+  .navbar-search-autocomplete li.ui-autocomplete-category {
     color: #EED891; }
-    .navbar-search-autocompletion li.ui-autocomplete-category:hover {
+    .navbar-search-autocomplete li.ui-autocomplete-category:hover {
       background-color: unset; }
 
 a {

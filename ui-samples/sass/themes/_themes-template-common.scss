@@ -56,9 +56,10 @@ a.navbar-item:hover, {
 
 
 // Autocompletion popup
-.navbar-search-autocompletion {
+.navbar-search-autocomplete {
   background-color: $scheme-main-ter;
-  box-shadow: $shadow-below;
+  box-shadow: $shadow;
+  border: 1px solid $border;
 
   li {
       padding: 8px 5px;
@@ -68,7 +69,7 @@ a.navbar-item:hover, {
     }
   }
 
-  li.autocompletion-category {
+  li.ui-autocomplete-category {
     // background-color: $heading;
     color: $heading;
     // border-top: 1px solid $border;

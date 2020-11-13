@@ -93,7 +93,7 @@
               </div>
             </div>
           </div>
-          <div id="navbar-search" class="navbar-search-autocompletion"></div>
+          <div id="navbar-search" class="navbar-search-autocomplete"></div>
         </div>
       </div>
     </nav>

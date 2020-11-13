@@ -37,6 +37,7 @@ body {
 .navbar-search-autocomplete {
   position: fixed;
   width: 240px;
+  max-height: 90%;
   top: 45px;
   left: 1255px;
   z-index: 100;
