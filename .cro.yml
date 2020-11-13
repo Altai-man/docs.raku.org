@@ -15,4 +15,5 @@ env:  []
 ignore:
   - static/css/
   - ui-samples/
+  - static/js/search.js
 ...
