@@ -35,7 +35,8 @@ a.navbar-item:hover {
 .navbar-divider {
   background-color: #fafafa; }
 
-.navbar-dropdown a.navbar-item:focus, .navbar-dropdown a.navbar-item:hover {
+.navbar-dropdown a.navbar-item:focus, .navbar-dropdown a.navbar-item:hover,
+a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
   background-color: #e5e5e5;
   color: #030303; }
 
