@@ -36,6 +36,19 @@
   .footer .level {
     height: auto;
   }
+
+  .raku.page-content {
+    padding: 1rem 0.75rem;
+  }
+
+  .tabcontent {
+    // overflow-x: auto;
+  }
+
+  .tabcontent table td:nth-child(3) {
+    word-break: break-word;
+  }
+
 }
 
 // .input, .textarea, .select select {

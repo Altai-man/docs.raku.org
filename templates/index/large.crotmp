@@ -42,7 +42,7 @@
           <div class="container px-4">
                 <!-- Table -->
                 <@tabs>
-                    <div id="tab-<.name>" class="raku tabcontent" <?.is-active>style="display: block;"</?>>
+                    <div id="tab-<.name>" class="raku tabcontent table-container" <?.is-active>style="display: block;"</?>>
                         <table class="pod-table table is-bordered is-fullwidth centered">
                             <thead><tr><@columns><th><$_></th></@></tr></thead>
                             <tbody><@rows><tr><@$_><td><&HTML($_)></td></@></tr></@></tbody>

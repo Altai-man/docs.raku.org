@@ -15,10 +15,10 @@ h1, h2, h3, h4, h5, h6 {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; }
+  min-height: calc(100vh - 1px); }
 
 #wrapper {
-  flex: 1 0 auto; }
+  flex: 1; }
 
 /* Site header */
 .navbar-brand .navbar-item img {
@@ -37,11 +37,12 @@ body {
 .navbar-search-autocomplete {
   position: fixed;
   width: 240px;
-  max-height: 90%;
+  max-height: 85%;
   top: 45px;
   left: 1255px;
   z-index: 100;
   overflow: scroll;
+  visibility: hidden;
   font-size: 0.875rem; }
   .navbar-search-autocomplete li {
     padding: 8px 5px; }
@@ -12987,4 +12988,8 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
     padding: 1rem;
     background-color: #f2f2f2; }
   .footer .level {
-    height: auto; } }
+    height: auto; }
+  .raku.page-content {
+    padding: 1rem 0.75rem; }
+  .tabcontent table td:nth-child(3) {
+    word-break: break-word; } }

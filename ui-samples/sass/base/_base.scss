@@ -26,12 +26,14 @@ h1,h2,h3,h4,h5,h6 {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  // min-height: 100vh;
+  min-height: calc(100vh - 1px); // We need it to hide scrollbar when body is short
 }
 
 
 #wrapper {
-  flex: 1 0 auto;
+  // flex: 1 0 auto;
+  flex: 1;
 }
 
 
@@ -63,6 +65,7 @@ body {
   left: 1255px;
   z-index: 100;
   overflow: scroll;
+  visibility: hidden;
 
   font-size: 0.875rem;
 
