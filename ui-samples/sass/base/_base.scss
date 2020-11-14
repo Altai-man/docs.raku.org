@@ -425,6 +425,10 @@ table.centered {
 }
 
 // Text & other stuff
+.content li:not(:only-child) {
+  padding: 0.25rem 0;
+}
+
 p {
   padding-top: $size-7 !important;
   padding-bottom: $size-7 !important;
