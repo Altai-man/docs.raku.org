@@ -49,8 +49,39 @@
     word-break: break-word;
   }
 
+  a.raku-anchor,
+  .raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
+    visibility: visible;
+  }
+
+  .navbar-search-autocomplete {
+    width: calc(100% - 40px);
+    left: 20px;
+    margin-top: 450px;
+  }
+
+  .error-icon {
+    position: relative;
+    right: 0;
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .error-icon, error-content {
+    display: block;
+  }
+
+  .error-title,
+  .error-content .subtitle {
+    text-align: center;
+  }
 }
 
+
+// TODO: fix on 1280px
 // .input, .textarea, .select select {
 //     background-color: $white;
 //     border-color: $grey;

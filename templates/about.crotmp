@@ -14,6 +14,10 @@
         <section class="raku page-content">
           <div class="container">
             <div class="content">
+              <figure class="image is-128x128">
+                <img src="https://bulma.io/images/placeholders/256x256.png">
+              </figure>
+
               <p><b>Raku programming language</b> is a very flexible, modern programming language.</p>
               <p>This website is dedicated to be a good <i>viewer</i> for its documentation. A great lot of people contributed to documentation's text and tooling, a dedicated credits page is <a href="https://raw.githubusercontent.com/Raku/doc/master/CREDITS">here</a>.</p>
               <p>This particular website is a fraction of effort standing on the shoulders of the giants.</p>

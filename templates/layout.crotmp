@@ -70,7 +70,7 @@
                   About
                 </a>
                 <hr class="navbar-divider">
-                <a class="navbar-item" href="https://github.com/raku/doc/blob/master/CONTRIBUTING.md#reporting-bugs">
+                <a class="navbar-item has-text-red" href="https://github.com/raku/doc/blob/master/CONTRIBUTING.md#reporting-bugs">
                   Report an issue
                 </a>
               </div>

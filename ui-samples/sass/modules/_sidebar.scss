@@ -91,6 +91,11 @@ $sidebar-divider: 1px solid $grey-lighter !default;
   font-size: 0.875rem;
   list-style: disc outside;
   padding-left: 10px;
+
+  // line-height: 1.1;
+  code {
+    background-color: unset;
+  }
 }
 
 

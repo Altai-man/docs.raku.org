@@ -349,8 +349,13 @@ body {
 a.raku-anchor,
 .raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
   text-decoration: none;
+
+  visibility: hidden;
 }
 
+.raku-h1:hover a.raku-anchor, .raku-h2:hover a.raku-anchor, .raku-h3:hover a.raku-anchor, .raku-h4:hover a.raku-anchor, .raku-h5:hover a.raku-anchor, .raku-h6:hover a.raku-anchor {
+  visibility: visible;
+}
 
 /* Version note */
 .raku.version-note {
@@ -384,6 +389,10 @@ table.centered {
 
 .table {
   margin: $size-7 0;
+
+  caption {
+    padding-bottom: 0.5rem;
+  }
 }
 
 // About page
@@ -440,6 +449,7 @@ figure svg {
 }
 
 // Error pages.
+// TODO: mobile layout
 
 h1.error-title {
   font-size: 168px;
@@ -448,9 +458,17 @@ h1.error-title {
 .error-icon {
   font-size: 240px;
   position: absolute;
-  right: 25%;
+  // top: 125px;
+  right: 5%;
 }
+
+.error-icon img {
+  margin-top: 25px;
+  width: 400px;
+}
+
 // Workaround
+
 // .field, .fields {
 //   .button, .input, .textarea, .select select, .file-cta, .file-name, .pagination-previous, .pagination-next, .pagination-link, .pagination-ellipsis {
 //     display: inline-table;

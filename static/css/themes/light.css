@@ -35,6 +35,9 @@ a.navbar-item:hover {
 .navbar-divider {
   background-color: #fafafa; }
 
+.navbar-menu {
+  background-color: #f2f2f2; }
+
 .navbar-dropdown a.navbar-item:focus, .navbar-dropdown a.navbar-item:hover,
 a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
   background-color: #e5e5e5;
@@ -95,6 +98,15 @@ a:hover {
 
 .has-text-dark {
   color: #3A3D4E !important; }
+
+.has-text-danger {
+  color: #A30031 !important; }
+
+.has-text-danger:hover {
+  color: #A30031 !important; }
+
+a.has-text-red, a.has-text-red:hover {
+  color: #A30031; }
 
 .button.is-link {
   background-color: #004FB3; }
@@ -204,6 +216,9 @@ a.raku-anchor,
   a.raku-anchor:hover,
   .raku-h1 a.raku-anchor:hover, .raku-h2 a.raku-anchor:hover, .raku-h3 a.raku-anchor:hover, .raku-h4 a.raku-anchor:hover, .raku-h5 a.raku-anchor:hover, .raku-h6 a.raku-anchor:hover {
     color: #004FB3; }
+
+.raku-h1:hover a.raku-anchor, .raku-h2:hover a.raku-anchor, .raku-h3:hover a.raku-anchor, .raku-h4:hover a.raku-anchor, .raku-h5:hover a.raku-anchor, .raku-h6:hover a.raku-anchor {
+  visibility: visible; }
 
 /* Version note */
 .raku.version-note {

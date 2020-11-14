@@ -49,6 +49,10 @@ a.navbar-item:hover, {
   background-color: $navbar-divider-background-color;
 }
 
+.navbar-menu {
+  background-color: $navbar-dropdown-background-color;
+}
+
 .navbar-dropdown a.navbar-item:focus, .navbar-dropdown a.navbar-item:hover,
 a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
   background-color: $navbar-dropdown-item-hover-background-color;
@@ -143,6 +147,18 @@ a:hover {
 
 .has-text-dark {
   color: $dark !important;
+}
+
+.has-text-danger {
+  color: $red !important;
+}
+
+.has-text-danger:hover {
+  color: $red !important;
+}
+
+a.has-text-red, a.has-text-red:hover {
+  color: $red;
 }
 
 .button.is-link {
@@ -300,6 +316,10 @@ a.raku-anchor,
   &:hover {
     color: $primary;
   }
+}
+
+.raku-h1:hover a.raku-anchor, .raku-h2:hover a.raku-anchor, .raku-h3:hover a.raku-anchor, .raku-h4:hover a.raku-anchor, .raku-h5:hover a.raku-anchor, .raku-h6:hover a.raku-anchor {
+  visibility: visible;
 }
 
 /* Version note */

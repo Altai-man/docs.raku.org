@@ -231,7 +231,11 @@ body {
 
 a.raku-anchor,
 .raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
-  text-decoration: none; }
+  text-decoration: none;
+  visibility: hidden; }
+
+.raku-h1:hover a.raku-anchor, .raku-h2:hover a.raku-anchor, .raku-h3:hover a.raku-anchor, .raku-h4:hover a.raku-anchor, .raku-h5:hover a.raku-anchor, .raku-h6:hover a.raku-anchor {
+  visibility: visible; }
 
 /* Version note */
 .raku.version-note {
@@ -259,6 +263,8 @@ table.centered {
 
 .table {
   margin: 0.75rem 0; }
+  .table caption {
+    padding-bottom: 0.5rem; }
 
 .raku-about .card {
   margin: 1.25rem 0;
@@ -279,6 +285,9 @@ table.centered {
 .raku.tabcontent {
   display: none; }
 
+.content li:not(:only-child) {
+  padding: 0.25rem 0; }
+
 p {
   padding-top: 0.75rem !important;
   padding-bottom: 0.75rem !important; }
@@ -293,7 +302,11 @@ h1.error-title {
 .error-icon {
   font-size: 240px;
   position: absolute;
-  right: 25%; }
+  right: 5%; }
+
+.error-icon img {
+  margin-top: 25px;
+  width: 400px; }
 
 .ui-helper-hidden-accessible {
   position: absolute;
@@ -349,6 +362,8 @@ h1.error-title {
   font-size: 0.875rem;
   list-style: disc outside;
   padding-left: 10px; }
+  .raku-sidebar .menu-list code {
+    background-color: unset; }
 
 .raku-sidebar .menu-list ::marker {
   font-size: 0.75em; }
@@ -12992,4 +13007,22 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .raku.page-content {
     padding: 1rem 0.75rem; }
   .tabcontent table td:nth-child(3) {
-    word-break: break-word; } }
+    word-break: break-word; }
+  a.raku-anchor,
+  .raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
+    visibility: visible; }
+  .navbar-search-autocomplete {
+    width: calc(100% - 40px);
+    left: 20px;
+    margin-top: 450px; }
+  .error-icon {
+    position: relative;
+    right: 0; }
+    .error-icon img {
+      display: block;
+      margin: 0 auto; }
+  .error-icon, error-content {
+    display: block; }
+  .error-title,
+  .error-content .subtitle {
+    text-align: center; } }
