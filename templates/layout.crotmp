@@ -32,7 +32,7 @@
         <div class="navbar-brand navbar-logo">
           <div class="navbar-logo">
             <a class="navbar-item" href="/">
-              <img src="/img/camelia-recoloured.png" width="52.83" height="38">
+              <img src="/img/camelia-recoloured.png" alt="Raku" width="52.83" height="38">
             </a>
             <div class="navbar-logo-tm">tm</div>
           </div>
@@ -111,7 +111,7 @@
            </div>
 
             <div class="level-item">
-              <a id="toggle-theme"">Toggle theme</a>
+              <a id="toggle-theme">Toggle theme</a>
             </div>
         </div>
 

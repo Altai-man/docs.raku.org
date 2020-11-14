@@ -25,6 +25,6 @@ class Docky::Renderer::TOC is TOC::Calculator {
             $result ~= '</li';
             $result ~= '</ul>' while $curr-level-- != 1;
         }
-        $result;
+        "$result\</ul></aside>";
     }
 }
