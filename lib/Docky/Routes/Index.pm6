@@ -62,10 +62,16 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
             }
             my $is-active = $category-kind eq $kind<name>;
             $active-category = $category-kind if $is-active;
-            @tabs.push: %( name => $kind<name>, :$is-active, :@rows, :@columns, display-text => $kind<display-text>);
+            @tabs.push: %( name => $kind<name>, :$is-active, :@rows, :@columns, display-text => $kind<display-text>,
+                           title => "Raku $kind<name> {$doc-kind.Str}s",
+                           description => "This is a list of built-in { $kind<name> } {$doc-kind.Str.tc}s that are documented here as part of the Raku language."
+            );
         };
         # Add first 'All' tab
-        @tabs.unshift: %( name => 'all', :is-active($category-kind eq 'all'), :@columns, rows => $all.map(*[^3]), display-text => 'All');
+        @tabs.unshift: %( name => 'all', :is-active($category-kind eq 'all'), :@columns, rows => $all.map(*[^3]), display-text => 'All',
+                          title => "Raku {$doc-kind.Str}s",
+                          description => "This is a list of built-in {$doc-kind.Str.tc}s that are documented here as part of the Raku language."
+        );
 
         # Now let's pack this table with additional data into our render data
         %render-data<tabs> = @tabs;

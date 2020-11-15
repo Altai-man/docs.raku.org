@@ -153,14 +153,22 @@ function setup_sidebar() {
     $(".menu-list li").each(function(i, elLi) {
         $(elLi).find('a').each(function(i, elA) {
             $(elA).click(function() {
+                // Update menu items
                 $(".menu-list li").each(function(i, el) {
-                    $(el).find('a').each(function(i, el) { console.log(el); $(el).removeClass('is-active'); });
+                    $(el).find('a').each(function(i, el) { $(el).removeClass('is-active'); });
                 });
                 $(this).addClass('is-active');
+                // Update tab visibility
                 var category = $(elLi).attr('id').substring(7); // 7 is length of "switch-"
                 var tab_id = 'tab-' + category;
                 $('.tabcontent').each(function(i, el) { $(el).css('display', 'none'); });
                 $('#' + tab_id).css('display', 'block');
+                // Update title-subtitle
+                console.log($(category).text());
+                console.log($('#page-title-' + category).text());
+                $('.page-title').text($('#page-title-' + category).text());
+                console.log($('.page-title').text());
+                $('.page-subtitle').text($('#page-subtitle-' + category).text());
                 // Update URL as well to follow convention of static pages like `type-basic.html` we rendered
                 // since forever, so backward-compat-y thing
                 let prefix = window.location.href;
@@ -184,12 +192,10 @@ function setup_sidebar() {
                 return false;
             }
             var res = fuzzysort.highlight(fuzzyRes);
-            console.log(res);
             if (res !== null) {
                 var nodes = $(li).contents().filter(function(i, node){ return node.nodeType == 1; });
 
                 if (nodes.length === 1) {
-                    console.log(nodes);
                     nodes[0].innerHTML = res;
                 }
                 return true;

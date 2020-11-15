@@ -42,6 +42,8 @@
           <div class="container px-4">
                 <!-- Table -->
                 <@tabs>
+                    <div id="page-title-<.name>" style="display:none;"><.title></div>
+                    <div id="page-subtitle-<.name>" style="display:none;"><.description></div>
                     <div id="tab-<.name>" class="raku tabcontent table-container" <?.is-active>style="display: block;"</?>>
                         <table class="pod-table table is-bordered is-fullwidth centered">
                             <thead><tr><@columns><th><$_></th></@></tr></thead>
