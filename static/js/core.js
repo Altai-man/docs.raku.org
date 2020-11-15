@@ -66,13 +66,14 @@ function setup_glot_io() {
             if ($el.find('.CodeMirror').length != 0) { return; }
             // If not a Raku snippet, return
             if (!$el.parent().hasClass('raku-lang')) { return; }
+            let editorText = $($el.find('code').html().replaceAll('<div class="line">', '').replaceAll('</div>', '\n')).text();
             CodeMirror(el, {
                 lineNumbers:    true,
                 lineWrapping:   true,
                 mode:           'perl6',
                 scrollbarStyle: 'null',
                 theme:          'ayaya',
-                value:          $el.find('code').text().trim()
+                value:          editorText
             });
             $el.find('code').text('');
         });
