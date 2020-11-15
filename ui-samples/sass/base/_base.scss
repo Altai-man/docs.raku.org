@@ -87,6 +87,32 @@ body {
   }
 }
 
+// Change navbar while search is active
+#query {
+  // transition: width 1.8s;
+}
+
+// .navbar-start {
+//   transition: opacity 5s ease-out;
+//   opacity: 1;
+// }
+
+// .navbar-autocomplete-active {
+//   .navbar-start {
+//     display: none;
+//     opacity: 0;
+//   }
+
+//   #query {
+//     width: 980px;
+//   }
+
+//   .navbar-search-autocomplete {
+//     width: 980px;
+//     left: 12px;
+//   }
+// }
+
 .navbar > .container {
   margin: 0 auto;
   max-width: 1140px;

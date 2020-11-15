@@ -12996,6 +12996,8 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
     display: block;
     overflow: hidden;
     padding: 0 5px 0 0; }
+  #query {
+    width: 100%; }
   .navbar-item .field .control:first-child {
     width: 90%; }
   .navbar-item input {

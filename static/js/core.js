@@ -208,18 +208,22 @@ function setup_sidebar() {
 
 function setup_search() {
     $('#query').focus(function() {
-        $('.navbar-start').hide();
-        $("#query").animate({ width: "700px" }, 100);
-        $(".navbar-search-autocomplete").animate({ width: "700px", left: 0 }, 100);
+        if ($('.navbar-menu').css('display') == 'flex') {
+            $('.navbar-start').hide();
+            $("#query").animate({ width: "980px" }, 1000);
+            $(".navbar-search-autocomplete").animate({ width: "980px", left: 12 }, 100);
+        }
 
         $('#navbar-search').show();
         $('#navMenu').addClass('navbar-autocomplete-active');
     });
     $('#query').blur(function() {
-        $('.navbar-start').show();
-        $('#query').width();
-        $("#query").animate({ width: "200px" }, 100);
-        $(".navbar-search-autocomplete").animate({ width: "700px", left: 50 }, 100);
+        if ($('.navbar-menu').css('display') == 'flex') {
+            // $('#query').width();
+            $("#query").animate({ width: "200px" }, 1000);
+            $(".navbar-search-autocomplete").animate({ width: "980px", left: 50 }, 100);
+            $('.navbar-start').delay(1200).show(0);
+        }
 
         $('#navbar-search').hide();
         $('#navMenu').removeClass('navbar-autocomplete-active');
