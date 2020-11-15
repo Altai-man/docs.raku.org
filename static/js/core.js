@@ -164,10 +164,7 @@ function setup_sidebar() {
                 $('.tabcontent').each(function(i, el) { $(el).css('display', 'none'); });
                 $('#' + tab_id).css('display', 'block');
                 // Update title-subtitle
-                console.log($(category).text());
-                console.log($('#page-title-' + category).text());
                 $('.page-title').text($('#page-title-' + category).text());
-                console.log($('.page-title').text());
                 $('.page-subtitle').text($('#page-subtitle-' + category).text());
                 // Update URL as well to follow convention of static pages like `type-basic.html` we rendered
                 // since forever, so backward-compat-y thing
