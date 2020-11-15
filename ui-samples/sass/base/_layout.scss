@@ -56,8 +56,8 @@
 
   .navbar-search-autocomplete {
     width: calc(100% - 40px);
-    left: 20px;
-    margin-top: 450px;
+    // left: 20px;
+    // margin-top: 450px;
   }
 
   .error-icon {
@@ -77,6 +77,19 @@
   .error-title,
   .error-content .subtitle {
     text-align: center;
+  }
+
+  .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
+    // height:
+    // height: 100%;
+    // max-height: unset;
+    max-height: calc(100vh - 350px);
+  }
+
+  .navbar-search-autocomplete {
+    display: block;
+    position: static;
+
   }
 }
 

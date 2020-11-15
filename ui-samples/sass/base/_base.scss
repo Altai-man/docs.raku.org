@@ -57,15 +57,24 @@ body {
 }
 
 // Autocompletion popup
+.navbar-search-wrapper {
+  position: relative;
+}
+
 .navbar-search-autocomplete {
-  position: fixed;
+  position: absolute;
   width: 240px;
-  max-height: 85%;
+  // TODO: change to fit in screen size
+  // max-height: 800px;
+  // // max-height: 85%;
+  max-height: calc(100vh - 150px);
+  left: 12px;
   top: 45px;
-  left: 1255px;
+  // left: 1255px;
   z-index: 100;
-  overflow: scroll;
-  visibility: hidden;
+  // overflow-y: auto;
+  overflow-y: scroll;
+  // visibility: hidden;
 
   font-size: 0.875rem;
 

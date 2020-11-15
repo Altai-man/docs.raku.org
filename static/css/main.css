@@ -34,15 +34,17 @@ body {
 .navbar-search {
   height: 30px; }
 
+.navbar-search-wrapper {
+  position: relative; }
+
 .navbar-search-autocomplete {
-  position: fixed;
+  position: absolute;
   width: 240px;
-  max-height: 85%;
+  max-height: calc(100vh - 150px);
+  left: 12px;
   top: 45px;
-  left: 1255px;
   z-index: 100;
-  overflow: scroll;
-  visibility: hidden;
+  overflow-y: scroll;
   font-size: 0.875rem; }
   .navbar-search-autocomplete li {
     padding: 8px 5px; }
@@ -13012,9 +13014,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
     visibility: visible; }
   .navbar-search-autocomplete {
-    width: calc(100% - 40px);
-    left: 20px;
-    margin-top: 450px; }
+    width: calc(100% - 40px); }
   .error-icon {
     position: relative;
     right: 0; }
@@ -13025,4 +13025,9 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
     display: block; }
   .error-title,
   .error-content .subtitle {
-    text-align: center; } }
+    text-align: center; }
+  .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
+    max-height: calc(100vh - 350px); }
+  .navbar-search-autocomplete {
+    display: block;
+    position: static; } }
