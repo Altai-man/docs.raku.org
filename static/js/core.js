@@ -2,6 +2,7 @@ $(function(){
     setup_glot_io();
     setup_sidebar();
     setup_theme();
+    setup_search();
 });
 
 // Open navbar menu via burger button on mobiles
@@ -202,5 +203,16 @@ function setup_sidebar() {
         });
         $allListElements.hide();
         $matchingListElements.show();
+    });
+}
+
+function setup_search() {
+    $('#query').focus(function() {
+        $('#navbar-search').show();
+        $('#navMenu').addClass('navbar-autocomplete-active');
+    });
+    $('#query').blur(function() {
+        $('#navbar-search').hide();
+        $('#navMenu').removeClass('navbar-autocomplete-active');
     });
 }
