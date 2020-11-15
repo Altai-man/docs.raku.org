@@ -84,6 +84,16 @@
     text-align: center;
   }
 
+  .error-content .subtitle {
+    max-width: unset;
+  }
+
+  .error-content {
+    .level {
+      margin: 5rem auto;
+    }
+  }
+
   .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
     // height:
     // height: 100%;

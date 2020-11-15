@@ -16,7 +16,9 @@
         <div class="container">
 
           <div class="error-icon">
-            <img src="/img/camelia-recoloured.png">
+            <a href="/">
+            <img src="/img/camelia-recoloured.png" alt="Homepage">
+            </a>
           </div>
 
           <divv class="error-content">
@@ -33,12 +35,13 @@
               This error is already reported. Thank you for noticing it!
             </h3>
 
-            <div class="columns is-vcentered">
-              <div class="column is-1 is-5-mobile">
+            <nav class="level is-mobile">
+              <div class="level-item">
                 <a href="/" class="button is-link">Home</a>
-              </div>
-              <div class="column is-4 is-5-mobile">
 
+              </div>
+
+              <div class="level-item">
                 <div class="field">
                   <div class="control has-icons-right">
                     <input class="input" type="text" placeholder="Search...">
@@ -48,7 +51,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </nav>
 
           </div>
 

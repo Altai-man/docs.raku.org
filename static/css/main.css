@@ -301,6 +301,9 @@ figure svg {
 h1.error-title {
   font-size: 168px; }
 
+.error-content .subtitle {
+  max-width: 600px; }
+
 .error-icon {
   font-size: 240px;
   position: absolute;
@@ -309,6 +312,12 @@ h1.error-title {
 .error-icon img {
   margin-top: 25px;
   width: 400px; }
+
+.error-content .level {
+  width: 400px; }
+
+.error-content .level-item {
+  justify-content: start; }
 
 .ui-helper-hidden-accessible {
   position: absolute;
@@ -13028,6 +13037,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .error-title,
   .error-content .subtitle {
     text-align: center; }
+  .error-content .subtitle {
+    max-width: unset; }
+  .error-content .level {
+    margin: 5rem auto; }
   .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
     max-height: calc(100vh - 350px); }
   .navbar-search-autocomplete {

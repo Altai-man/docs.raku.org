@@ -490,6 +490,10 @@ h1.error-title {
   font-size: 168px;
 }
 
+.error-content .subtitle {
+  max-width: 600px;
+}
+
 .error-icon {
   font-size: 240px;
   position: absolute;
@@ -500,6 +504,16 @@ h1.error-title {
 .error-icon img {
   margin-top: 25px;
   width: 400px;
+}
+
+.error-content {
+  .level {
+    width: 400px;
+  }
+
+  .level-item {
+    justify-content: start;
+  }
 }
 
 // Workaround
