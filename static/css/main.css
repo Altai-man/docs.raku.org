@@ -47,8 +47,10 @@ body {
   overflow-y: scroll;
   font-size: 0.875rem; }
   .navbar-search-autocomplete li {
-    padding: 8px 5px; }
+    padding: 8px 5px;
+    cursor: pointer; }
   .navbar-search-autocomplete li.ui-autocomplete-category {
+    cursor: default;
     font-weight: 600; }
 
 .navbar > .container {

@@ -80,9 +80,11 @@ body {
 
   li {
       padding: 8px 5px;
+      cursor: pointer;
   }
 
   li.ui-autocomplete-category {
+    cursor: default;
     font-weight: $weight-semibold;
   }
 }
