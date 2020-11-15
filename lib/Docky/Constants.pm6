@@ -13,10 +13,10 @@ our @backup-cards is export =
            url => '/programs', :icon<fa-code> ),
         %( title => 'FAQs (Frequently Asked Questions)',
            description => 'A collection of questions that have cropped up often, along with answers.',
-           url => '/faq', :icon<fa-question-circle> ),
+           url => '/language/faq', :icon<fa-question-circle> ),
         %( title => 'Community',
            description => 'Information about the Raku development community, email lists, IRC and IRC bots, and blogs.',
-           url => '/community', :icon<fa-user-friends> );
+           url => '/language/community', :icon<fa-user-friends> );
 
 our @community-links is export =
     { :title<Reddit>, :url<https://www.reddit.com/r/rakulang/> },
