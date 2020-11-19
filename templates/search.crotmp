@@ -6,8 +6,7 @@
 
         <section class="raku page-header">
           <div class="container px-4">
-            <div class="raku page-title has-text-centered">Search</div>
-            <!-- <div class="raku page-subtitle has-text-centered">Page subtitle</div> -->
+            <div class="raku page-title has-text-centered">Search - Raku Documentation</div>
           </div>
         </section>
 
@@ -35,8 +34,7 @@
                       <div class="control">
                         <div class="select">
                           <select>
-                            <option>Select category</option>
-                            <option>Category</option>
+                            <@cats><option value="<$_>"><$_></option></@>
                           </select>
                         </div>
                       </div>
@@ -47,7 +45,7 @@
 
                 <div class="level-right">
                   <div class="level-item">
-                    <div class="raku search-result-amount">123421 results</div>
+                    <div id="search-count" class="raku search-result-amount">Awaiting data...</div>
                   </div>
                 </div>
               </nav>

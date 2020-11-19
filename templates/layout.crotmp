@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/code/<$color-scheme>.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="https://rawgit.com/farzher/fuzzysort/master/fuzzysort.js"></script>
     <script src="/js/lib/cookie.umd.min.js"></script>
     <script src="/js/lib/codemirror.min.js"></script>
@@ -66,6 +66,10 @@
               </a>
 
               <div class="navbar-dropdown">
+                <a class="navbar-item" href="/search">
+                  Extended Search
+                </a>
+                <hr class="navbar-divider">
                 <a class="navbar-item" href="/about">
                   About
                 </a>
