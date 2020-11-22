@@ -7,6 +7,7 @@ use Docky::Renderer::TOC;
 use Docky::Renderer::Node;
 use Docky::Routes::BackwardCompat;
 use Docky::Routes::Index;
+use Docky::Search;
 use Documentable;
 use Documentable::Registry;
 use Documentable::DocPage::Factory;
@@ -47,9 +48,12 @@ sub routes(Docky::Host $host) is export {
 
         my sub serve-cached-page($page, Str :$sidebar, Str :$color-scheme) {
             my $html = $page.value.clone;
+            # Update cached sidebar
             $html .= subst('SIDEBAR_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="width:0px; display:none;"');
             $html .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
             $html .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
+            # Update cached SVG if any
+            $html .= subst('<strong>SVG_PLACEHOLDER</strong>', compose-type-graph($page));
             template 'entry.crotmp', { title => $page.key, |$host.config.config, :$html,
                                        :color-scheme($color-scheme // 'light') }
         }
@@ -65,6 +69,50 @@ sub routes(Docky::Host $host) is export {
                                        :color-scheme($color-scheme // 'light') }
         }
 
+        my sub compose-type-graph($doc, :$color-scheme = 'light') {
+            my $template = q:to/END/;
+<figure>
+  <figcaption>Type relations for <code>PATH</code></figcaption>
+  SVG
+  <p class="fallback">
+    <a
+      rel="alternate"
+      href="/images/type-graph-ESC_PATH.svg"
+      type="image/svg+xml"
+      >Expand above chart</a
+    >
+  </p>
+</figure>
+END
+            my $svg;
+            my $podname = $doc.key.words[1];
+            my $valid-path = $podname.subst(:g, /\:\:/, "");
+            if "static/images/$color-scheme/type-graph-{ $valid-path }.svg".IO.e {
+                $svg = $_.substr($_.index('<svg')) given ("static/images/$color-scheme/type-graph-{ $valid-path }.svg").IO.slurp;
+            } else {
+                $svg = "<svg></svg>";
+                $podname = "404";
+            }
+            my $figure = $template.subst("PATH", $podname)
+                    .subst("ESC_PATH", $podname)
+                    .subst("SVG", $svg);
+
+            return [
+                pod-heading("Type Graph"),
+                Pod::Raw.new: :target<html>,
+                        contents => [$figure]
+            ]
+        }
+
+        my sub compose-type-page($doc) {
+            $doc.pod.contents.append: pod-bold('SVG_PLACEHOLDER');
+            # supply all routines
+            Documentable::DocPage::Primary::Type.roles-done-by-type($host.registry, $doc);
+            Documentable::DocPage::Primary::Type.parent-class($host.registry, $doc);
+            Documentable::DocPage::Primary::Type.roles-done-by-parent-class($host.registry, $doc);
+            $doc;
+        }
+
         # /type/Int
         get -> $category-id where 'type'|'language'|'programs', $name, Str :$color-scheme is cookie, Str :$sidebar is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
@@ -78,7 +126,7 @@ sub routes(Docky::Host $host) is export {
                 my $doc = $host.registry.documentables.first({ .kind eq $kind && .url eq "/$category-id/$name" });
                 with $doc {
                     my $pod = $kind eq Kind::Type
-                            ?? Documentable::DocPage::Primary::Type.compose-type($host.registry, $_).pod
+                            ?? compose-type-page($_).pod
                             !! $_.pod;
                     cache-and-serve-pod($category-id, $name, $pod, :$sidebar, :$color-scheme);
                 } else {
@@ -130,6 +178,15 @@ sub routes(Docky::Host $host) is export {
                     bad-request;
                 }
             }
+        }
+
+        # Search...
+        get -> 'search', Str :$q is query, Str :$color-scheme is cookie {
+            my @cats = generate-categories($host);
+            template 'search.crotmp', {
+                title => 'Search - Raku Documentation',
+                :@cats,
+                |$host.config.config, color-scheme => $color-scheme // 'light' };
         }
 
         # Statics
