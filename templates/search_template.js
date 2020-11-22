@@ -82,10 +82,12 @@ $(function(){
       });
     }
   });
+  var searchResults;
   $("#query").attr('placeholder', '🔍').catcomplete({
       appendTo: "#navbar-search",
-      response: function( e, ui ) {
-        if ( ! ui.content.length ) {
+      response: function(e, ui) {
+        searchResults = ui.content;
+        if (!ui.content.length) {
             $('#search').addClass('not-found')
                 .find('#try-web-search').attr(
                     'href', siteSearchUrl( $("#query").val() )
@@ -101,7 +103,7 @@ $(function(){
             ui_el.css({left: 0})
         }
       },
-      position: { my: "right top", at: "right bottom", of: "#search div" },
+      position: { my: "right top", at: "right bottom" },
       source: function(request, response) {
           var items = [
               {
@@ -160,7 +162,24 @@ $(function(){
           response(trim_results(results, request.term));
       },
       select: function (event, ui) { window.location.href = ui.item.url; },
-      autoFocus: true
+  });
+
+  $("#query").keydown(function(event) {
+    if (event.keyCode == 13) {
+      let searchText = $('#query').val();
+      let matchedItems = [];
+      for (var i = 0; i < searchResults.length; i++) {
+        if (searchResults[i].category === "Site Search")
+          continue;
+        if (searchResults[i].value === searchText || searchResults[i].value.toLowerCase() === searchText.toLowerCase())
+          matchedItems.push(searchResults[i]);
+      }
+      if (matchedItems.length === 1) {
+        window.location.href = matchedItems[0].url;
+      } else {
+        window.location.href = "/search#q=" + searchText;
+      }
+    }
   });
 });
 
