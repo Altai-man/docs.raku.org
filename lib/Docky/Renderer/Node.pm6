@@ -46,7 +46,7 @@ class Docky::Renderer::Node is Node::To::HTML {
                 my $parsed-json = from-json($json);
                 %!code-cache{$parsed-json<file>}.keep($parsed-json<html>);
             });
-            $!hl-proc.start;
+            $!hl-proc.start; # FIXME this wants a proper failure mode to avoid hang when coffee is not present
         }
 
         my ($tmp_fname, $tmp_io) = tempfile;
