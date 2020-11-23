@@ -8,12 +8,14 @@ When having Rakudo and zef installed, clone the repo,
 then in its directory:
 
 ```
-cd ..
-git clone https://github.com/Raku/Pod-To-HTML.git -b enhance # Make sure Pod::To::HTML is at correct branch
-cd Pod-To-HTML
-zef install .
-cd ../docky
-git clone https://github.com/Raku/doc.git
+git clone  https://github.com/Altai-man/docs.raku.org.git
 zef --deps-only install .
-DOCKY_PORT=20000 DOCKY_HOST=localhost raku -Ilib -I../Pod-To-HTML/lib service.p6
+git clone https://github.com/Raku/doc.git
+cd doc
+make init-highlights
+cd ..
+# This will take a lot of time for the first time, because lots of pod files are cached
+# It can take e.g. 5 minutes, you were warned, really
+# It will be much faster next time
+DOCKY_PORT=20000 DOCKY_HOST=localhost raku -Ilib service.p6
 ```
