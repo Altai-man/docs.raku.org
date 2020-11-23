@@ -19,7 +19,7 @@ class Docky::Renderer::Node is Node::To::HTML {
         %escaped<uri> = uri_escape(%escaped<id>);
         my $content = %escaped<html> ~~ m{href .+ \<\/a\>}
                 ?? %escaped<html>
-                !!'<a class="u" href="#___top" title="go to top of document">' ~ %escaped<html> ~ '</a>';
+                !! '<a class="u" href="#___top" title="go to top of document">' ~ %escaped<html> ~ '</a>';
         $content ~= qq:to/END/;
 
                 <a class="raku-anchor" href="#%escaped<id>">§</a>
@@ -31,9 +31,9 @@ class Docky::Renderer::Node is Node::To::HTML {
         # A very hole-y number of heuristics to check if it is a signature
         # and we don't want to have 'Run' button there...
         # If there is only a single line and it starts with `class`
-        $code.indices("\n").elems == 0 && $code.starts-with('class'|'role') ||
+        $code.indices("\n").elems == 0 && $code.starts-with('class' | 'role') ||
                 # There are multiple lines and all start from either multi, sub
-                so $code.lines.map(*.starts-with('multi'|'sub'|'method'|'proto')).all;
+                so $code.lines.map(*.starts-with('multi' | 'sub' | 'method' | 'proto')).all;
         # Extend rules here if necessary...
     }
 
@@ -62,10 +62,15 @@ class Docky::Renderer::Node is Node::To::HTML {
     }
 
     multi method node2html(Pod::Block::Code $node) {
-        my $lang = $node.config<lang> ?? '' !! ' raku-lang';
-        $lang = '' with $node.config<skip-test>;
-        my $content = self.highlight-code($node).subst('<pre class="editor editor-colors">', '<pre class="editor editor-colors cm-s-ayaya"><code>')
-                .subst('</pre>', '</code></pre>').subst("\n", '<br>');
+        my $lang = $node.config<lang> || $node.config<skip-test> ?? '' !! ' raku-lang';
+        my $content;
+        if $lang {
+            $content = self.highlight-code($node).subst('<pre class="editor editor-colors">',
+                    '<pre class="editor editor-colors cm-s-ayaya"><code>')
+                    .subst('</pre>', '</code></pre>').subst("\n", '<br>');
+        } else {
+            $content = '<pre class="pod-block-code">' ~ self.node2inline($node.contents) ~ "</pre>\n";
+        }
         my $code-runner = $lang && !detect-declaration($node.contents.join) ??
         q:to/END/
           <div class="code-output">
@@ -101,7 +106,7 @@ class Docky::Renderer::Node is Node::To::HTML {
                 </div>
 
                 <div class="version-body">
-                    {self.node2inline($node.contents)}
+                    { self.node2inline($node.contents) }
                 </div>
             </article>
             END
