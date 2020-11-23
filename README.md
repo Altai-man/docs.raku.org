@@ -8,7 +8,6 @@ When having Rakudo and zef installed, clone the repo,
 then in its directory:
 
 ```
-git clone  https://github.com/Altai-man/docs.raku.org.git
 zef --deps-only install .
 git clone https://github.com/Raku/doc.git
 cd doc
