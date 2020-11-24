@@ -201,6 +201,9 @@ strong {
 .raku-h1 a, .raku-h2 a, .raku-h3 a, .raku-h4 a, .raku-h5 a, .raku-h6 a {
   color: #A30031; }
 
+.raku-h1 code, .raku-h2 code, .raku-h3 code, .raku-h4 code, .raku-h5 code, .raku-h6 code {
+  color: unset; }
+
 .raku-h1 a:hover, .raku-h2 a:hover, .raku-h3 a:hover, .raku-h4 a:hover, .raku-h5 a:hover, .raku-h6 a:hover {
   color: #004FB3; }
 
