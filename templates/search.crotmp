@@ -16,12 +16,12 @@
 
             <div class="search-form mb-4">
               <div class="field">
-                <p class="control has-icons-right">
+                <div class="control has-icons-right">
                   <input class="input" type="text" placeholder="Search">
                   <span class="icon is-small is-right">
                     <i class="fas fa-search"></i>
                   </span>
-                </p>
+                </div>
               </div>
 
 
