@@ -309,7 +309,7 @@ strong {
 
 .raku-anchor {
   color: $grey-darker;
-  }
+}
 
 a.raku-anchor:hover {
   color: $primary;
@@ -500,6 +500,10 @@ code {
     background: $primary;
     color: $scheme-main;
     border: $border;
+
+    &:hover {
+      background-color: $primary-dark;
+    }
   }
 
   .code-name {
