@@ -13,7 +13,8 @@
     "Documentable",
     "Cro::WebApp",
     "Perl6::TypeGraph",
-    "Pod::From::Cache:ver<0.2+>"
+    "Pod::From::Cache:ver<0.2+>",
+    "Pod::To::HTML:ver<0.8>:auth<github:Raku>"
   ],
   "build-depends": [],
   "test-depends": [],
