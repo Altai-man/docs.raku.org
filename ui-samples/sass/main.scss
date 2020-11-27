@@ -6,31 +6,23 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
 // Custom modules
-// @import "./themes/colors";
-// @import "./themes/colors-variables";
 @import "./base/variables";
-
 @import "./base/base";
 @import "./modules/sidebar";
 @import "./modules/code/highlighting";
 
-// TODO: get rid of _all.sass files
-// Utilities
+// Initial Bulma stuff
 @import "../node_modules/bulma/sass/utilities/_all.sass";
-
-// Base
 @import "../node_modules/bulma/sass/base/_all.sass";
 
-// Import Bulma mixins
-@import '../node_modules/bulma/bulma.sass';
-@import '../node_modules/bulma/sass/utilities/mixins';
-
-
+// Bulma styles
 // Components
+// @import "../node_modules/bulma/sass/components/tabs.sass";
 @import "../node_modules/bulma/sass/components/card.sass";
 @import "../node_modules/bulma/sass/components/level.sass";
-@import "../node_modules/bulma/sass/components/navbar.sass";
+@import "../node_modules/bulma/sass/components/menu.sass";
 @import "../node_modules/bulma/sass/components/message.sass";
+@import "../node_modules/bulma/sass/components/navbar.sass";
 
 // Elements
 @import "../node_modules/bulma/sass/elements/box.sass";
@@ -40,6 +32,7 @@
 @import "../node_modules/bulma/sass/elements/icon.sass";
 @import "../node_modules/bulma/sass/elements/image.sass";
 @import "../node_modules/bulma/sass/elements/other.sass";
+@import "../node_modules/bulma/sass/elements/table.sass";
 @import "../node_modules/bulma/sass/elements/title.sass";
 
 // Form
@@ -58,6 +51,5 @@
 @import "../node_modules/bulma/sass/helpers/color.sass";
 @import "../node_modules/bulma/sass/helpers/spacing.sass";
 
-// Responsiveness
+// Responsiveness & custom fixes
 @import "./base/layout";
-// @import "./themes/dark";
