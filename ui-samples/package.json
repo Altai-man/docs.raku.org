@@ -5,20 +5,25 @@
     "license": "Artistic-2.0",
     "dependencies": {
         "autoprefixer": "^9.8.6",
-        "bulma": "^0.9.0",
-        "clean-css-cli": "^4.3.0",
+        "bulma": "^0.9.1",
+        "cssnano": "^4.1.10",
         "node-sass": "^4.14.1",
+        "onchange": "^7.1.0",
         "postcss-cli": "^7.1.2"
     },
     "scripts": {
-        "css-build": "npx node-sass --omit-source-map-url sass/main.scss ../static/css/main.css",
-        "css-themes": "npx node-sass --omit-source-map-url sass/themes/ --output ../static/css/themes/",
-        "css-all": "npm run css-build && npm run css-themes",
-        "css-code": "npx node-sass --omit-source-map-url sass/modules/code/ --output ../static/css/code/",
-        "css-postcss": "npx postcss --use autoprefixer --map true --output dist/css/main.css dist/css/main.css",
-        "css-minify": "npx cleancss --level 2 dist/css/main.css -o dist/css/main.min.css",
-        "css-watch": "npm run css-build -- --watch",
-        "css-themes-watch": "npm run css-themes -- --watch",
+        "css-main": "npx node-sass --source-map=true sass/main.scss ../static/css/main.css",
+        "css-themes": "npx node-sass --source-map=true sass/themes/ --output ../static/css/themes/",
+        "css-code": "npx node-sass --source-map=true sass/code/ --output ../static/css/code/",
+        "css-build": "npx node-sass --source-map=true sass --output ../static/css",
+        "css-optimize": "for file in ../static/css/**/*.css; do npx postcss --config ./postcss.config.json $file --replace --map; done;",
+        "postcss-main": "npx postcss --config ./postcss.config.js ../static/css/main.css -o ../static/css/main.min.css --map",
+        "postcss-themes": "npx postcss --config ./postcss.config.js ../static/css/themes/* --dir ../static/css/themes/out --map",
+        "css-watch": "onchange 'sass/**/*.scss' -- npm run css-build",
+        "css-release": "npm run css-build && npm run css-optimize",
         "start": "npm run css-watch"
-    }
+    },
+    "browserslist": [
+        "defaults"
+    ]
 }
