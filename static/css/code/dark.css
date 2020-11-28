@@ -16,25 +16,25 @@
 .CodeMirror-focused .CodeMirror-selected {
   background: #393e41; }
 
-.cm-s-ayaya span.cm-atom {
+.cm-s-ayaya span.cm-atom, .cm-s-ayaya span.function, .cm-s-ayaya span.routine {
   color: #978DEB; }
 
-.cm-s-ayaya span.cm-comment {
+.cm-s-ayaya span.cm-comment, .cm-s-ayaya span.comment {
   color: #6C7292; }
 
-.cm-s-ayaya span.cm-number {
+.cm-s-ayaya span.cm-number, .cm-s-ayaya span.numeric {
   color: #6295E3; }
 
 .cm-s-ayaya span.cm-comment.cm-type {
   color: #5998a6; }
 
-.cm-s-ayaya span.cm-keyword {
+.cm-s-ayaya span.cm-keyword, .cm-s-ayaya span.keyword, .cm-s-ayaya span.declarator {
   color: #8DE1EB; }
 
-.cm-s-ayaya span.cm-string {
+.cm-s-ayaya span.cm-string, .cm-s-ayaya span.string {
   color: #68F3CA; }
 
-.cm-s-ayaya span.cm-variable {
+.cm-s-ayaya span.cm-variable, .cm-s-ayaya span.variable {
   color: #EED891; }
 
 .cm-s-ayaya span.cm-variable-2 {
@@ -49,7 +49,7 @@
 .cm-s-ayaya span.cm-def {
   color: #8DE1EB; }
 
-.cm-s-ayaya span.cm-operator {
+.cm-s-ayaya span.cm-operator, .cm-s-ayaya span.assignment, .cm-s-ayaya span.operator {
   color: #E05C4C; }
 
 textarea::-moz-selection {

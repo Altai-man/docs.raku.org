@@ -4,7 +4,7 @@ use Pod::To::HTML;
 use URI::Escape;
 
 class Docky::Renderer::Node is Node::To::HTML {
-    has $.hl-proc = Proc::Async.new('coffee', 'doc/highlights/highlight-filename-from-stdin.coffee', :r, :w);
+    has $.hl-proc = Proc::Async.new('coffee', 'highlights/highlight-filename-from-stdin.coffee', :r, :w);
     has %!code-cache;
 
     multi method node2html(Pod::List $node) {

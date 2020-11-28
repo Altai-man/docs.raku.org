@@ -19,3 +19,5 @@ node_modules/
 
 # Generated files
 static/js/search.js
+atom-language-perl6/
+package-lock.json
