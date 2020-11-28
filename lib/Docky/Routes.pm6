@@ -22,7 +22,8 @@ sub routes(Docky::Host $host) is export {
 
     route {
         after {
-            template '404.crotmp', { title => '404' } if .status == 404;
+            template '404.crotmp', hash if .status == 404;
+            template '500.crotmp', hash if .status == 500;
         }
 
         # Index

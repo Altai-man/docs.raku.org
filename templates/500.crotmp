@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Server error - Raku Documentation</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/themes/light.css">
+
+    <script type="text/javascript" src="../js/core.js"></script>
+
+  </head>
+  <body>
+    <section class="hero error-page is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+
+          <div class="error-icon">
+            <a href="/">
+            <img src="/img/camelia-recoloured.png" alt="Homepage">
+            </a>
+          </div>
+
+          <divv class="error-content">
+            <h1 class="title error-title">
+              500
+            </h1>
+
+
+            <h2 class="subtitle is-4">
+              Oh no, we <strong>could not</strong> load your page due to some error.
+            </h2>
+
+            <h3 class="subtitle is-6">
+              This error is already reported. Thank you for noticing it!
+            </h3>
+
+            <nav class="level is-mobile">
+              <div class="level-item">
+                <a href="/" class="button is-link">Home</a>
+
+              </div>
+
+              <div class="level-item">
+                <div class="field">
+                  <div class="control has-icons-right">
+                    <input class="input" type="text" placeholder="Search...">
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </nav>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Include Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </body>
+</html>
