@@ -16,7 +16,7 @@
         "css-themes": "npx node-sass --source-map=true sass/themes/ --output ../static/css/themes/",
         "css-code": "npx node-sass --source-map=true sass/code/ --output ../static/css/code/",
         "css-build": "npx node-sass --source-map=true sass --output ../static/css",
-        "css-optimize": "for file in ../static/css/**/*.css; do npx postcss --config ./postcss.config.json $file --replace --map; done;",
+        "css-optimize": "for file in ../static/css/**/*.css ../static/css/main.css; do npx postcss --config ./postcss.config.json $file --replace --map; done;",
         "postcss-main": "npx postcss --config ./postcss.config.js ../static/css/main.css -o ../static/css/main.min.css --map",
         "postcss-themes": "npx postcss --config ./postcss.config.js ../static/css/themes/* --dir ../static/css/themes/out --map",
         "css-watch": "onchange 'sass/**/*.scss' -- npm run css-build",
