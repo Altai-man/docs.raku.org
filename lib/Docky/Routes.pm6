@@ -47,46 +47,43 @@ sub routes(Docky::Host $host) is export {
             "$renderer.metadata()<title> - Raku Documentation" => $html;
         }
 
-        my sub serve-cached-page($page, Str :$sidebar, Str :$color-scheme) {
-            my $html = $page.value.clone;
-            # Update cached sidebar
-            $html .= subst('SIDEBAR_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="width:0px; display:none;"');
-            $html .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
-            $html .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
-            # Update cached SVG if any
-            $html .= subst('<strong>SVG_PLACEHOLDER</strong>', compose-type-graph($page));
-            template 'entry.crotmp', { title => $page.key, |$host.config.config, :$html,
-                                       :color-scheme($color-scheme // 'light') }
+        sub refresh-page($page is rw, $sidebar, $color-scheme) {
+            $page .= subst('SIDEBAR_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="width:0px; display:none;"');
+            $page .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
+            $page .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
+            $page .= subst('COLOR_SCHEME', $color-scheme // 'light', :g);
+            $page ~~ s/'<strong>SVG_PLACEHOLDER_' (.+?) '</strong>'/ { compose-type-graph($0, $color-scheme) } /;
         }
 
         my sub cache-and-serve-pod(Str $category-id, Str $name, $pod, Str :$sidebar, Str :$color-scheme) {
-            $host.render-cache{$category-id}{$name} = render-pod($category-id, $name, $pod);
-            my $page = $host.render-cache{$category-id}{$name}.clone;
-            $page.value .= subst('SIDEBAR_STYLE',
-            ($sidebar // 'true') eq 'true' ?? '' !! 'style="width:0px; display:none;"');
-            $page.value .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
-            $page.value .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
-            template 'entry.crotmp', { title => $page.key, |$host.config.config, html => $page.value,
-                                       :color-scheme($color-scheme // 'light') }
+            my $entry-html = render-pod($category-id, $name, $pod);
+            $host.render-cache{$category-id}{$name} = render-template 'entry.crotmp',
+                    { title => $entry-html.key, |$host.config.config,
+                      html => $entry-html.value, :color-scheme<COLOR_SCHEME> }
+            my $html = $host.render-cache{$category-id}{$name}.clone;
+            refresh-page($html, $sidebar, $color-scheme);
+            content 'text/html', $html;
         }
 
-        my sub compose-type-graph($doc, :$color-scheme = 'light') {
+        my sub serve-cached-page($page is copy, Str :$sidebar, Str :$color-scheme) {
+            # Update cached sidebar
+            refresh-page($page, $sidebar, $color-scheme);
+            # Serve the resulting HTML
+            content 'text/html', $page;
+        }
+
+        my sub compose-type-graph($typename, $color-scheme) {
             my $template = q:to/END/;
 <figure>
   <figcaption>Type relations for <code>PATH</code></figcaption>
   SVG
   <p class="fallback">
-    <a
-      rel="alternate"
-      href="/images/type-graph-ESC_PATH.svg"
-      type="image/svg+xml"
-      >Expand above chart</a
-    >
+    <a rel="alternate" href="/images/type-graph-ESC_PATH.svg" type="image/svg+xml">Expand above chart</a>
   </p>
 </figure>
 END
             my $svg;
-            my $podname = $doc.key.words[1];
+            my $podname = $typename;
             my $valid-path = $podname.subst(:g, /\:\:/, "");
             if "static/images/$color-scheme/type-graph-{ $valid-path }.svg".IO.e {
                 $svg = $_.substr($_.index('<svg')) given ("static/images/$color-scheme/type-graph-{ $valid-path }.svg").IO.slurp;
@@ -94,20 +91,14 @@ END
                 $svg = "<svg></svg>";
                 $podname = "404";
             }
-            my $figure = $template.subst("PATH", $podname)
-                    .subst("ESC_PATH", $podname)
-                    .subst("SVG", $svg);
-
-            return [
-                pod-heading("Type Graph"),
-                Pod::Raw.new: :target<html>,
-                        contents => [$figure]
-            ]
+            $template.subst("PATH", $podname).subst("ESC_PATH", $podname).subst("SVG", $svg);
         }
 
-        my sub compose-type-page($doc) {
-            $doc.pod.contents.append: pod-bold('SVG_PLACEHOLDER');
-            # supply all routines
+        my sub compose-type-page($doc, $color-scheme) {
+            # type graph
+            $doc.pod.contents.append(pod-heading("Type Graph"));
+            $doc.pod.contents.append(pod-bold("SVG_PLACEHOLDER_$doc.filename()"));
+            # supply routines from parents and roles
             Documentable::DocPage::Primary::Type.roles-done-by-type($host.registry, $doc);
             Documentable::DocPage::Primary::Type.parent-class($host.registry, $doc);
             Documentable::DocPage::Primary::Type.roles-done-by-parent-class($host.registry, $doc);
@@ -127,7 +118,7 @@ END
                 my $doc = $host.registry.documentables.first({ .kind eq $kind && .url eq "/$category-id/$name" });
                 with $doc {
                     my $pod = $kind eq Kind::Type
-                            ?? compose-type-page($_).pod
+                            ?? compose-type-page($_, ($color-scheme // 'light')).pod
                             !! $_.pod;
                     cache-and-serve-pod($category-id, $name, $pod, :$sidebar, :$color-scheme);
                 } else {
