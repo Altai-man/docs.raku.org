@@ -46,7 +46,7 @@ class Docky::Renderer::Node is Node::To::HTML {
                 my $parsed-json = from-json($json);
                 %!code-cache{$parsed-json<file>}.keep($parsed-json<html>);
             });
-            $!hl-proc.start; # FIXME this wants a proper failure mode to avoid hang when coffee is not present
+            $!hl-proc.start;
         }
 
         my ($tmp_fname, $tmp_io) = tempfile;
@@ -54,10 +54,16 @@ class Docky::Renderer::Node is Node::To::HTML {
 
         my $p = %!code-cache{$tmp_fname} = Promise.new;
         $!hl-proc.say($tmp_fname);
-        my $res = $p.result;
+        my $res = await Promise.anyof($p, Promise.in(3));
+        unless $p.status ~~ Kept {
+            warn "Code example was not highlighted! Check if you have coffeescript interpreter installed or try to debug what's wrong if you have.";
+            %!code-cache{$tmp_fname}:delete;
+            unlink $tmp_fname;
+            return $code;
+        }
         %!code-cache{$tmp_fname}:delete;
         unlink $tmp_fname;
-        %!code-cache{$code} = $res;
+        %!code-cache{$code} = $p.result;
         $res;
     }
 
