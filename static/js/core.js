@@ -182,26 +182,26 @@ function setup_sidebar() {
         $('#toc-menu').html(originalTOC);
         var searchText = this.value.toLowerCase();
         if (searchText.length === 0) return;
-        var $allListElements = $('#toc-menu > ul > li');
-        var $matchingListElements = $allListElements.filter(function(i, li) {
-            var listItemText = $(li).text();
-            var fuzzyRes = fuzzysort.go(searchText, [listItemText])[0];
+        var $menuListElements = $('.menu-list').find("li");
+        var $matchingListElements = $menuListElements.filter(function(i, li) { 
+            var listItemHTML = li.firstChild.innerHTML;
+            var fuzzyRes = fuzzysort.go(searchText, [listItemHTML])[0];
             if (fuzzyRes === undefined || fuzzyRes.score < -8000) {
                 return false;
             }
             var res = fuzzysort.highlight(fuzzyRes);
             if (res !== null) {
                 var nodes = $(li).contents().filter(function(i, node){ return node.nodeType == 1; });
-
-                if (nodes.length === 1) {
-                    nodes[0].innerHTML = res;
-                }
+                nodes[0].innerHTML = res;
                 return true;
             } else {
                 return false;
             }
         });
-        $allListElements.hide();
+        $menuListElements.hide();
+        $($matchingListElements).each(function(i, elem) {
+            $(elem).parents('li').show();
+        });
         $matchingListElements.show();
     });
 }
