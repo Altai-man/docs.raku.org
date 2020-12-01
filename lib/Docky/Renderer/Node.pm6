@@ -54,7 +54,7 @@ class Docky::Renderer::Node is Node::To::HTML {
 
         my $p = %!code-cache{$tmp_fname} = Promise.new;
         $!hl-proc.say($tmp_fname);
-        my $res = await Promise.anyof($p, Promise.in(3));
+        await Promise.anyof($p, Promise.in(3)); # A timeout of 3 seconds that should be enough for coffee to do the job
         unless $p.status ~~ Kept {
             warn "Code example was not highlighted! Check if you have coffeescript interpreter installed or try to debug what's wrong if you have.";
             %!code-cache{$tmp_fname}:delete;
@@ -64,7 +64,6 @@ class Docky::Renderer::Node is Node::To::HTML {
         %!code-cache{$tmp_fname}:delete;
         unlink $tmp_fname;
         %!code-cache{$code} = $p.result;
-        $res;
     }
 
     multi method node2html(Pod::Block::Code $node) {
