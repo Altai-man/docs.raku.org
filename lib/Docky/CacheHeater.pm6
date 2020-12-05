@@ -10,7 +10,7 @@ class Docky::CacheHeater {
                 @urls.append: $pages.map(*.url);
             }
         }
-        for <routine reference syntax> -> $category {
+        for <routine syntax> -> $category {
             for @($host.registry.lookup($category, :by<kind>)) -> $page {
                 @urls.append: "/$category/" ~ uri-escape($page.url.substr($category.chars + 2))
             }
