@@ -2,10 +2,12 @@ use File::Temp;
 use JSON::Fast;
 use Pod::To::HTML;
 use URI::Escape;
+use OO::Monitors;
 
-class Docky::Renderer::Node is Node::To::HTML {
-    has $.hl-proc = Proc::Async.new('coffee', 'highlights/highlight-filename-from-stdin.coffee', :r, :w);
-    has %!code-cache;
+monitor Docky::Renderer::Node is Node::To::HTML {
+    my $hl-proc = Proc::Async.new('coffee', 'highlights/highlight-filename-from-stdin.coffee', :r, :w);
+    my $lock = Lock.new;
+    my %code-cache;
 
     multi method node2html(Pod::List $node) {
         "<div class=\"content\"><ul>" ~ self.node2html($node.contents) ~ "</ul></div>\n";
@@ -39,31 +41,39 @@ class Docky::Renderer::Node is Node::To::HTML {
 
     method highlight-code($node) {
         my $code = $node.contents.join;
-        return $_ with %!code-cache{$code};
 
-        unless $!hl-proc.started {
-            $!hl-proc.stdout.lines.tap(-> $json {
-                my $parsed-json = from-json($json);
-                %!code-cache{$parsed-json<file>}.keep($parsed-json<html>);
-            });
-            $!hl-proc.start;
-        }
+        $lock.protect({
+            unless $hl-proc.started {
+                $hl-proc.stdout.lines.tap(-> $json {
+                    my $parsed-json = from-json($json);
+                    my $p = %code-cache{$parsed-json<file>};
+                    with $p {
+                        .keep($parsed-json<html>)
+                    } else {
+                        note "Something went wrong during highlighting...";
+                    }
+                });
+                note "Starting HL thread!";
+                $hl-proc.start;
+            }
+        });
 
         my ($tmp_fname, $tmp_io) = tempfile;
         $tmp_io.spurt: $code, :close;
 
-        my $p = %!code-cache{$tmp_fname} = Promise.new;
-        $!hl-proc.say($tmp_fname);
+        my $p;
+        $lock.protect({
+            $p = %code-cache{$tmp_fname} = Promise.new;
+        });
+        $hl-proc.say($tmp_fname);
         await Promise.anyof($p, Promise.in(3)); # A timeout of 3 seconds that should be enough for coffee to do the job
-        unless $p.status ~~ Kept {
-            warn "Code example was not highlighted! Check if you have coffeescript interpreter installed or try to debug what's wrong if you have.";
-            %!code-cache{$tmp_fname}:delete;
-            unlink $tmp_fname;
-            return $code;
-        }
-        %!code-cache{$tmp_fname}:delete;
         unlink $tmp_fname;
-        %!code-cache{$code} = $p.result;
+        if $p.status !~~ Kept {
+            warn "Code example was not highlighted! Check if you have coffeescript interpreter installed or try to debug what's wrong if you have.";
+            return $code;
+        } else {
+            return $p.result;
+        }
     }
 
     multi method node2html(Pod::Block::Code $node) {

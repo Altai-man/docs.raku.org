@@ -43,6 +43,10 @@ process_file = (given_path) ->
           obj.html = html
           mystdout.write(JSON.stringify(obj) + '\n' )
 
-
-stdin.on 'data', (input) ->
-    process_file input.trim()
+readline = require('readline')
+rl = readline.createInterface(
+  input: process.stdin
+  output: process.stdout
+  terminal: false)
+rl.on 'line', (line) ->
+  process_file line
