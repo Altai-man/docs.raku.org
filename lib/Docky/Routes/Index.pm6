@@ -75,8 +75,8 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
 
         # Now let's pack this table with additional data into our render data
         %render-data<tabs> = @tabs;
-        %render-data<section-title> = "Raku $active-category {$doc-kind.Str}s";
-        %render-data<section-description> = "This is a list of built-in { $active-category } {$doc-kind.Str.tc}s that are documented here as part of the Raku language.";
+        %render-data<section-title> = "Raku {$active-category // ''} {$doc-kind.Str}s";
+        %render-data<section-description> = "This is a list of built-in { $active-category // '' } {$doc-kind.Str.tc}s that are documented here as part of the Raku language.";
     }
     %render-data;
 }
