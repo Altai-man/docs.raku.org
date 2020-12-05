@@ -1,3 +1,4 @@
+use URI::Escape;
 use Docky::Host;
 
 class Docky::CacheHeater {
@@ -11,7 +12,7 @@ class Docky::CacheHeater {
         }
         for <routine reference syntax> -> $category {
             for @($host.registry.lookup($category, :by<kind>)) -> $page {
-                @urls.append: $page.url;
+                @urls.append: "/$category/" ~ uri-escape($page.url.substr($category.chars + 2))
             }
         }
         my $count = 0;
