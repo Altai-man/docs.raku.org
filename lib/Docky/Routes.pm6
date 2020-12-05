@@ -1,3 +1,4 @@
+use OO::Monitors;
 use Cro::WebApp::Template;
 use Cro::HTTP::Client;
 use Cro::HTTP::Router;
@@ -52,7 +53,7 @@ sub routes(Docky::Host $host) is export {
             $page .= subst('SIDEBAR_TOGGLE_STYLE', ($sidebar // 'true') eq 'true' ?? '' !! 'style="left:0px;"');
             $page .= subst('SIDEBAR_SHEVRON', ($sidebar // 'true') eq 'true' ?? 'left' !! 'right');
             $page .= subst('COLOR_SCHEME', $color-scheme // 'light', :g);
-            $page ~~ s/'<strong>SVG_PLACEHOLDER_' (.+?) '</strong>'/ { compose-type-graph($0, $color-scheme) } /;
+            $page ~~ s/'<strong>SVG_PLACEHOLDER_' (.+?) '</strong>'/ { compose-type-graph($0, $color-scheme // 'light') } /;
         }
 
         my sub cache-and-serve-pod(Str $category-id, Str $name, $pod, Str :$sidebar, Str :$color-scheme) {
@@ -61,6 +62,12 @@ sub routes(Docky::Host $host) is export {
                     { title => $entry-html.key, |$host.config.config,
                       html => $entry-html.value, :color-scheme<COLOR_SCHEME> }
             my $html = $host.render-cache{$category-id}{$name}.clone;
+            # Seems like due to concurrency access to our cache sometimes $html
+            # becomes Any, as if it was not filled just a moment ago...
+            # So just try render it again and good luck next time.
+            without $html {
+                return cache-and-serve-pod($category-id, $name, $pod, :$sidebar, :$color-scheme);
+            }
             refresh-page($html, $sidebar, $color-scheme);
             content 'text/html', $html;
         }
@@ -94,7 +101,7 @@ END
             $template.subst("PATH", $podname).subst("ESC_PATH", $podname).subst("SVG", $svg);
         }
 
-        my sub compose-type-page($doc, $color-scheme) {
+        my sub compose-type-page($doc) {
             # type graph
             $doc.pod.contents.append(pod-heading("Type Graph"));
             $doc.pod.contents.append(pod-bold("SVG_PLACEHOLDER_$doc.filename()"));
@@ -118,7 +125,7 @@ END
                 my $doc = $host.registry.documentables.first({ .kind eq $kind && .url eq "/$category-id/$name" });
                 with $doc {
                     my $pod = $kind eq Kind::Type
-                            ?? compose-type-page($_, ($color-scheme // 'light')).pod
+                            ?? compose-type-page($_).pod
                             !! $_.pod;
                     cache-and-serve-pod($category-id, $name, $pod, :$sidebar, :$color-scheme);
                 } else {

@@ -7,6 +7,7 @@ use Cro::HTTP::Server;
 use Docky::Host;
 use Docky::Routes;
 use Docky::Search;
+use Docky::CacheHeater;
 
 my $host = Docky::Host.new;
 
@@ -39,6 +40,11 @@ my Cro::Service $http = Cro::HTTP::Server.new(
 );
 $http.start;
 say "Listening at http://%*ENV<DOCKY_HOST>:%*ENV<DOCKY_PORT>";
+
+if %*ENV<PRODUCTION_ENV> {
+    Docky::CacheHeater.heat-cache($host);
+}
+
 react {
     whenever signal(SIGINT) {
         say "Shutting down...";

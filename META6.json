@@ -14,11 +14,13 @@
     "Cro::WebApp",
     "Perl6::TypeGraph",
     "Pod::From::Cache:ver<0.2+>",
-    "Pod::To::HTML:ver<0.8>:auth<github:Raku>"
+    "Pod::To::HTML:ver<0.8>:auth<github:Raku>",
+    "OO::Monitors"
   ],
   "build-depends": [],
   "test-depends": [],
   "provides": {
+    "Docky::CacheHeater": "lib/Docky/CacheHeater.pm6",
     "Docky::Constants": "lib/Docky/Constants.pm6",
     "Docky::Host": "lib/Docky/Host.pm6",
     "Docky::Renderer::Node": "lib/Docky/Renderer/Node.pm6",

@@ -12,41 +12,34 @@ class Docky::Host {
     method new(Str $config-file = 'config.json') {
         my $registry = Documentable::Registry.new(
                 topdir => 'doc/doc',
-                :dirs( "Language", "Type", "Programs", "Native" ),
-                :verbose);
+                :dirs("Language", "Type", "Programs", "Native"),
+                :verbose, :typegraph-file('doc/type-graph.txt'));
         $registry.compose;
         my $config = Documentable::Config.new(filename => $config-file);
-        my %page-set := self!generate-page-sets($registry);
-        my %index-pages := self!generate-index-pages($config, %page-set);
-        self.bless: :$registry, :$config, :%page-set, :%index-pages;
-    }
-    method !generate-index-pages(Documentable::Config $config, %all-pages) {
-        my %pages;
-        for Kind.enums.keys -> $kind {
-            my $key = Kind::{$kind};
-            %pages{$key.Str} = $config.get-categories($key).map(-> $category {
-                %( title => $category<display-text>,
-                   pages => %all-pages{$key}.grep({
-                       try .pod.config<category> eq $category<name>
-                   }).grep(so *).cache
-                )
-            });
-        }
-        %pages;
+        my %index-pages := self!generate-index-pages($registry, $config);
+        self.bless: :$registry, :$config, :%index-pages;
     }
 
-    method !generate-page-sets(Documentable::Registry $registry) {
-        return %( Kind::Language.Str => $registry.lookup(Kind::Language.Str, :by<kind>),
-                  Kind::Type.Str     => $registry.lookup(Kind::Type.Str, :by<kind>),
-                  Kind::Routine.Str  => $registry.lookup(Kind::Routine.Str, :by<kind>),
-                  Kind::Programs.Str => $registry.lookup(Kind::Programs.Str, :by<kind>) );
+    method !generate-index-pages($registry, Documentable::Config $config) {
+        my %all-pages = %( Kind::Language.Str => $registry.lookup(Kind::Language.Str, :by<kind>),
+                           Kind::Type.Str => $registry.lookup(Kind::Type.Str, :by<kind>),
+                           Kind::Routine.Str => $registry.lookup(Kind::Routine.Str, :by<kind>),
+                           Kind::Programs.Str => $registry.lookup(Kind::Programs.Str, :by<kind>)
+        );
+        my %index-pages;
+        for Kind.enums.keys -> $kind {
+            my $key = Kind::{$kind};
+            %index-pages{$key.Str} = $config.get-categories($key).map(-> $category {
+                my $pages = %all-pages{$key}.grep({
+                    try .pod.config<category> eq $category<name>
+                }).grep(so *).cache;
+                %( title => $category<display-text>, :$pages )
+            }).cache;
+        }
+        %index-pages;
     }
 
     method get-index-page-data(Kind $index-kind) {
         %!index-pages{$index-kind};
-    }
-
-    method get-pages($index) {
-        # TODO
     }
 }
