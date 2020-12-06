@@ -1,5 +1,6 @@
-// Common template for every custom theme
+@import "../base/_variables.scss";
 
+// Common template for every custom theme
 html {
   background: $background;
 }
@@ -300,6 +301,8 @@ strong {
 
   code {
     color: unset;
+    background: unset;
+    font-weight: $weight-semibold;
   }
 }
 
