@@ -83,25 +83,32 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
 
 # Category indexes
 sub index-routes($host) is export {
+    my %index-pages-cache;
+
     route {
         get -> $category-id where 'language' | 'type' | 'routine' | 'programs', :$color-scheme is cookie {
-            my $category = $host.config.kinds.first(*<kind> eq $category-id);
-            # We have three views to demonstrate data depending on number of items:
-            # * Small: programs
-            # * Medium: language
-            # * Large: type, routine
-            my TemplateKind $template = do given $category-id {
-                when 'programs' { TemplateKind::small }
-                when 'language' { TemplateKind::medium }
-                when 'type' | 'routine' { TemplateKind::large }
+            with %index-pages-cache{$category-id} {
+                content 'text/html', $_.subst('COLOR_SCHEME', $color-scheme // 'light', :g);
+            } else {
+                my $category = $host.config.kinds.first(*<kind> eq $category-id);
+                # We have three views to demonstrate data depending on number of items:
+                # * Small: programs
+                # * Medium: language
+                # * Large: type, routine
+                my TemplateKind $template = do given $category-id {
+                    when 'programs' { TemplateKind::small }
+                    when 'language' { TemplateKind::medium }
+                    when 'type' | 'routine' { TemplateKind::large }
+                }
+                %index-pages-cache{$category-id} = render-template "index/$template.crotmp", %(
+                    |$host.config.config, :color-scheme('COLOR_SCHEME'),
+                    title => "$category<display-text> - Raku Documentation",
+                    category-title => $category<display-text>,
+                    category-description => $category<description>,
+                    |calculate-categories($host, $template, (Kind::{$category-id.tc}))
+                );
+                content 'text/html', %index-pages-cache{$category-id}.subst('COLOR_SCHEME', $color-scheme // 'light', :g);
             }
-            template "index/$template.crotmp", %(
-                |$host.config.config, color-scheme => $color-scheme // 'light',
-                title => "$category<display-text> - Raku Documentation",
-                category-title => $category<display-text>,
-                category-description => $category<description>,
-                |calculate-categories($host, $template, (Kind::{$category-id.tc}))
-            );
         }
     }
 }
