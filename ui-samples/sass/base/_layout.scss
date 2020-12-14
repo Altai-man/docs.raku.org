@@ -98,7 +98,7 @@
     // height:
     // height: 100%;
     // max-height: unset;
-    max-height: calc(100vh - 350px);
+    max-height: calc(100vh - 250px);
   }
 
   .navbar-search-autocomplete {
@@ -108,11 +108,31 @@
   }
 }
 
+/* Smartphones (portrait) */
+@media only screen and (max-width : 480px) {
+  .navbar-search-autocomplete {
+    left: 0;
+    width: 100%;
+  }
 
-// TODO: fix on 1280px
-// .input, .textarea, .select select {
-//     background-color: $white;
-//     border-color: $grey;
-//     border-radius: 3px;
-//     color: $grey-darker;
-// }
+  .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
+    // height:
+    // height: 100%;
+    // max-height: unset;
+    max-height: calc(100vh - 50px);
+  }
+
+
+
+  .raku.page-header .page-edit {
+    position: relative;
+  }
+
+  .page-generated {
+    padding: 0.75rem;
+  }
+
+  .footer {
+    padding: 0.75rem 0.5rem;
+  }
+}
