@@ -1,5 +1,35 @@
 //WARNING
 var current_search = "";
+var category_search = (function() {
+    var method_sign = new RegExp(/^\./);
+    var routine_sign = new RegExp(/^\&/);
+    var routineMethod_sign = new RegExp(/\(\)$/);
+    var classPackageRole_sign = new RegExp(/^\:\:/);
+    return {
+         filter_by_category: function(search_term, items) {
+             var filteredItems = [];
+             if (search_term.match(method_sign)) {
+              filteredItems = items.filter(function(item) { return item.category === 'method' });
+            } else if (search_term.match(routine_sign)){
+              filteredItems = items.filter(function(item) { return item.category === 'routine' });
+            } else if (search_term.match(routineMethod_sign)) {
+              filteredItems = items.filter(function(item) { return item.category === 'method' || item.category === 'routine' });
+            } else if (search_term.match(classPackageRole_sign)) {
+              filteredItems = items.filter(function(item) { return item.category === 'role' || item.category === 'class' || item.category === 'package'});
+            } else {
+              filteredItems = items;
+            }
+            return filteredItems;
+         },
+         strip_sign: function(search_term) {
+             search_term = search_term.replace(classPackageRole_sign, '');
+             search_term = search_term.replace(method_sign, '');
+             search_term = search_term.replace(routineMethod_sign, '');
+             search_term = search_term.replace(routine_sign, '');
+             return search_term;
+         }
+    };
+})();
 
 $(function(){
   $.widget( "custom.catcomplete", $.ui.autocomplete, {
@@ -62,7 +92,7 @@ $(function(){
         return 0;
       }
       var sortedItems = items.sort(sortBy);
-      var keywords = $("#query").val();
+      var keywords = category_search.strip_sign($("#query").val());
       sortedItems.push({
           category: 'Site Search',
           label: "Search the entire site for " + keywords,
@@ -119,7 +149,8 @@ $(function(){
                   value: ";; (long name)",
                   url: "/type/Signature#index-entry-Long_Names"
               }, ITEMS ];
-          var results = $.ui.autocomplete.filter(items, request.term);
+          items = category_search.filter_by_category(request.term, items);
+          var results = $.ui.autocomplete.filter(items, category_search.strip_sign(request.term));
           function trim_results(results, term) {
               var cutoff = 50;
               if (results.length < cutoff) {
