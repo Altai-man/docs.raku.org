@@ -22,10 +22,15 @@ body {
 
 .navbar a {
   color: $link;
-}
 
-.navbar a:hover {
-  color: $link;
+  &:hover {
+    color: $link;
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: $link;
+  }
 }
 
 a.navbar-item:hover, {
@@ -91,7 +96,12 @@ a {
   color: $link;
 
   &:hover {
-    color: $link-hover;
+    color: $link;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: $purple;
   }
 }
 
@@ -102,6 +112,7 @@ a {
 
   &:hover {
     background-color: $primary-dark !important;
+    text-decoration: none;
   }
 }
 
@@ -286,6 +297,8 @@ strong {
 
 .raku-h1 a:hover, .raku-h2 a:hover, .raku-h3 a:hover, .raku-h4 a:hover, .raku-h5 a:hover, .raku-h6 a:hover {
   color: $primary;
+
+  text-decoration: none;
 }
 
 .raku-anchor {
@@ -412,6 +425,7 @@ p > code {
 
       &:hover {
         background: $menu-item-hover-background-color;
+        text-decoration: none;
       }
 
       &.is-active {
