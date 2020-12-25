@@ -8,8 +8,7 @@
     padding: $size-6 $size-7;
   }
 
-  // searchbox
-
+  // Navbar search
   .navbar-item span {
     display: block;
     overflow: hidden;
@@ -46,10 +45,6 @@
     padding: 1rem 0.75rem;
   }
 
-  .tabcontent {
-    // overflow-x: auto;
-  }
-
   .tabcontent table td:nth-child(3) {
     word-break: break-word;
   }
@@ -61,8 +56,6 @@
 
   .navbar-search-autocomplete {
     width: calc(100% - 40px);
-    // left: 20px;
-    // margin-top: 450px;
   }
 
   .error-icon {
@@ -95,9 +88,6 @@
   }
 
   .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
-    // height:
-    // height: 100%;
-    // max-height: unset;
     max-height: calc(100vh - 250px);
   }
 
@@ -116,13 +106,8 @@
   }
 
   .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
-    // height:
-    // height: 100%;
-    // max-height: unset;
     max-height: calc(100vh - 50px);
   }
-
-
 
   .raku.page-header .page-edit {
     position: relative;

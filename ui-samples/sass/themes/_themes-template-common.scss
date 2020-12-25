@@ -20,7 +20,6 @@ body {
   border-bottom: 1px solid $border-light;
 }
 
-// TODO: mono links?
 .navbar a {
   color: $link;
 }
@@ -68,7 +67,7 @@ a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar
   border: 1px solid $border;
 
   li {
-      padding: 8px 5px;
+    padding: 8px 5px;
 
     &:hover {
       background-color: darken($scheme-main-ter, 5);
@@ -90,20 +89,20 @@ a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar
 
 a {
   color: $link;
-}
 
-a:hover {
-  color: $link-hover;
+  &:hover {
+    color: $link-hover;
+  }
 }
 
 
 // Forms
 .button.is-primary {
   background-color: $primary !important;
-}
 
-.button.is-primary:hover {
-  background-color: $primary-dark !important;
+  &:hover {
+    background-color: $primary-dark !important;
+  }
 }
 
 .label {
@@ -111,7 +110,6 @@ a:hover {
 }
 
 .input, .textarea, .select select {
-  // background-color: $scheme-main-ter;
   background-color: $form-background;
   border-color: $border;
   color: $text;
@@ -170,7 +168,6 @@ a.has-text-red, a.has-text-red:hover {
   background-color: $link-hover;
 }
 
-
 strong {
   color: $text-strong;
 }
@@ -198,7 +195,7 @@ strong {
 
 /* Raku page template */
 .raku.page-title {
-  color: $heading; // TODO: heading
+  color: $heading;
 }
 
 .raku.page-header .page-edit {
@@ -242,15 +239,12 @@ strong {
 
 }
 
-
 .raku-category {
-
   .category-header {
     background: $block-heading-background;
     border-bottom: 1px solid $border;
     color: $grey-dark;
   }
-
 
   .category-item:not(:last-child) {
     border-bottom: 1px solid $border;
@@ -270,31 +264,15 @@ strong {
   background: $scheme-main-bis;
   border: 1px solid $border;
   border-bottom: 3px solid $heading;
-  color: $heading;
 }
 
 .raku-h2 {
   border-bottom: 3px solid $heading;
-  color: $heading;
-}
-
-.raku-h3 {
-  color: $heading;
-}
-
-.raku-h4 {
-  color: $heading;
-}
-
-.raku-h5 {
-  color: $heading;
-}
-
-.raku-h6 {
-  color: $heading;
 }
 
 .raku-h1, .raku-h2, .raku-h3, .raku-h4, .raku-h5, .raku-h6 {
+  colors: $heading;
+
   a {
     color: $heading;
   }
@@ -402,16 +380,13 @@ a.raku-anchor,
   }
 }
 
-
 // Text & other stuff
 p > code {
   background-color: $grey-lightest;
   border: 1px solid $grey-lighter;
 }
 
-
 // Sidebar module
-
 .raku-sidebar {
   background-color: $scheme-main-bis;
   border-right: 1px solid $border;
@@ -453,21 +428,20 @@ p > code {
 
 // Alt sidebar
 .raku-sidebar.category-sidebar {
-
   li a.is-active {
     background-color: $menu-item-active-background-color;
     border-left: 3px solid $link;
   }
 
-    a {
-      &.is-active {
-        color: $text;
+  a {
+    &.is-active {
+      color: $text;
 
-        &:hover {
-          background: $menu-item-active-background-color;
-        }
+      &:hover {
+        background: $menu-item-active-background-color;
       }
     }
+  }
 }
 
 // Alt sidebar with bottom border

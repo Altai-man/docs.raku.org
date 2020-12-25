@@ -1,11 +1,6 @@
 // Raku code highlighting
-// @import "../../themes/colors";
-// @import "../../themes/colors-variables";
-
 .raku-code {
   position: relative;
-  // border: 1px solid $border;
-  // border-bottom: 3px solid $border;
   margin: $size-6 0;
   // box-shadow: $shadow-below;
 
@@ -20,7 +15,6 @@
     // position: absolute;
     // top: $size-7;
     // right: $size-5;
-    // background: $scheme-main-ter;
     height: 2em;
   }
 
@@ -28,46 +22,14 @@
     font-size: $size-7;
     font-family: $family-monospace;
     padding: $size-7 $size-5;
-    // border-top: 1px solid $border;
-    // background: $grey-lightest;
   }
 
   .code-output-title {
     font-size: $size-6;
     font-weight: $weight-medium;
-    // border-bottom: 1px solid $border;
-    // color: $red;
+
     padding: 0.25rem 0;
     margin-bottom: 0.5rem;
   }
 
-  // pre {
-  //   background-color: $code-background;
-  //   color: $code-foreground;
-  // }
-
-  // .code-callable {
-  //   color: $code-callable-color;
-  // }
-  // .code-comment {
-  //   color: $code-comment-color;
-  // }
-  // .code-keyword {
-  //   color: $code-keyword-color;
-  // }
-  // .code-number {
-  //   color: $code-number-color;
-  // }
-  // .code-operator {
-  //   color: $code-operator-color;
-  // }
-  // .code-string {
-  //   color: $code-string-color;
-  // }
-  // .code-type {
-  //   color: $code-type-color;
-  // }
-  // .code-variable {
-  //   color: $code-variable-color;
-  // }
 }

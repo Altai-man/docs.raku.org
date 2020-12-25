@@ -1,4 +1,4 @@
-// Custom SCSS
+// Custom CSS
 
 // Titles
 h1,h2,h3,h4,h5,h6 {
@@ -44,7 +44,6 @@ body {
 
 /* Resize search box */
 .navbar-item input {
-  // width: 200px;
   width: 200px;
 }
 
@@ -64,23 +63,19 @@ body {
 .navbar-search-autocomplete {
   position: absolute;
   width: 240px;
-  // TODO: change to fit in screen size
-  // max-height: 800px;
-  // // max-height: 85%;
+  // TODO: try to find a better way to do that
   max-height: calc(100vh - 150px);
   left: 12px;
   top: 45px;
-  // left: 1255px;
   z-index: 100;
-  // overflow-y: auto;
   overflow-y: scroll;
   // visibility: hidden;
 
   font-size: 0.875rem;
 
   li {
-      padding: 8px 5px;
-      cursor: pointer;
+    padding: 8px 5px;
+    cursor: pointer;
   }
 
   li.ui-autocomplete-category {
@@ -88,32 +83,6 @@ body {
     font-weight: $weight-semibold;
   }
 }
-
-// Change navbar while search is active
-#query {
-  // transition: width 1.8s;
-}
-
-// .navbar-start {
-//   transition: opacity 5s ease-out;
-//   opacity: 1;
-// }
-
-// .navbar-autocomplete-active {
-//   .navbar-start {
-//     display: none;
-//     opacity: 0;
-//   }
-
-//   #query {
-//     width: 980px;
-//   }
-
-//   .navbar-search-autocomplete {
-//     width: 980px;
-//     left: 12px;
-//   }
-// }
 
 .navbar > .container {
   margin: 0 auto;
@@ -171,8 +140,6 @@ body {
 }
 
 .raku.links-block {
-  // border-top: 1px solid $grey-lighter;
-
   .head {
     font-family: $family-secondary;
     font-size: $size-6;
@@ -252,10 +219,6 @@ body {
     margin-bottom: $size-5;
   }
 
-  // .search-match {
-  //   background: $yellow;
-  // }
-
   .search-item-title {
     font-weight: $weight-medium;
     margin-bottom: 0.25rem;
@@ -296,13 +259,6 @@ body {
 /* Programs page template */
 .raku-programs {
 
-  // .programs-header {
-  //   background: $grey-lightest;
-  //   border-bottom: 1px solid $border;
-  //   color: $grey-dark;
-  //   padding: 0.35rem;
-  // }
-
   .programs-items {
     padding-top: 0.25rem;
     padding-bottom: $size-7;
@@ -311,16 +267,11 @@ body {
   .programs-item {
     font-weight: $weight-medium;
     padding: $size-6 $size-4;
-    // margin: $size-7 0;
-    // border: 1px solid $border;
-    // border-radius: 3px;
-
   }
 
   .programs-item-title {
     font-size: $size-5;
     font-weight: $weight-medium;
-    // margin-bottom: 0.25rem;
   }
 }
 
@@ -381,7 +332,6 @@ body {
 }
 
 .raku-anchor {
-  // visibility: hidden;
   font-size: 0.9em;
   text-decoration: none;
 }
@@ -455,14 +405,8 @@ table.centered {
 }
 
 
-// .raku-about .card-content {
-//   background-color: $white;
-// }
-
 // Tabs
 .raku.tabs {
-
-
   &.is-boxed a {
     border: unset;
     border-radius: unset;
@@ -490,8 +434,6 @@ figure svg {
 }
 
 // Error pages.
-// TODO: mobile layout
-
 h1.error-title {
   font-size: 168px;
 }
@@ -521,21 +463,5 @@ h1.error-title {
     justify-content: start;
   }
 }
-
-// Workaround
-
-// .field, .fields {
-//   .button, .input, .textarea, .select select, .file-cta, .file-name, .pagination-previous, .pagination-next, .pagination-link, .pagination-ellipsis {
-//     display: inline-table;
-//   }
-// }
-
-// @include mobile {
-//   // to fix 'too wide' bug on mobile
-//   .columns {
-//     margin-left: 0;
-//     margin-right: 0;
-//   }
-// }
 
 .ui-helper-hidden-accessible { position: absolute; left:-999em; }

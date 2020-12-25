@@ -36,20 +36,6 @@ $code-variable-color: #EED891;
   background: $code-selection;
 }
 
-// .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection {
-//   background: yellow;
-// }
-
-// .CodeMirror-line,
-// .CodeMirror-line > span,
-// .CodeMirror-line > span > span,
-// {
-//   ::selection, ::-moz-selection {
-//     background: red;
-//   }
-// }
-
-
 .cm-s-ayaya {
   span.cm-atom, span.function, span.routine { color: $code-callable-color; }
   span.cm-comment, span.comment { color: $code-comment-color; }
