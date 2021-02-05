@@ -4,7 +4,7 @@ A docky demo.
 
 ### Installation
 
-When having Rakudo and zef installed, clone the repo,
+When having Rakudo and zef installed and also node, npm, coffeescript and graphviz, clone the repo,
 then in its directory:
 
 ```
