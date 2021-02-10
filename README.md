@@ -9,6 +9,7 @@ then in its directory:
 
 ```
 # Install dependencies
+zef install https://github.com/Altai-man/Pod-To-HTML.git
 zef --deps-only install .
 # Fresh docs copy
 git clone https://github.com/Raku/doc.git
