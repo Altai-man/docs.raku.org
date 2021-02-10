@@ -4,43 +4,42 @@ var category_search = (function() {
     var routine_sign = new RegExp(/^(\&)([\d\w]+.*)/);
     var routineMethod_sign = new RegExp(/([^\(])(\(\))$/);
     var classPackageRole_sign = new RegExp(/^(\:\:)([A-Z][\w\:]+)/);
-        return {
-            filter_by_category: function(search_term, items) {
-                var filteredItems = [];
-                if (search_term.match(method_sign)) {
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' });
-                } else if (search_term.match(routine_sign)){
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'routine' });
-                } else if (search_term.match(routineMethod_sign)) {
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' || item.category.toLowerCase() === 'routine' });
-                } else if (search_term.match(classPackageRole_sign)) {
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'class' || item.category.toLowerCase() === 'package'});
-                } else {
-                    filteredItems = items;
-                }
-                return filteredItems;
-            },
-            strip_sign: function(search_term) {
-                var match;
-                if (search_term.match(method_sign)) {
-                    match = search_term.match(method_sign);
-                    search_term = search_term.replace(search_term, match[2]);
-                } else if (search_term.match(routine_sign)) {
-                    match = search_term.match(routine_sign);
-                    search_term = search_term.replace(search_term, match[2]);
-                } else if (search_term.match(routineMethod_sign)) {
-                    match = search_term.match(routineMethod_sign);
-                    console.log(match);
-                    search_term = search_term.replace(search_term, match[1]);
-                } else if (search_term.match(classPackageRole_sign)) {
-                    match = search_term.match(classPackageRole_sign);
-                    search_term = search_term.replace(search_term, match[2]);
-                }
-                return search_term;
+    return {
+        filter_by_category: function(search_term, items) {
+            var filteredItems = [];
+            if (search_term.match(method_sign)) {
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' });
+            } else if (search_term.match(routine_sign)){
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'routine' });
+            } else if (search_term.match(routineMethod_sign)) {
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' || item.category.toLowerCase() === 'routine' });
+            } else if (search_term.match(classPackageRole_sign)) {
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'class' || item.category.toLowerCase() === 'package'});
+            } else {
+                filteredItems = items;
             }
-        };
-    })();
-
+            return filteredItems;
+        },
+        strip_sign: function(search_term) {
+            var match;
+            if (search_term.match(method_sign)) {
+                match = search_term.match(method_sign);
+                search_term = search_term.replace(search_term, match[2]);
+            } else if (search_term.match(routine_sign)) {
+                match = search_term.match(routine_sign);
+                search_term = search_term.replace(search_term, match[2]);
+            } else if (search_term.match(routineMethod_sign)) {
+                match = search_term.match(routineMethod_sign);
+                console.log(match);
+                search_term = search_term.replace(search_term, match[1]);
+            } else if (search_term.match(classPackageRole_sign)) {
+                match = search_term.match(classPackageRole_sign);
+                search_term = search_term.replace(search_term, match[2]);
+            }
+            return search_term;
+        }
+    };
+})();
 $(function(){
   $.widget( "custom.catcomplete", $.ui.autocomplete, {
     _create: function() {
