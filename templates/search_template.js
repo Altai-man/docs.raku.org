@@ -2,7 +2,7 @@ var current_search = "";
 var category_search = (function() {
     var method_sign = new RegExp(/^(\.)(\w[\w\-]+)/);
     var routine_sign = new RegExp(/^(\&)([\d\w]+.*)/);
-    var routineMethod_sign = new RegExp(/([^\(])(\(\))$/);
+    var routineMethod_sign = new RegExp(/([^\(]+)(\(\))$/);
     var classPackageRole_sign = new RegExp(/^(\:\:)([A-Z][\w\:]+)/);
         return {
             filter_by_category: function(search_term, items) {
