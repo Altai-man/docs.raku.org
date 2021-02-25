@@ -40,7 +40,6 @@ var category_search = (function() {
             }
         };
     })();
-
 $(function(){
   $.widget( "custom.catcomplete", $.ui.autocomplete, {
     _create: function() {
