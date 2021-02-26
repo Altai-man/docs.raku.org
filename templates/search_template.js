@@ -4,42 +4,41 @@ var category_search = (function() {
     var routine_sign = new RegExp(/^(\&)([\d\w]+.*)/);
     var routineMethod_sign = new RegExp(/([^\(]+)(\(\))$/);
     var classPackageRole_sign = new RegExp(/^(\:\:)([A-Z][\w\:]+)/);
-        return {
-            filter_by_category: function(search_term, items) {
-                var filteredItems = [];
-                if (search_term.match(method_sign)) {
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' });
-                } else if (search_term.match(routine_sign)){
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'routine' });
-                } else if (search_term.match(routineMethod_sign)) {
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' || item.category.toLowerCase() === 'routine' });
-                } else if (search_term.match(classPackageRole_sign)) {
-                    filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'class' || item.category.toLowerCase() === 'package'});
-                } else {
-                    filteredItems = items;
-                }
-                return filteredItems;
-            },
-            strip_sign: function(search_term) {
-                var match;
-                if (search_term.match(method_sign)) {
-                    match = search_term.match(method_sign);
-                    search_term = search_term.replace(search_term, match[2]);
-                } else if (search_term.match(routine_sign)) {
-                    match = search_term.match(routine_sign);
-                    search_term = search_term.replace(search_term, match[2]);
-                } else if (search_term.match(routineMethod_sign)) {
-                    match = search_term.match(routineMethod_sign);
-                    console.log(match);
-                    search_term = search_term.replace(search_term, match[1]);
-                } else if (search_term.match(classPackageRole_sign)) {
-                    match = search_term.match(classPackageRole_sign);
-                    search_term = search_term.replace(search_term, match[2]);
-                }
-                return search_term;
+    return {
+        filter_by_category: function(search_term, items) {
+            var filteredItems = [];
+            if (search_term.match(method_sign)) {
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' });
+            } else if (search_term.match(routine_sign)){
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'routine' });
+            } else if (search_term.match(routineMethod_sign)) {
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' || item.category.toLowerCase() === 'routine' });
+            } else if (search_term.match(classPackageRole_sign)) {
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'class' || item.category.toLowerCase() === 'package'});
+            } else {
+                filteredItems = items;
             }
-        };
-    })();
+            return filteredItems;
+        },
+        strip_sign: function(search_term) {
+            var match;
+            if (search_term.match(method_sign)) {
+                match = search_term.match(method_sign);
+                search_term = search_term.replace(search_term, match[2]);
+            } else if (search_term.match(routine_sign)) {
+                match = search_term.match(routine_sign);
+                search_term = search_term.replace(search_term, match[2]);
+            } else if (search_term.match(routineMethod_sign)) {
+                match = search_term.match(routineMethod_sign);
+                search_term = search_term.replace(search_term, match[1]);
+            } else if (search_term.match(classPackageRole_sign)) {
+                match = search_term.match(classPackageRole_sign);
+                search_term = search_term.replace(search_term, match[2]);
+            }
+            return search_term;
+        }
+    }
+})();
 $(function(){
   $.widget( "custom.catcomplete", $.ui.autocomplete, {
     _create: function() {
@@ -47,17 +46,43 @@ $(function(){
       this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
     },
     _renderItem: function( ul, item) {
+        var enter_text = $('<span>')
+            .attr('class', 'enter-prompt')
+            .css('display', 'none')
+            .html('Enter to select');
         var regex = new RegExp('('
             + current_search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
             + ')', 'ig');
         var text = item.label.replace(regex, '<b>$1</b>');
+        var boldMatch = text.match(/^<b>.*?<\/b>$/);
+        if (boldMatch && boldMatch[0].match(/<b>/g).length === 1) {
+            $('#navbar-search').attr('data-default-url', item.url);
+            enter_text.css('display', 'inline');
+            enter_text.addClass('default-selection');
+        } else if (item.category === 'Site Search') {
+            $('#navbar-search').attr('data-search-url', item.url);
+            enter_text.css('display', 'inline');
+            enter_text.addClass('default-selection');
+        }
         return $( "<li>" )
-            .append( $( "<div>" ).html(text) )
-            .appendTo( ul );
+            .append( $( "<div>" ).html(text).append(enter_text) )
+            .appendTo( ul )
+            .hover(
+                function() {
+                $('#navbar-search .enter-prompt:visible').hide();
+                $(this).find('.enter-prompt').show()
+                },
+                function() {
+                    $(this).find('.enter-prompt').hide();
+                    $('#navbar-search .default-selection').show();
+                }
+            )
     },
     _renderMenu: function( ul, items ) {
       var that = this,
       currentCategory = "";
+      $('#navbar-search').attr('data-default-url', '');
+      $('#navbar-search').attr('data-search-url', '');
       function sortBy(a, b) {
         // We want to place 5to6 docs to the end of the list.
         // See if either a or b are in 5to6 category.
@@ -119,6 +144,11 @@ $(function(){
           li.attr( "aria-label", item.category + " : " + item.label );
         }
       });
+      if ($(ul).find('.default-selection').length > 1) {
+        $(ul).find('.default-selection').not(":first")
+            .removeClass('default-selection')
+            .css({'display': 'none'});
+      };
     }
   });
   var searchResults;
@@ -201,27 +231,38 @@ $(function(){
           };
           response(trim_results(results, request.term));
       },
-      select: function (event, ui) { window.location.href = ui.item.url; },
+      select: function (event, ui) { 
+        $('#navbar-search').attr('data-default-url', ui.item.url);
+        followLink(); 
+      },
   });
 
-  $("#query").keydown(function(event) {
+  $("#query").keydown(function(event, ui) {
     if (event.keyCode == 13) {
-      let searchText = $('#query').val();
-      let matchedItems = [];
-      for (var i = 0; i < searchResults.length; i++) {
-        if (searchResults[i].category === "Site Search")
-          continue;
-        if (searchResults[i].value === searchText || searchResults[i].value.toLowerCase() === searchText.toLowerCase())
-          matchedItems.push(searchResults[i]);
-      }
-      if (matchedItems.length === 1) {
-        window.location.href = matchedItems[0].url;
-      } else {
-        window.location.href = "/search#q=" + searchText;
-      }
+     followLink();    
     }
   });
 });
+
+var followLink = function() {
+    /* When using return key to select, the select event
+    and keydown event are both activated and the second
+    event should do nothing */ 
+    var url;
+    if ($('#navbar-search').attr('data-default-url')) {
+        url = $('#navbar-search').attr('data-default-url');
+        $('#navbar-search').attr('data-default-url', '');
+        $('#navbar-search').attr('data-search-url', '');
+        window.location.href = url;
+    } else if ($('#navbar-search').attr('data-search-url')) {
+        url = $('#navbar-search').attr('data-search-url');
+        window.location.href = url;
+    }
+
+
+
+
+}
 
 /*
  * allow for inexact searching via sift4
