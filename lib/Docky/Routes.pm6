@@ -147,7 +147,7 @@ END
                             pod-block("Documentation for $subkind ", pod-code($doc-name),
                                     " assembled from the following pages:"),
                             @docs.map({
-                                pod-heading("{ .origin.human-kind } { .origin.name }"),
+                                pod-heading("{ .origin.human-kind.tc() }: { .origin.name }"),
                                 pod-block("From ", pod-link(.origin.name, .url-in-origin),), .pod.list,
                             }));
                     cache-and-serve-pod($category-id, $doc-name, $pod, :$sidebar, :$color-scheme);
