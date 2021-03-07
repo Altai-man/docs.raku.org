@@ -18,7 +18,6 @@ use Pod::Utilities::Build;
 constant GLOT_KEY = %*ENV<DOCKY_GLOT_IO_KEY>;
 
 sub routes(Docky::Host $host) is export {
-    my $UI-PREFIX = "ui-samples/dist";
     template-location 'templates';
 
     route {
@@ -195,9 +194,9 @@ END
         }
         get -> 'css', *@path { static "static/css/", @path }
         get -> 'js',  *@path { static "static/js/", @path }
-        get -> 'img', *@path { static "$UI-PREFIX/img/", @path }
+        get -> 'img', *@path { static "static/img/", @path }
         get -> 'images', $svg-path, Str :$color-scheme is cookie { static "static/images/{ $color-scheme // 'light' }/$svg-path" }
-        get -> 'favicon.ico' { static "$UI-PREFIX/img/favicon.ico" }
+        get -> 'favicon.ico' { static "static/img/favicon.ico" }
 
         include backward-compatibility-redirects($host);
     }
