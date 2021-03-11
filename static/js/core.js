@@ -87,7 +87,7 @@ function setup_glot_io() {
             var output_top = '<p class="code-output-title">Output</p>';
             $(this).closest('.raku-code').find('.CodeMirror-code .CodeMirror-line').each(function(i, el){ code += $(el).text() + "\n"; });
             if (code.length == 0) {
-                $(this).closest('.raku-code').find('code').each(function(i, el){ code += $(el).text() + "\n"; });
+                $(this).closest('.raku-code').find('code').each(function(i, el){ $(el).find('.line').each(function(i, el) { code += $(el).text() + "\n"; })});
             }
 
             jQuery.ajax('/run', {
