@@ -15,7 +15,8 @@ use Documentable::DocPage::Factory;
 use Documentable::To::HTML::Wrapper;
 use Pod::Utilities::Build;
 
-constant GLOT_KEY = %*ENV<DOCKY_GLOT_IO_KEY>;
+constant DOCKY_EXAMPLES_EXECUTOR_HOST = %*ENV<DOCKY_EXAMPLES_EXECUTOR_HOST>;
+constant DOCKY_EXAMPLES_EXECUTOR_KEY = %*ENV<DOCKY_EXAMPLES_EXECUTOR_KEY>;
 
 sub routes(Docky::Host $host) is export {
     template-location 'templates';
@@ -162,11 +163,12 @@ END
             request-body -> %json {
                 # Remove zero-width space from editing...
                 my $code = %json<code>.subst("\x200B", '', :g);
-
-                my $resp = await Cro::HTTP::Client.post('https://run.glot.io/languages/perl6/latest',
+                my $resp = await Cro::HTTP::Client.post(DOCKY_EXAMPLES_EXECUTOR_HOST,
                         content-type => 'application/json',
-                        headers => ['Authorization' => 'Token ' ~ GLOT_KEY],
-                        body => { files => [{ :name<main.p6>, :content($code) },] });
+                        headers => ['X-Access-Token' => DOCKY_EXAMPLES_EXECUTOR_KEY],
+                        body => {
+                            :image('glot/raku:latest'),
+                            payload => { :language<raku>, files => [{ :name<main.raku>, :content($code) },] } });
                 if $resp.status eq 200 {
                     my $json = await $resp.body;
                     content 'text/plain',
