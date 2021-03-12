@@ -14,6 +14,8 @@ ENV PATH=/root/.raku/bin:/opt/rakudo-pkg/bin:/opt/rakudo-pkg/share/perl6/site/bi
 # So install zef, update it
 RUN /opt/rakudo-pkg/bin/install-zef
 RUN zef update
+# We need our fork of Pod::To::HTML for a faster renderer
+git clone https://github.com/Altai-man/Pod-To-HTML.git && cd Pod-To-HTML && zef install .
 # We need our fork of Documentable at this stage
 RUN git clone -b search-categories-streamlined https://github.com/Raku/Documentable.git && cd Documentable && zef install .
 # We need our fork of docs at this stage

@@ -6,6 +6,7 @@ use Docky::Constants;
 use Docky::Host;
 use Docky::Renderer::TOC;
 use Docky::Renderer::Node;
+use Docky::Renderer::Page;
 use Docky::Routes::BackwardCompat;
 use Docky::Routes::Index;
 use Docky::Search;
@@ -40,6 +41,7 @@ sub routes(Docky::Host $host) is export {
 
         my sub render-pod($category-id, $name, $pod) {
             my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,
+                    page-renderer => Docky::Renderer::Page,
                     prettyPodPath => "$category-id.tc()/$name.subst('::', '/', :g).pod6",
                     podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
                     # FIXME this is a hack because Documentable::Config is not flexible enough...

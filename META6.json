@@ -24,6 +24,7 @@
     "Docky::Constants": "lib/Docky/Constants.pm6",
     "Docky::Host": "lib/Docky/Host.pm6",
     "Docky::Renderer::Node": "lib/Docky/Renderer/Node.pm6",
+    "Docky::Renderer::Page": "lib/Docky/Renderer/Page.pm6",
     "Docky::Renderer::TOC": "lib/Docky/Renderer/TOC.pm6",
     "Docky::Routes::BackwardCompat": "lib/Docky/Routes/BackwardCompat.pm6",
     "Docky::Routes::Index": "lib/Docky/Routes/Index.pm6",

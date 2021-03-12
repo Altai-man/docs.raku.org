@@ -7,7 +7,6 @@
 </div>
 
 <div id="mainSidebar" class="raku-sidebar">
-
       <div class="field">
         <label class="label has-text-centered">Table of Contents</label>
         <div class="control has-icons-right">
@@ -18,12 +17,9 @@
         </div>
       </div>
       <div class="raku-sidebar-body">
-
           <&HTML(.toc)>
-
       </div>
-
-    </div>
+</div>
 
 
 <div id="wrapper">
@@ -62,6 +58,5 @@
       </p>
     </div>
   </section>
-
 </div>
 <!-- Wrapper ends -->
