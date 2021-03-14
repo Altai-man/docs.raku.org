@@ -38,7 +38,7 @@ does all the mundane steps for you, so you need to build the container and run i
 #### Docker
 
 ```
--> docker build -t next-docs -f Dockerfile .
+-> docker build -t next-docs -f infra/Dockerfile.cro .
 -> docker run -p 10000:10000 next-docs
 # Now you can access the site via browser at `http://localhost:10000`
 ```
