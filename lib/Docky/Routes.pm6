@@ -196,11 +196,26 @@ END
             template 'about.crotmp', { title => 'About - Raku Documentation', |$host.config.config,
                                        color-scheme => $color-scheme // 'light' }
         }
-        get -> 'css', *@path { static "static/css/", @path }
-        get -> 'js',  *@path { static "static/js/", @path }
-        get -> 'img', *@path { static "static/img/", @path }
-        get -> 'images', $svg-path, Str :$color-scheme is cookie { static "static/images/{ $color-scheme // 'light' }/$svg-path" }
-        get -> 'favicon.ico' { static "static/img/favicon.ico" }
+        get -> 'css', *@path {
+            cache-control(:public, :max-age(86400));
+            static "static/css/", @path;
+        }
+        get -> 'js',  *@path {
+            cache-control(:public, :max-age(86400));
+            static "static/js/", @path;
+        }
+        get -> 'img', *@path {
+            cache-control(:public, :max-age(86400));
+            static "static/img/", @path;
+        }
+        get -> 'images', $svg-path, Str :$color-scheme is cookie {
+            cache-control(:public, :max-age(86400));
+            static "static/images/{ $color-scheme // 'light' }/$svg-path"
+        }
+        get -> 'favicon.ico' {
+            cache-control(:public, :max-age(31536000));
+            static "static/img/favicon.ico"
+        }
 
         include backward-compatibility-redirects($host);
     }
