@@ -164,7 +164,9 @@ END
         post -> 'run' {
             request-body -> %json {
                 # Remove zero-width space from editing...
-                my $code = %json<code>.subst("\x200B", '', :g);
+                my $code = %json<code>.subst("\x200B", '', :g)
+                        .subst("\x00A0", ' ', :g);
+
                 my $resp = await Cro::HTTP::Client.post(DOCKY_EXAMPLES_EXECUTOR_HOST,
                         content-type => 'application/json',
                         headers => ['X-Access-Token' => DOCKY_EXAMPLES_EXECUTOR_KEY],
