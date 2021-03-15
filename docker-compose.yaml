@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  upstream:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.cro
+    container_name: upstream
+    ports:
+      - 10000:10000
+
+  nginx:
+    build:
+      context: infra
+      dockerfile: infra/Dockerfile.nginx
+    container_name: nginx
+    ports:
+      - 10010:10010
+    links:
+      - upstream
