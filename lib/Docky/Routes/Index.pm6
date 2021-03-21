@@ -6,6 +6,10 @@ use Pod::Utilities::Build;
 
 enum TemplateKind <small medium large>;
 
+sub escape($url) {
+    $url.trans(['?'] => ['%3F']);
+}
+
 # FIXME caching of all this...
 sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
                          Kind $doc-kind, :$category-kind = 'all') is export {
@@ -30,7 +34,7 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
 
         # Create content of "All" category
         # Get all doc pages, for each page create a row in the table
-        my $all = @docs.map( -> $doc-item {
+        my $all = @docs.map(-> $doc-item {
             $doc-item.categorize(*.name).map({
                 # Here we have `name -> array of pod pages` to be $_,
                 # for types the array always consists of a single element, so gather summary etc
@@ -40,7 +44,8 @@ sub calculate-categories(Docky::Host $host, TemplateKind $tmpl-kind,
                 }
                 else {
                     # Routines are a bit more delicate, we can get a bunch of pages, so process them accordingly
-                    ["<a href=\"$_.value()[0].url()\">$_.key()\</a>", .value.map(*.subkinds).flat.unique.join(', '),
+                    my $url = escape($_.value()[0].url());
+                    ["<a href=\"$url\">$_.key()\</a>", .value.map(*.subkinds).flat.unique.join(', '),
                      "From ({ .value.map({ "<a href=\"$_.url-in-origin()\">$_.origin.name()\</a>" }).join(', ') })"];
                 }
             }).Slip
@@ -107,7 +112,8 @@ sub index-routes($host) is export {
                     category-description => $category<description>,
                     |calculate-categories($host, $template, (Kind::{$category-id.tc}))
                 );
-                content 'text/html', %index-pages-cache{$category-id}.subst('COLOR_SCHEME', $color-scheme // 'light', :g);
+                content 'text/html', %index-pages-cache{$category-id}.subst('COLOR_SCHEME', $color-scheme // 'light',
+                        :g);
             }
         }
     }

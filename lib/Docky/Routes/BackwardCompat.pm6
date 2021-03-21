@@ -11,9 +11,13 @@ sub backward-compatibility-redirects($host) is export {
             ;
 
     route {
+        get -> 'routine', 'perl' {
+            redirect '/routine/raku', :see-other;
+        }
+
         # First, just redirect folks with `.html` to extension-less pages
-        get -> $page where $page.ends-with('.html') {
-            redirect $page.subst('.html'), :permanent;
+        get -> *@path where *[*-1].ends-with('.html') {
+            redirect '/' ~ @path.map(*.subst('.html', '')).join('/'), :see-other;
         }
 
         # Index pages by categories...
