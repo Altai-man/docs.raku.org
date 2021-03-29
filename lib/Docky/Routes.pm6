@@ -16,8 +16,8 @@ use Documentable::DocPage::Factory;
 use Documentable::To::HTML::Wrapper;
 use Pod::Utilities::Build;
 
-constant DOCKY_EXAMPLES_EXECUTOR_HOST = %*ENV<DOCKY_EXAMPLES_EXECUTOR_HOST>;
-constant DOCKY_EXAMPLES_EXECUTOR_KEY = %*ENV<DOCKY_EXAMPLES_EXECUTOR_KEY>;
+my $DOCKY_EXAMPLES_EXECUTOR_HOST = %*ENV<DOCKY_EXAMPLES_EXECUTOR_HOST>;
+my $DOCKY_EXAMPLES_EXECUTOR_KEY = %*ENV<DOCKY_EXAMPLES_EXECUTOR_KEY>;
 
 sub routes(Docky::Host $host) is export {
     template-location 'templates';
@@ -169,9 +169,9 @@ END
                 my $code = %json<code>.subst("\x200B", '', :g)
                         .subst("\x00A0", ' ', :g);
 
-                my $resp = await Cro::HTTP::Client.post(DOCKY_EXAMPLES_EXECUTOR_HOST,
+                my $resp = await Cro::HTTP::Client.post($DOCKY_EXAMPLES_EXECUTOR_HOST,
                         content-type => 'application/json',
-                        headers => ['X-Access-Token' => DOCKY_EXAMPLES_EXECUTOR_KEY],
+                        headers => ['X-Access-Token' => $DOCKY_EXAMPLES_EXECUTOR_KEY],
                         body => {
                             :image('glot/raku:latest'),
                             payload => { :language<raku>, files => [{ :name<main.raku>, :content($code) },] } });
