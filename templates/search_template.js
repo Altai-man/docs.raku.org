@@ -8,13 +8,13 @@ var category_search = (function() {
         filter_by_category: function(search_term, items) {
             var filteredItems = [];
             if (search_term.match(method_sign)) {
-                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'methods' ||  item.category.toLowerCase() === 'routines' });
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' ||  item.category.toLowerCase() === 'routine' });
             } else if (search_term.match(routine_sign)){
-                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'subroutines' || item.category.toLowerCase() === 'routines' });
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'subroutine' || item.category.toLowerCase() === 'routine' });
             } else if (search_term.match(routineMethod_sign)) {
-                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'methods' || item.category.toLowerCase() === 'subroutines' || item.category.toLowerCase() === 'routines' });
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'method' || item.category.toLowerCase() === 'subroutine' || item.category.toLowerCase() === 'routine' });
             } else if (search_term.match(classPackageRole_sign)) {
-                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'types' });
+                filteredItems = items.filter(function(item) { return item.category.toLowerCase() === 'type' });
             } else {
                 filteredItems = items;
             }
