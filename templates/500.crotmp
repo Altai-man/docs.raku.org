@@ -4,10 +4,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Server error - Raku Documentation</title>
-    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/themes/light.css">
 
-    <script type="text/javascript" src="../js/core.js"></script>
+    <script type="text/javascript" src="/js/core.js"></script>
 
   </head>
   <body>

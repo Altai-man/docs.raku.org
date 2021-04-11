@@ -16,8 +16,8 @@ use Documentable::DocPage::Factory;
 use Documentable::To::HTML::Wrapper;
 use Pod::Utilities::Build;
 
-constant DOCKY_EXAMPLES_EXECUTOR_HOST = %*ENV<DOCKY_EXAMPLES_EXECUTOR_HOST>;
-constant DOCKY_EXAMPLES_EXECUTOR_KEY = %*ENV<DOCKY_EXAMPLES_EXECUTOR_KEY>;
+my $DOCKY_EXAMPLES_EXECUTOR_HOST = %*ENV<DOCKY_EXAMPLES_EXECUTOR_HOST>;
+my $DOCKY_EXAMPLES_EXECUTOR_KEY = %*ENV<DOCKY_EXAMPLES_EXECUTOR_KEY>;
 
 sub routes(Docky::Host $host) is export {
     template-location 'templates';
@@ -36,6 +36,8 @@ sub routes(Docky::Host $host) is export {
                 color-scheme => $color-scheme // 'light'
             )
         }
+
+        include backward-compatibility-redirects($host);
 
         include index-routes($host);
 
@@ -115,7 +117,7 @@ END
         }
 
         # /type/Int
-        get -> $category-id where 'type'|'language'|'programs', $name, Str :$color-scheme is cookie, Str :$sidebar is cookie {
+        get -> $category-id where 'type'|'language'|'programs', $name where not *.contains('.html'), Str :$color-scheme is cookie, Str :$sidebar is cookie {
             with $host.render-cache{$category-id}{$name} -> $page {
                 serve-cached-page($page, :$sidebar, :$color-scheme);
             } else {
@@ -146,7 +148,7 @@ END
                     my @subkinds = @docs.map({ slip .subkinds }).unique;
                     my $subkind = @subkinds == 1 ?? @subkinds[0] !! $category-id;
                     my $doc-name = @docs[0].name;
-                    my $pod = pod-with-title("$subkind $doc-name",
+                    my $pod = pod-with-title(Pod::Raw.new(target => 'html', contents => "$subkind $doc-name"),
                             pod-block("Documentation for $subkind ", pod-code($doc-name),
                                     " assembled from the following pages:"),
                             @docs.map({
@@ -167,9 +169,9 @@ END
                 my $code = %json<code>.subst("\x200B", '', :g)
                         .subst("\x00A0", ' ', :g);
 
-                my $resp = await Cro::HTTP::Client.post(DOCKY_EXAMPLES_EXECUTOR_HOST,
+                my $resp = await Cro::HTTP::Client.post($DOCKY_EXAMPLES_EXECUTOR_HOST,
                         content-type => 'application/json',
-                        headers => ['X-Access-Token' => DOCKY_EXAMPLES_EXECUTOR_KEY],
+                        headers => ['X-Access-Token' => $DOCKY_EXAMPLES_EXECUTOR_KEY],
                         body => {
                             :image('glot/raku:latest'),
                             payload => { :language<raku>, files => [{ :name<main.raku>, :content($code) },] } });
@@ -218,7 +220,5 @@ END
             cache-control(:public, :max-age(31536000));
             static "static/img/favicon.ico"
         }
-
-        include backward-compatibility-redirects($host);
     }
 }

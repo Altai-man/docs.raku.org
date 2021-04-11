@@ -55,8 +55,6 @@ the following:
 git clone -b search-categories https://github.com/Raku/doc.git
 # Get patched Documentable
 git clone -b search-categories-streamlined https://github.com/Raku/Documentable.git && cd Documentable && zef install . && cd ..
-№ Get faster Pod::To::HTML
-git clone https://github.com/Altai-man/Pod-To-HTML.git && cd Pod-To-HTML && zef install . && cd ..
 # Install missing Raku-level dependencies
 zef --deps-only install .
 # Setup highlighting
