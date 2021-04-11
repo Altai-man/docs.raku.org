@@ -7,7 +7,7 @@ use Pod::Utilities::Build;
 enum TemplateKind <small medium large>;
 
 sub escape($url) {
-    $url.trans(['?'] => ['%3F']);
+    $url.trans(['?', '|'] => ['%3F', '%7C']);
 }
 
 # FIXME caching of all this...
