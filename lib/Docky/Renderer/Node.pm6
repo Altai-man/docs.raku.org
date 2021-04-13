@@ -90,6 +90,12 @@ monitor Docky::Renderer::Node is Node::To::HTML {
         q:to/END/
           <div class="code-output">
             <button class="button code-button" aria-label="run">Run</button>
+            <div id="code-run-spinner-container">
+                <div id="code-run-spinner">
+                    <img id="camelia-spinner" src="https://raku.org/camelia-logo.png" width="50" />
+                    <p>Running Code</p>
+                </div>
+            </div>
             <div></div>
           </div>
         END

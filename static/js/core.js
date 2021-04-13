@@ -83,6 +83,8 @@ function setup_glot_io() {
     // Run code button
     $('.code-button').each(function(i, el) {
         $(el).click(function() {
+            // Show spinner on button click
+            $("#code-run-spinner-container").show();
             var code = '';
             var output_top = '<p class="code-output-title">Output</p>';
             $(this).closest('.raku-code').find('.CodeMirror-code .CodeMirror-line').each(function(i, el){ code += $(el).text() + "\n"; });
@@ -93,6 +95,8 @@ function setup_glot_io() {
             jQuery.ajax('/run', {
                 method: 'POST',
                 success: function(data) {
+                    // Hide spinner on success
+                    $("#code-run-spinner-container").hide();
                     $(el).closest('.raku-code').find('.code-output').each(function(i, el) {
                         $(el).find('div').html(output_top + data);
                     });

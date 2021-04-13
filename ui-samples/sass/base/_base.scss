@@ -1,5 +1,34 @@
 // Custom CSS
 
+/* Camelia Spinner Container */
+#code-run-spinner-container {
+  visibility: hidden;
+}
+
+/* Display as flex and center */
+#code-run-spinner {
+  display: flex;
+  justify-content: center;
+}
+
+/* Camelia img */
+#camelia-spinner {
+  display: inline-block;
+  animation: spinner 1.25s infinite;
+  border: 5px black;
+  border-radius: 10px black;
+}
+
+/* Keyframes for camelia spinner */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
 // Titles
 h1,h2,h3,h4,h5,h6 {
   font-family: $family-secondary;
