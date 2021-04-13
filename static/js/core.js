@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
     setup_glot_io();
     setup_sidebar();
     setup_theme();
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($navbarBurgers.length > 0) {
 
         // Add a click event on each of them
-        $navbarBurgers.forEach( el => {
+        $navbarBurgers.forEach(el => {
             el.addEventListener('click', () => {
 
                 // Get the target from the "data-target" attribute
@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function setup_theme() {
     var theme = cookie.get('color-scheme', undefined);
     if (theme === undefined) {
-        cookie.set({'color-scheme' : 'light'}, { expires: 30, path: '/', sameSite: true });
+        cookie.set({ 'color-scheme': 'light' }, { expires: 30, path: '/', sameSite: true });
     }
-    $('#toggle-theme').each(function(i, el) {
-        $(el).click(function() {
+    $('#toggle-theme').each(function (i, el) {
+        $(el).click(function () {
             var theme = cookie.get('color-scheme', 'light');
-            cookie.set({'color-scheme' : theme === 'light' ? 'dark' : 'light'}, { expires: 30, path: '/', sameSite: true });
+            cookie.set({ 'color-scheme': theme === 'light' ? 'dark' : 'light' }, { expires: 30, path: '/', sameSite: true });
             let links = document.getElementsByTagName('link');
             for (let i = 0; i < links.length; i++) {
                 if (links[i].getAttribute('rel') == 'stylesheet') {
@@ -60,7 +60,7 @@ function setup_theme() {
 
 function setup_glot_io() {
     // CodeMirror editor is enabled on click
-    $('pre').each(function(i, el) {
+    $('pre').each(function (i, el) {
         $(el).click(function () {
             var $el = $(this);
             // If already editor, return
@@ -69,37 +69,47 @@ function setup_glot_io() {
             if (!$el.parent().hasClass('raku-lang')) { return; }
             let editorText = $($el.find('code').html().replaceAll('<div class="line">', '').replaceAll('</div>', '\n')).text();
             CodeMirror(el, {
-                lineNumbers:    true,
-                lineWrapping:   true,
-                mode:           'perl6',
+                lineNumbers: true,
+                lineWrapping: true,
+                mode: 'perl6',
                 scrollbarStyle: 'null',
-                theme:          'ayaya',
-                value:          editorText
+                theme: 'ayaya',
+                value: editorText
             });
             $el.find('code').text('');
         });
     });
 
     // Run code button
-    $('.code-button').each(function(i, el) {
-        $(el).click(function() {
+    $('.code-button').each(function (i, el) {
+        $(el).click(function () {
             var code = '';
             var output_top = '<p class="code-output-title">Output</p>';
-            $(this).closest('.raku-code').find('.CodeMirror-code .CodeMirror-line').each(function(i, el){ code += $(el).text() + "\n"; });
+            $(this).closest('.raku-code').find('.CodeMirror-code .CodeMirror-line').each(function (i, el) { code += $(el).text() + "\n"; });
             if (code.length == 0) {
-                $(this).closest('.raku-code').find('code').each(function(i, el){ $(el).find('.line').each(function(i, el) { code += $(el).text() + "\n"; })});
+                $(this).closest('.raku-code').find('code').each(function (i, el) { $(el).find('.line').each(function (i, el) { code += $(el).text() + "\n"; }) });
             }
 
+            // Adds a spinner for the user to wait...
+            $(el).closest('.raku-code').find('.code-output').each(function (i, el) {
+                $(el).find('div').append(
+                    $('<div/>').addClass("code-run-spinner-container")
+                        .append($('<div/>').addClass("code-run-spinner")
+                            .append($('<img/>').attr('id', 'camelia-spinner').attr('src', 'https://raku.org/camelia-logo.png').attr('width', '50'))
+                            .append($('<p/>').text('Running Code'))
+                        )
+                );
+            });
             jQuery.ajax('/run', {
                 method: 'POST',
-                success: function(data) {
-                    $(el).closest('.raku-code').find('.code-output').each(function(i, el) {
+                success: function (data) {
+                    $(el).closest('.raku-code').find('.code-output').each(function (i, el) {
                         $(el).find('div').html(output_top + data);
                     });
                 },
                 data: { code: code },
-                error: function(req, error) {
-                    $(el).closest('.raku-code').find('.code-output').each(function(i, el) {
+                error: function (req, error) {
+                    $(el).closest('.raku-code').find('.code-output').each(function (i, el) {
                         $(el).find('div').html(output_top + 'Error occurred: ' + error);
                     });
                 }
@@ -114,7 +124,7 @@ function setup_sidebar() {
     sidebar_is_shown = JSON.parse(cookie.get('sidebar', null));
     if (sidebar_is_shown === null) {
         sidebar_is_shown = true;
-        cookie.set({sidebar: sidebar_is_shown}, { expires: 30, path: '/', sameSite: true });
+        cookie.set({ sidebar: sidebar_is_shown }, { expires: 30, path: '/', sameSite: true });
     }
 
     function hide_sidebar(el) {
@@ -138,8 +148,8 @@ function setup_sidebar() {
     }
 
     // Sidebar toggle
-    $('.raku-sidebar-toggle').each(function(i, el) {
-        $(el).click(function() {
+    $('.raku-sidebar-toggle').each(function (i, el) {
+        $(el).click(function () {
             if (sidebar_is_shown) {
                 sidebar_is_shown = false;
                 hide_sidebar(el);
@@ -147,22 +157,22 @@ function setup_sidebar() {
                 sidebar_is_shown = true;
                 show_sidebar(el);
             }
-            cookie.set({sidebar: sidebar_is_shown}, { expires: 30, path: '/', sameSite: true });
+            cookie.set({ sidebar: sidebar_is_shown }, { expires: 30, path: '/', sameSite: true });
         });
     });
 
-    $(".menu-list li").each(function(i, elLi) {
-        $(elLi).find('a').each(function(i, elA) {
-            $(elA).click(function() {
+    $(".menu-list li").each(function (i, elLi) {
+        $(elLi).find('a').each(function (i, elA) {
+            $(elA).click(function () {
                 // Update menu items
-                $(".menu-list li").each(function(i, el) {
-                    $(el).find('a').each(function(i, el) { $(el).removeClass('is-active'); });
+                $(".menu-list li").each(function (i, el) {
+                    $(el).find('a').each(function (i, el) { $(el).removeClass('is-active'); });
                 });
                 $(this).addClass('is-active');
                 // Update tab visibility
                 var category = $(elLi).attr('id').substring(7); // 7 is length of "switch-"
                 var tab_id = 'tab-' + category;
-                $('.tabcontent').each(function(i, el) { $(el).css('display', 'none'); });
+                $('.tabcontent').each(function (i, el) { $(el).css('display', 'none'); });
                 $('#' + tab_id).css('display', 'block');
                 // Update title-subtitle
                 $('.page-title').text($('#page-title-' + category).text());
@@ -178,12 +188,12 @@ function setup_sidebar() {
 
     var originalTOC = $('#toc-menu').html();
 
-    $("#toc-filter").keyup(function() {
+    $("#toc-filter").keyup(function () {
         $('#toc-menu').html(originalTOC);
         var searchText = this.value.toLowerCase();
         if (searchText.length === 0) return;
         var $menuListElements = $('.menu-list').find("li");
-        var $matchingListElements = $menuListElements.filter(function(i, li) { 
+        var $matchingListElements = $menuListElements.filter(function (i, li) {
             var listItemHTML = li.firstChild.innerHTML;
             var fuzzyRes = fuzzysort.go(searchText, [listItemHTML])[0];
             if (fuzzyRes === undefined || fuzzyRes.score < -8000) {
@@ -191,7 +201,7 @@ function setup_sidebar() {
             }
             var res = fuzzysort.highlight(fuzzyRes);
             if (res !== null) {
-                var nodes = $(li).contents().filter(function(i, node){ return node.nodeType == 1; });
+                var nodes = $(li).contents().filter(function (i, node) { return node.nodeType == 1; });
                 nodes[0].innerHTML = res;
                 return true;
             } else {
@@ -199,7 +209,7 @@ function setup_sidebar() {
             }
         });
         $menuListElements.hide();
-        $($matchingListElements).each(function(i, elem) {
+        $($matchingListElements).each(function (i, elem) {
             $(elem).parents('li').show();
         });
         $matchingListElements.show();
@@ -207,20 +217,20 @@ function setup_sidebar() {
 }
 
 function setup_search() {
-    $('#query').focus(function() {
+    $('#query').focus(function () {
         if ($('.navbar-menu').css('display') == 'flex') {
             $("#query").stop(true);
             $('.navbar-start').hide()
-            $("#query").animate({ width: "980px" }, 200, function() {  $(".navbar-search-autocomplete").width("980px"); $('#navbar-search').show();} );
+            $("#query").animate({ width: "980px" }, 200, function () { $(".navbar-search-autocomplete").width("980px"); $('#navbar-search').show(); });
         } else {
             $('#navbar-search').show();
         }
         $('#navMenu').addClass('navbar-autocomplete-active');
     });
-    $('#query').blur(function() {
+    $('#query').blur(function () {
         if ($('.navbar-menu').css('display') == 'flex') {
             $("#query").stop(true);
-            $("#query").animate({ width: "200px" }, 400, function() { $('.navbar-start').show() });
+            $("#query").animate({ width: "200px" }, 400, function () { $('.navbar-start').show() });
         }
 
         $('#navbar-search').hide();
