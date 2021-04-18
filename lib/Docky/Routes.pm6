@@ -188,11 +188,20 @@ END
 
         # Search...
         get -> 'search', Str :$q is query, Str :$color-scheme is cookie {
-            my @cats = generate-categories($host);
+            my @categories := generate-categories;
             template 'search.crotmp', {
                 title => 'Search - Raku Documentation',
-                :@cats,
+                :@categories,
                 |$host.config.config, color-scheme => $color-scheme // 'light' };
+        }
+
+        post -> 'search', {
+            request-body -> %items-to-query {
+                # TODO This is an interesting situation. The possible options are:
+                # * A type, a Primary object - we return a .summary for that
+                # * Other cases are not handled yet...
+                # $host.registry.docs-for()
+            }
         }
 
         # Statics

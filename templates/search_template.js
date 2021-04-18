@@ -1,3 +1,18 @@
+var items = [
+    {
+        category: "Syntax",
+        value: "# single-line comment",
+        url: "/language/syntax#Single-line_comments"
+    }, {
+        category: "Syntax",
+        value: "#` multi-line comment",
+        url: "/language/syntax#Multi-line_/_embedded_comments"
+    }, {
+        category: "Signature",
+        value: ";; (long name)",
+        url: "/type/Signature#index-entry-Long_Names"
+    }, ITEMS ];
+
 var current_search = "";
 var category_search = (function() {
     var method_sign = new RegExp(/^(\.)(\w[\w\-]+)/);
@@ -153,11 +168,10 @@ $(function(){
       };
     }
   });
-  var searchResults;
+
   $("#query").attr('placeholder', '🔍').catcomplete({
       appendTo: "#navbar-search",
       response: function(e, ui) {
-        searchResults = ui.content;
         if (!ui.content.length) {
             $('#search').addClass('not-found')
                 .find('#try-web-search').attr(
@@ -176,20 +190,6 @@ $(function(){
       },
       position: { my: "right top", at: "right bottom" },
       source: function(request, response) {
-          var items = [
-              {
-                  category: "Syntax",
-                  value: "# single-line comment",
-                  url: "/language/syntax#Single-line_comments"
-              }, {
-                  category: "Syntax",
-                  value: "#` multi-line comment",
-                  url: "/language/syntax#Multi-line_/_embedded_comments"
-              }, {
-                  category: "Signature",
-                  value: ";; (long name)",
-                  url: "/type/Signature#index-entry-Long_Names"
-              }, ITEMS ];
           items = category_search.filter_by_category(request.term, items);
           var results = $.ui.autocomplete.filter(items, category_search.strip_sign(request.term));
           function trim_results(results, term) {
