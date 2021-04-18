@@ -10,9 +10,11 @@ sub init-search($host) is export {
     spurt 'static/js/search.js', $template;
 }
 
-sub generate-categories($host) is export {
-    # XXX This will be eventually replaced with a constant list...
-    my $search-generator = Documentable::Search.new(prefix => $host.config.url-prefix);
-    my @results = $search-generator.generate-entries($host.registry).map({ ($_ ~~ / 'category: "' (<-["]>*) '"' /)[0].Str }).unique;
-    @results;
+sub generate-categories is export {
+    # An alphabetic sorting here? Or maybe semantic sorting?
+    ["Adverbs", "Asynchronous Phasers", "Circumfix operators", "Control flow", "Foreign",
+     "Infix operators", "Language", "List operators", "Listop operators", "Metaoperators",
+     "Methods", "Modules", "Operators", "Phasers", "Postcircumfix operators", "Postfix operators",
+     "Pragmas", "Prefix operators", "Programs", "Reference", "Regexes", "Routines", "Subroutines",
+     "Syntax", "Terms", "Traits", "Tutorial", "Types", "Variables"]
 }

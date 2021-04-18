@@ -17,7 +17,7 @@
             <div class="search-form mb-4">
               <div class="field">
                 <div class="control has-icons-right">
-                  <input class="input" type="text" placeholder="Search">
+                  <input id="search-input" class="input" type="text" placeholder="Search">
                   <span class="icon is-small is-right">
                     <i class="fas fa-search"></i>
                   </span>
@@ -33,8 +33,9 @@
                     <div class="field">
                       <div class="control">
                         <div class="select">
-                          <select>
-                            <@cats><option value="<$_>"><$_></option></@>
+                          <select id="search-category-select">
+                            <option value="All">All</option>
+                            <@categories><option value="<$_>"><$_></option></@>
                           </select>
                         </div>
                       </div>
@@ -54,33 +55,12 @@
 
 
             <div class="raku-search results">
-              <div class="box search-category">
-                <div class="search-category-title has-text-centered subtitle">Category</div>
-
-                <article class="search-item">
-                  <div class="search-item-title">
-                    <a href="#" class="search-item-title">$some_method</a>
-                  </div>
-
-                  <p>Placerat orci <span class="search-match">nulla pellentesque</span> dignissim enim, sit amet venenatis urna cursus eget? Neque ornare aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl rhoncus mattis rhoncus, urna!</p>
-                </article>
-
-                <article class="search-item">
-                  <div class="search-item-title">
-                    <a href="#" >$some_method</a>
-                  </div>
-
-                  <p>Placerat orci nulla pellentesque dignissim enim, sit amet venenatis urna cursus eget? Neque ornare aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl rhoncus mattis rhoncus, urna!</p>
-                </article>
-
-              </div>
-
-
             </div>
 
           </div>
         </section>
-
+        <!-- the worker script -->
+        <script defer src="js/extended-search.js"></script>
       </div>
 
 
