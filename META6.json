@@ -9,10 +9,9 @@
   ],
   "auth": "Write me!",
   "depends": [
-    "Cro::HTTP",
-    "Documentable",
+    "Cro::HTTP:ver<0.8.7>",
     "Cro::WebApp",
-    "Perl6::TypeGraph",
+    "Documentable",
     "Pod::From::Cache:ver<0.2+>",
     "Pod::To::HTML:ver<0.8+>",
     "OO::Monitors"

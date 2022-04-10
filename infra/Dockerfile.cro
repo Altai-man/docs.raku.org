@@ -1,4 +1,4 @@
-FROM fedora:32
+FROM fedora:34
 RUN mkdir /app
 WORKDIR /app
 
@@ -26,7 +26,7 @@ COPY . /app
     # we need a static code highlighter
 RUN cd highlights && rm -rf atom-language-perl6 && git clone https://github.com/Raku/atom-language-perl6.git && npm install . && npm rebuild && cd .. && \
     # We need our fork of docs at this stage
-    rm -rf doc && git clone -b search-categories https://github.com/Raku/doc.git
+    rm -rf doc && git clone -b search-categories-update https://github.com/Raku/doc.git
 
 EXPOSE 10000
 CMD raku -Ilib service.p6

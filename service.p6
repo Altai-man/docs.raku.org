@@ -1,5 +1,5 @@
-use Perl6::TypeGraph;
-use Perl6::TypeGraph::Viz;
+use Doc::TypeGraph;
+use Doc::TypeGraph::Viz;
 use Documentable;
 use Documentable::Registry;
 use Cro::HTTP::Log::File;
@@ -16,13 +16,13 @@ init-search($host);
 unless 'static/images'.IO.e {
     mkdir 'static/images/light';
     mkdir 'static/images/dark';
-    my $tg = Perl6::TypeGraph.new-from-file;
+    my $tg = Doc::TypeGraph.new-from-file;
     # Write light colors
-    my $viz = Perl6::TypeGraph::Viz.new(class-color => '#030303', role-color => '#5503B3', enum-color => '#A30031',
+    my $viz = Doc::TypeGraph::Viz.new(class-color => '#030303', role-color => '#5503B3', enum-color => '#A30031',
             bg-color => '#fafafa', node-style => 'filled margin=0.2 fillcolor="#f2f2f2" shape=rectangle fontsize=16');
     $viz.write-type-graph-images(path => "static/images/light", :force, type-graph => $tg);
     # Write dark colors
-    $viz = Perl6::TypeGraph::Viz.new(class-color => '#f7f7f7', role-color => '#8DB2EB', enum-color => '#EED891',
+    $viz = Doc::TypeGraph::Viz.new(class-color => '#f7f7f7', role-color => '#8DB2EB', enum-color => '#EED891',
             bg-color => '#1B1D1E', node-style => 'filled margin=0.2 fillcolor="#212426" shape=rectangle fontsize=16');
     $viz.write-type-graph-images(path => "static/images/dark", :force, type-graph => $tg);
 }
