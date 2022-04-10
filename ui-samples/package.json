@@ -6,10 +6,9 @@
     "dependencies": {
         "autoprefixer": "^9.8.6",
         "bulma": "^0.9.1",
-        "cssnano": "^4.1.10",
-        "node-sass": "^4.14.1",
-        "onchange": "^7.1.0",
-        "postcss-cli": "^7.1.2"
+        "cssnano": "^5.1.7",
+        "node-sass": "^7.0.1",
+        "onchange": "^7.1.0"
     },
     "scripts": {
         "css-main": "npx node-sass --source-map=true sass/main.scss ../static/css/main.css",
@@ -25,5 +24,9 @@
     },
     "browserslist": [
         "defaults"
-    ]
+    ],
+    "devDependencies": {
+        "postcss": "^8.4.12",
+        "postcss-cli": "^9.1.0"
+    }
 }
