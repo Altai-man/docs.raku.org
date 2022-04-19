@@ -121,12 +121,12 @@ monitor Docky::Renderer::Node is Node::To::HTML {
                 </div>
 
                 <div class="version-body">
-                    { self.node2inline($node.contents) }
+                    { "<p>" ~ self.node2inline($node.contents) ~ "</p>" }
                 </div>
             </article>
             END
         } else {
-            self.node2inline($node.contents)
+            "<p>" ~ self.node2inline($node.contents) ~ "</p>"
         }
     }
 }
