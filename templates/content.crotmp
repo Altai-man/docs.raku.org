@@ -54,7 +54,7 @@
     <div class="container has-text-centered">
       <p>
         Generated from
-        <a href="{{podPath}}"><.prettyPodPath></a>
+        <a href="<.podPath>"><.prettyPodPath></a>
       </p>
     </div>
   </section>
