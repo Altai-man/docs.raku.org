@@ -141,9 +141,7 @@ $(function(){
         return 0;
       }
       var sortedItems = items.sort(sortBy);
-      console.log($("#query").val());
       var keywords = category_search.strip_sign($("#query").val());
-      console.log(keywords);
       sortedItems.push({
           category: 'Site Search',
           label: "Search the entire site for " + keywords,
