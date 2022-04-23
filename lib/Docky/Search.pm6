@@ -12,7 +12,7 @@ sub init-search($host) is export {
 
 sub generate-categories is export {
     # An alphabetic sorting here? Or maybe semantic sorting?
-    ["Adverbs", "Asynchronous Phasers", "Circumfix operators", "Control flow", "Foreign",
+    ["Adverbs", "Asynchronous Phasers", "Circumfix operators", "Control flow", "Other languages",
      "Infix operators", "Language", "List operators", "Listop operators", "Metaoperators",
      "Methods", "Modules", "Operators", "Phasers", "Postcircumfix operators", "Postfix operators",
      "Pragmas", "Prefix operators", "Programs", "Reference", "Regexes", "Routines", "Subroutines",
