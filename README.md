@@ -52,7 +52,7 @@ the following:
 
 ```
 # Get a fresh docs copy
-git clone -b search-categories https://github.com/Raku/doc.git
+git clone https://github.com/Raku/doc.git
 # Get patched Documentable
 git clone -b search-categories-streamlined https://github.com/Raku/Documentable.git && cd Documentable && zef install . && cd ..
 # Install missing Raku-level dependencies
