@@ -75,7 +75,11 @@
                 </a>
                 <hr class="navbar-divider">
                 <a class="navbar-item has-text-red" href="https://github.com/raku/doc/blob/master/CONTRIBUTING.md#reporting-bugs">
-                  Report an issue
+                  Report an issue with the content
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item has-text-red" href="https://github.com/Altai-man/docs.raku.org/issues">
+                  Report an issue of this site
                 </a>
               </div>
             </div>
