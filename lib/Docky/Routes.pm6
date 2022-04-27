@@ -15,9 +15,7 @@ use Documentable::Registry;
 use Documentable::DocPage::Factory;
 use Documentable::To::HTML::Wrapper;
 use Pod::Utilities::Build;
-
-my $DOCKY_EXAMPLES_EXECUTOR_HOST = %*ENV<DOCKY_EXAMPLES_EXECUTOR_HOST>;
-my $DOCKY_EXAMPLES_EXECUTOR_KEY = %*ENV<DOCKY_EXAMPLES_EXECUTOR_KEY>;
+use JSON::Fast;
 
 sub routes(Docky::Host $host) is export {
     template-location 'templates';
@@ -163,20 +161,40 @@ END
             }
         }
 
+        constant DOCKER_COMMAND = <docker run --rm -i --read-only --tmpfs /tmp:rw,noexec,nosuid,size=65536k --tmpfs /home/glot:rw,exec,nosuid,uid=1000,gid=1000,size=131072k -u glot -w /home/glot glot/raku:latest>;
+
         post -> 'run' {
             request-body -> %json {
                 # Remove zero-width space from editing...
-                my $code = %json<code>.subst("\x200B", '', :g)
-                        .subst("\x00A0", ' ', :g);
+                my $code = %json<code>.subst("\x200B", '', :g).subst("\x00A0", ' ', :g);
+                my $payload = { :language<raku>, files => [{ :name<main.raku>, :content($code) },] };
+                my $proc = Proc::Async.new(:w, |DOCKER_COMMAND);
 
-                my $resp = await Cro::HTTP::Client.post($DOCKY_EXAMPLES_EXECUTOR_HOST,
-                        content-type => 'application/json',
-                        headers => ['X-Access-Token' => $DOCKY_EXAMPLES_EXECUTOR_KEY],
-                        body => {
-                            :image('glot/raku:latest'),
-                            payload => { :language<raku>, files => [{ :name<main.raku>, :content($code) },] } });
-                if $resp.status eq 200 {
-                    my $json = await $resp.body;
+                my ($output, $success) = "", False;
+                react {
+                    whenever $proc.stdout.lines {
+                        $output ~= $_;
+                    }
+                    whenever $proc.stderr { # chunks
+                        done;
+                    }
+                    whenever $proc.start {
+                        $success = $_.exitcode == 0;
+                        done;
+                    }
+                    whenever $proc.print: to-json($payload) {
+                        $proc.close-stdin;
+                    }
+                    whenever Promise.in(10) {
+                        $proc.kill;
+                        whenever Promise.in(2) {
+                            say ‘Timeout. Forcing the process to stop’;
+                            $proc.kill: SIGKILL
+                        }
+                    }
+                }
+                if $success {
+                    my $json = from-json $output;
                     content 'text/plain',
                             ($json<stdout>.subst("\n", '<br>', :g),
                              ($json<stderr> ?? "STDERR:<br>$json<stderr>".subst("\n", '<br>', :g) !! '')).join;
