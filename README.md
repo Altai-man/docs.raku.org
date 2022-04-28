@@ -83,8 +83,12 @@ The cache heater is enabled if the `PRODUCTION_ENV` env variable is set.
 #### Examples execution
 
 We use containers provided by the [glot](https://github.com/glotcode) project to execute
-code examples: when asked to run an example a cheap, isolated container is started to run the code
-and return the results.
+code examples. In production environment we send snippets to our secret server and for
+testing environment you probably want to setup yourself a Docker container if you 
+want to work on this piece of the website (which is welcome!).
 
-To get the image locally to work with the website, you can pull the image using the `docker pull glot/raku:latest` command,
-the rest should just work.
+See instructions for setting up your container [here](https://github.com/glotcode/docker-run/blob/main/docs/install/docker-ubuntu-20.10.md)
+
+Next you want to setup environment variables that will be used for sending requests,
+`DOCKY_EXAMPLES_EXECUTOR_HOST` and `DOCKY_EXAMPLES_EXECUTOR_KEY` to specify the host and
+the access token, once its done you can play with examples execution locally.
