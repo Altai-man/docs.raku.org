@@ -21,3 +21,6 @@ node_modules/
 static/js/search.js
 atom-language-perl6/
 package-lock.json
+
+# secret env variables
+e.env
