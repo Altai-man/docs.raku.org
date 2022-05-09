@@ -39,8 +39,23 @@ monitor Docky::Renderer::Node is Node::To::HTML {
         # Extend rules here if necessary...
     }
 
+    sub strip-off-formatting($node) {
+        given $node {
+            when Pod::FormattingCode {
+                $node.contents;
+            }
+            default {
+                $node
+            }
+        }
+    }
+
     method highlight-code($node) {
-        my $code = $node.contents.join;
+        my $code = $node.contents.map(&strip-off-formatting).join;
+        # my $code = $node.contents.join;
+        # if $code.contains('<strong>') {
+        #     say $node.contents.raku;
+        # }
 
         $lock.protect({
             unless $hl-proc.started {
