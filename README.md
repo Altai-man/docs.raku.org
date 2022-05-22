@@ -9,7 +9,6 @@ We need your help! Do not hesitate to fix and improve things if you like the pro
 We need volunteers to:
 
 - Reviewing project's documentation (just send patches for all the silly typos!)
-- Improve JS side of things (we lack some small goodies like a spinner for `Run example` action, as well as a search page...)
 - Improve Raku code (there are still some mysteries and a lot of room for improvement)
 - Utilize plenty of opportunities to speed up the website rendering
 - Improve infrastructure (you write kubernetes? We love you and need your help!)
@@ -23,15 +22,6 @@ If you feel interested in contributing, feel warmly welcome to
 
 ### Installation
 
-= = WARNING START = =
-
-As we are in beta, lots of things were re-done in a breaking matter and not everybody likes that transition period.
-While we strive to keep the main, existing website going until this one is accepted (or ouch rejected) and matured,
-this also means we have to dance around our workflow not to break existing ones, so expect
-e.g. cloning branches until all the cuts are tied.
-
-= = WARNING END = =
-
 The most safe way to run the website locally is to use Docker. We provide a Dockerfile which
 does all the mundane steps for you, so you need to build the container and run it:
 
@@ -42,6 +32,12 @@ does all the mundane steps for you, so you need to build the container and run i
 -> docker run -p 10000:10000 next-docs
 # Now you can access the site via browser at `http://localhost:10000`
 ```
+
+#### Cro + Nginx setup
+
+A docker-compose setup exists. It describes two containers,
+one is the actual Cro application and the other one is a Nginx container
+to reverse-proxy requests and add things like caching and avoiding exposure of the app itself.
 
 #### Manual installation
 
@@ -59,7 +55,7 @@ git clone -b search-categories-streamlined https://github.com/Raku/Documentable.
 zef --deps-only install .
 # Setup highlighting
 cd highlights && git clone https://github.com/Raku/atom-language-perl6.git && npm install . && npm rebuild && cd ..
-# This will take A LOT of time for the first time, because lots of pod files are cached
+# This will take A LOT of time for the first time, because lots of pod files are to be cached
 # It can take e.g. 5 minutes, you were warned, really
 # It will be much faster next time
 DOCKY_PORT=20000 DOCKY_HOST=localhost raku -Ilib service.p6
@@ -74,9 +70,9 @@ this process, [here](https://github.com/Raku/Pod-To-HTML/pull/80), [here](https:
 [here](https://github.com/Altai-man/Pod-To-HTML/commit/456c210614c2b682ff20caa5ae9927994f9811aa) etc
 it is clearly not enough.
 
-As an ultimate temporary solution we simply cache pages on first run.
-For dev environment it is not so important and caching is not applied, for production
-environment it is.
+As the ultimate temporary solution we simply cache all pages on first run.
+For dev environment it is not so important and the cache is not heated by the app,
+but for production environment should be.
 
 The cache heater is enabled if the `PRODUCTION_ENV` env variable is set.
 
@@ -84,11 +80,18 @@ The cache heater is enabled if the `PRODUCTION_ENV` env variable is set.
 
 We use containers provided by the [glot](https://github.com/glotcode) project to execute
 code examples. In production environment we send snippets to our secret server and for
-testing environment you probably want to setup yourself a Docker container if you 
-want to work on this piece of the website (which is welcome!).
+testing environment you may want to set up something simpler.
 
-See instructions for setting up your container [here](https://github.com/glotcode/docker-run/blob/main/docs/install/docker-ubuntu-20.10.md)
+Until https://github.com/glotcode/docker-run/issues/6 is not resolved we use our own
+small server to pass the code execution requests to the executor. To recreate the setup:
 
-Next you want to setup environment variables that will be used for sending requests,
-`DOCKY_EXAMPLES_EXECUTOR_HOST` and `DOCKY_EXAMPLES_EXECUTOR_KEY` to specify the host and
-the access token, once its done you can play with examples execution locally.
+``` sh
+docker pull glot/raku:latest # pull the raku image
+DOCKY_EXAMPLES_EXECUTOR_KEY=... raku tools/glot-server.raku # run the server with a certain token
+# Run the application locally with additional env variables:
+DOCKY_PORT=20000 DOCKY_HOST=localhost DOCKY_EXAMPLES_EXECUTOR_HOST=http://localhost:8088/run DOCKY_EXAMPLES_EXECUTOR_KEY=... raku -Ilib service.p6
+# OR run it in a docker container, while providing appropriate values for the DOCKY_EXAMPLES_EXECUTOR_HOST and DOCKY_EXAMPLES_EXECUTOR_KEY env variables
+```
+
+Note the docker setup uses host network to be able to access the examples server.
+It is possible to avoid this and get back to docker-only setup when the upstream issue is resolved.
