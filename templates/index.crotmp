@@ -26,13 +26,15 @@
                 <div class="card-content">
 
                   <div class="has-text-centered">
-                    <span class="icon is-large has-text-primary">
-                      <i class="fas <.icon> icon-large"></i>
-                    </span>
+                    <a href="<.url>">
+                      <span class="icon is-large has-text-primary">
+                        <i class="fas <.icon> icon-large"></i>
+                      </span>
+                    </a>
                   </div>
 
                   <div class="content has-text-centered">
-                    <p class="title is-5 has-text-primary"><.title></p>
+                    <p class="title is-5 has-text-primary"><a href="<.url>"><.title></a></p>
                   </div>
 
                   <div class="content has-text-centered">
