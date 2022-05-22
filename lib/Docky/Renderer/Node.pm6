@@ -104,7 +104,7 @@ monitor Docky::Renderer::Node is Node::To::HTML {
             $content = '<pre class="pod-block-code">' ~ self.node2inline($node.contents) ~ "</pre>\n";
         }
         # Should we have a run button?
-        my $allow-running = False && $lang eq 'raku-lang' && !detect-declaration($node.contents.join);
+        my $allow-running = $lang eq 'raku-lang' && !detect-declaration($node.contents.join);
         # Allow to explicitly override our guesses
         with $node.config<runnable> -> $is-runnable {
             $allow-running = $is-runnable;
