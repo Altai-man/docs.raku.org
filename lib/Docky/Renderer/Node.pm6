@@ -92,27 +92,33 @@ monitor Docky::Renderer::Node is Node::To::HTML {
     }
 
     multi method node2html(Pod::Block::Code $node) {
-        my $lang = $node.config<lang> || $node.config<skip-test> ?? '' !! ' raku-lang';
+        # Detect language
+        my $lang = $node.config<lang> || $node.config<skip-test> ?? '' !! 'raku-lang';
         my $content;
-        if $lang {
+        # If it's Raku, we allow an editor
+        if $lang eq 'raku-lang' {
             $content = self.highlight-code($node).subst('<pre class="editor editor-colors">',
                     '<pre class="editor editor-colors cm-s-ayaya"><code>')
                     .subst('</pre>', '</code></pre>').subst("\n", '<br>');
         } else {
             $content = '<pre class="pod-block-code">' ~ self.node2inline($node.contents) ~ "</pre>\n";
         }
-        my $code-runner = $lang && !detect-declaration($node.contents.join) ??
-        q:to/END/
+        # Should we have a run button?
+        my $allow-running = False && $lang eq 'raku-lang' && !detect-declaration($node.contents.join);
+        # Allow to explicitly override our guesses
+        with $node.config<runnable> -> $is-runnable {
+            $allow-running = $is-runnable;
+        }
+        constant $code-runner = q:to/END/;
           <div class="code-output">
             <button class="button code-button" aria-label="run">Run</button>
             <div></div>
           </div>
         END
-        !! '';
-        qq:to/END/;
-        <div class="raku-code$lang">
+        return qq:to/END/;
+        <div class="raku-code $lang">
           $content
-          $code-runner
+          { $allow-running ?? $code-runner !! '' }
         </div>
         END
     }
