@@ -395,8 +395,8 @@ a.raku-anchor,
 
 // Text & other stuff
 p > code {
-  background-color: $grey-lightest;
-  border: 1px solid $grey-lighter;
+  background-color: $code-background;
+  border: 1px solid lighten($code-background, 5);
 }
 
 // Sidebar module
