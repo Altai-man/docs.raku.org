@@ -3,8 +3,9 @@ use Documentable::Config;
 use Documentable::Registry;
 
 class Docky::Host {
-    has Documentable::Registry $.registry;
+    has Documentable::Registry $.registry is rw;
     has Documentable::Config $.config;
+    has %.info;
     has %.page-sets;
     has %.index-pages;
     has %.render-cache;
@@ -61,8 +62,10 @@ class Docky::Host {
                 :verbose, :typegraph-file('doc/type-graph.txt'));
         $registry.compose;
         my $config = Documentable::Config.new(filename => $config-file);
+        my %info = content-version =>
+            run(<git describe>, :cwd($*CWD.child('doc')), :out).out.slurp(:close).trim;
         my %index-pages := self!generate-index-pages($registry, $config);
-        self.bless: :$registry, :$config, :%index-pages;
+        self.bless: :$registry, :$config, :%index-pages, :%info;
     }
 
     method !generate-index-pages($registry, Documentable::Config $config) {
