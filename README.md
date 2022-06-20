@@ -95,3 +95,10 @@ DOCKY_PORT=20000 DOCKY_HOST=localhost DOCKY_EXAMPLES_EXECUTOR_HOST=http://localh
 
 Note the docker setup uses host network to be able to access the examples server.
 It is possible to avoid this and get back to docker-only setup when the upstream issue is resolved.
+
+#### Updating the content
+
+The application keeps a version of the `doc` repository content cached.
+To ask it for an update, send a GET request to `/update?token=...` route with
+an appropriate security token. The server then proceeds to update the git repo
+and the pages registry.
