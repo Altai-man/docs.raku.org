@@ -167,17 +167,21 @@ $(function(){
     }
   });
 
+  // The catcomplete plugin doesn't handle unfocus, so hide the "no results" bar
+  // manually in case the search is not used anymore
+  $("#query").focusout(function(){
+    $('#navbar-search-empty').hide();
+  });
+
   $("#query").attr('placeholder', '🔍').catcomplete({
       appendTo: "#navbar-search",
       response: function(e, ui) {
         if (!ui.content.length) {
-            $('#search').addClass('not-found')
-                .find('#try-web-search').attr(
-                    'href', siteSearchUrl( $("#query").val() )
-                );
+            $('#navbar-search-empty').show();
+            $('#try-web-search').attr('href', siteSearchUrl($("#query").val()));
         }
         else {
-            $('#search').removeClass('not-found')
+            $('#navbar-search-empty').hide();
         }
       },
       open: function() {
@@ -185,6 +189,7 @@ $(function(){
         if ( ui_el.offset().left < 0 ) {
             ui_el.css({left: 0})
         }
+        $('#navbar-search-empty').hide();
       },
       position: { my: "right top", at: "right bottom" },
       source: function(request, response) {

@@ -113,6 +113,13 @@ body {
   }
 }
 
+#navbar-search-empty {
+  width: max-content;
+  overflow: hidden;
+  padding: 0.75rem;
+  display: none;
+}
+
 .navbar > .container {
   margin: 0 auto;
   max-width: 1140px;
