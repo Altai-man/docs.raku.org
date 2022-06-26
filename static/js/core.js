@@ -220,7 +220,7 @@ function setup_search() {
     $('#query').focus(function () {
         if ($('.navbar-menu').css('display') == 'flex') {
             $("#query").stop(true);
-            $('.navbar-start').hide()
+            $('.navbar-start').hide();
             $("#query").animate({ width: "980px" }, 200, function () { $(".navbar-search-autocomplete").width("980px"); $('#navbar-search').show(); });
         } else {
             $('#navbar-search').show();

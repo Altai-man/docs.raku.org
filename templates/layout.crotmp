@@ -102,6 +102,10 @@
             </div>
 
             <div id="navbar-search" class="navbar-search-autocomplete" style="display: none;"></div>
+
+            <div id="navbar-search-empty" class="navbar-search-autocomplete">
+              <a id="try-web-search" href="https://www.google.com/" class="button" target="blank">Not found, but you can try site search</a>
+            </div>
           </div>
 
         </div>
