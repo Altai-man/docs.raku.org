@@ -8,6 +8,7 @@ use Docky::Renderer::TOC;
 use Docky::Renderer::Node;
 use Docky::Renderer::Page;
 use Docky::Routes::BackwardCompat;
+use Docky::Routes::Command;
 use Docky::Routes::Index;
 use Docky::Search;
 use Documentable;
@@ -40,6 +41,8 @@ sub routes(Docky::Host $host) is export {
         include backward-compatibility-redirects($host);
 
         include index-routes($host);
+
+        include command-routes($host);
 
         my sub render-pod($category-id, $name, $pod) {
             my $renderer = Pod::To::HTML.new(template => $*CWD, node-renderer => Docky::Renderer::Node,

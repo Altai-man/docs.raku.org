@@ -26,6 +26,7 @@
     "Docky::Renderer::Page": "lib/Docky/Renderer/Page.pm6",
     "Docky::Renderer::TOC": "lib/Docky/Renderer/TOC.pm6",
     "Docky::Routes::BackwardCompat": "lib/Docky/Routes/BackwardCompat.pm6",
+    "Docky::Routes::Command": "lib/Docky/Routes/Command.rakumod",
     "Docky::Routes::Index": "lib/Docky/Routes/Index.pm6",
     "Docky::Search": "lib/Docky/Search.pm6",
     "Renderer": "lib/Renderer.pm6",
