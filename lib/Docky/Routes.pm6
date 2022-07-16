@@ -49,6 +49,7 @@ sub routes(Docky::Host $host) is export {
                     page-renderer => Docky::Renderer::Page,
                     prettyPodPath => "$category-id.tc()/$name.subst('::', '/', :g).pod6",
                     podPath => "{ $host.config.pod-root-path }/$category-id.tc()/$name.subst('::', '/', :g).pod6",
+                    has-pod-path => so $category-id eq 'type' | 'language' | 'programs',
                     # FIXME this is a hack because Documentable::Config is not flexible enough...
                     editURL => "{ $host.config.pod-root-path.subst('blob', 'edit') }/$category-id.tc()/$name.subst('::', '/', :g).pod6");
             my $html = $renderer.render($pod, toc => Docky::Renderer::TOC);

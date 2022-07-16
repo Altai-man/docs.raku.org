@@ -27,6 +27,7 @@
       <div class="raku page-title has-text-centered"><.title></div>
       <div class="raku page-subtitle has-text-centered"><.subtitle></div>
 
+      <?.has-pod-path>
       <div class="page-edit">
         <a class="button page-edit-button" href="<.editURL>" title="Edit this page.">
           <span class="icon is-right">
@@ -34,6 +35,7 @@
           </span>
         </a>
       </div>
+      </?>
     </div>
   </section>
 
@@ -49,6 +51,7 @@
     </div>
   </section>
 
+  <?.has-pod-path>Generated from
   <section class="page-generated">
     <div class="container has-text-centered">
       <p>
@@ -57,5 +60,6 @@
       </p>
     </div>
   </section>
+  </?>
 </div>
 <!-- Wrapper ends -->
