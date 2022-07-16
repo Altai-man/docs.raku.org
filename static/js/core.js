@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                 el.classList.toggle('is-active');
                 $target.classList.toggle('is-active');
-
             });
         });
     }
@@ -34,12 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function setup_theme() {
     var theme = cookie.get('color-scheme', undefined);
     if (theme === undefined) {
-        cookie.set({ 'color-scheme': 'light' }, { expires: 30, path: '/', sameSite: true });
+        cookie.set({ 'color-scheme': 'light' }, { expires: 30, path: '/' });
     }
     $('#toggle-theme').each(function (i, el) {
         $(el).click(function () {
             var theme = cookie.get('color-scheme', 'light');
-            cookie.set({ 'color-scheme': theme === 'light' ? 'dark' : 'light' }, { expires: 30, path: '/', sameSite: true });
+            cookie.set({ 'color-scheme': theme === 'light' ? 'dark' : 'light' }, { expires: 30, path: '/' });
             let links = document.getElementsByTagName('link');
             for (let i = 0; i < links.length; i++) {
                 if (links[i].getAttribute('rel') == 'stylesheet') {
@@ -123,14 +122,24 @@ var sidebar_is_shown;
 function setup_sidebar() {
     sidebar_is_shown = JSON.parse(cookie.get('sidebar', null));
     if (sidebar_is_shown === null) {
-        sidebar_is_shown = true;
-        cookie.set({ sidebar: sidebar_is_shown }, { expires: 30, path: '/', sameSite: true });
+        // If the screen is not wide enough and the sidebar overlaps content -
+        // hide it (if it was not enabled on purpose and so was in cookies)
+        sidebar_is_shown = $(window).width() > 1760;
+        cookie.set({ sidebar: sidebar_is_shown }, { expires: 30, path: '/' });
+        if (!sidebar_is_shown) {
+            hide_sidebar($('.raku-sidebar-toggle')[0]);
+        }
     }
 
     function hide_sidebar(el) {
         var svg = $(el).find('svg')[0];
         if (svg !== undefined) {
             svg.setAttribute('data-icon', 'chevron-right');
+        }
+        else {
+            var i_icon = $(el).find('i')[0];
+            $(i).removeClass('fa-chevron-left');
+            $(i).addClass('fa-chevron-right');
         }
         $("#mainSidebar").css('width', '0');
         $("#mainSidebar").css('display', 'none');
@@ -157,7 +166,7 @@ function setup_sidebar() {
                 sidebar_is_shown = true;
                 show_sidebar(el);
             }
-            cookie.set({ sidebar: sidebar_is_shown }, { expires: 30, path: '/', sameSite: true });
+            cookie.set({ sidebar: sidebar_is_shown }, { expires: 30, path: '/' });
         });
     });
 
