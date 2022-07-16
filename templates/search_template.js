@@ -170,7 +170,9 @@ $(function(){
   // The catcomplete plugin doesn't handle unfocus, so hide the "no results" bar
   // manually in case the search is not used anymore
   $("#query").focusout(function(){
-    $('#navbar-search-empty').hide();
+    setTimeout(() => {
+        $('#navbar-search-empty').hide();
+    }, 200);
   });
 
   $("#query").attr('placeholder', '🔍').catcomplete({
