@@ -18,6 +18,7 @@ RUN git clone -b search-categories-streamlined https://github.com/Raku/Documenta
 
 ADD META6.json /app
 # Install raku dependencies and check sanity
+RUN zef install https://github.com/croservices/cro-http.git
 RUN zef install --deps-only .
 
 COPY . /app
