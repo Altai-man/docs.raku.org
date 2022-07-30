@@ -14,7 +14,8 @@ RUN yum install -y nodejs graphviz openssl-devel git coffee-script make gcc gcc-
     /opt/rakudo-pkg/bin/install-zef && zef update
 
 # We need our fork of Documentable at this stage
-RUN git clone -b search-categories-streamlined https://github.com/Raku/Documentable.git && cd Documentable && zef install . 
+RUN git clone -b devel https://github.com/Raku/Documentable.git && cd Documentable && zef install .
+RUN git clone -b devel https://github.com/Raku/Pod-To-HTML.git && cd Pod-To-HTML && zef install .
 
 ADD META6.json /app
 # Install raku dependencies and check sanity
