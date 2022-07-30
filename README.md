@@ -49,8 +49,10 @@ the following:
 ```
 # Get a fresh docs copy
 git clone https://github.com/Raku/doc.git
-# Get patched Documentable
-git clone -b search-categories-streamlined https://github.com/Raku/Documentable.git && cd Documentable && zef install . && cd ..
+# Get patched Documentable and Pod::To::HTML
+git clone -b devel https://github.com/Raku/Documentable.git && cd Documentable && zef install . && cd ..
+git clone -b devel https://github.com/Raku/Pod-To-HTML.git && cd Pod-To-HTML && zef install . && cd ..
+
 # Install missing Raku-level dependencies
 zef --deps-only install .
 # Setup highlighting
