@@ -16,6 +16,7 @@ use Documentable::Registry;
 use Documentable::DocPage::Factory;
 use Documentable::To::HTML::Wrapper;
 use Pod::Utilities::Build;
+use URI::Escape;
 
 my $DOCKY_EXAMPLES_EXECUTOR_HOST = %*ENV<DOCKY_EXAMPLES_EXECUTOR_HOST>;
 my $DOCKY_EXAMPLES_EXECUTOR_KEY = %*ENV<DOCKY_EXAMPLES_EXECUTOR_KEY>;
@@ -143,7 +144,10 @@ END
         }
 
         # /syntax/token...
-        get -> $category-id where 'routine' | 'reference' | 'syntax', $name, Str :$color-scheme is cookie, Str :$sidebar is cookie {
+        get -> $category-id where 'routine' | 'reference' | 'syntax', $name is copy, Str :$color-scheme is cookie, Str :$sidebar is cookie {
+            # Cro gladly gives us unescaped URL, but Documentable serves escaped ones,
+            # thus escape the parameter one so that we could match them
+            $name = uri-escape($name);
             with $host.render-cache{$category-id}{$name} -> $page {
                 serve-cached-page($page, :$sidebar, :$color-scheme);
             } else {
