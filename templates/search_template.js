@@ -195,8 +195,8 @@ $(function(){
       },
       position: { my: "right top", at: "right bottom" },
       source: function(request, response) {
-          items = category_search.filter_by_category(request.term, items);
-          var results = $.ui.autocomplete.filter(items, category_search.strip_sign(request.term));
+          var filteredItems = category_search.filter_by_category(request.term, items);
+          var results = $.ui.autocomplete.filter(filteredItems, category_search.strip_sign(request.term));
           function trim_results(results, term) {
               var cutoff = 50;
               if (results.length < cutoff) {
