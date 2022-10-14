@@ -31,7 +31,7 @@ our @resource-links is export =
     { :title<Downloadable docs>, :url</404> };
 
 our @explore-links is export =
-    { :title<Raku Blog Aggregator>, :url<https://pl6anet.org/> },
+    { :title<Raku Blog Aggregator>, :url<https://planet.raku.org/> },
     { :title<Rakudo Weekly>, :url<https://rakudoweekly.blog/> },
     { :title<The Weekly Challenge>, :url<https://perlweeklychallenge.org/> },
     { :title<Raku Advent Calendar>, :url<https://raku-advent.blog/> };
