@@ -80,7 +80,7 @@ class Docky::Host {
             %index-pages{$key.Str} = $config.get-categories($key).map(-> $category {
                 my $pages = %all-pages{$key}.grep({
                     try .pod.config<category> eq $category<name>
-                }).grep(so *).cache;
+                }).grep(so *).sort(*.name).cache;
                 %( title => $category<display-text>, :$pages )
             }).cache;
         }
