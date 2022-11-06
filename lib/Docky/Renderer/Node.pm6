@@ -5,7 +5,7 @@ use URI::Escape;
 use OO::Monitors;
 
 monitor Docky::Renderer::Node is Node::To::HTML {
-    my $hl-proc = Proc::Async.new('coffee', 'highlights/highlight-filename-from-stdin.coffee', :r, :w);
+    my $hl-proc = Proc::Async.new('node', 'highlights/highlight-filename-from-stdin.js', :r, :w);
     my $lock = Lock.new;
     my %code-cache;
 

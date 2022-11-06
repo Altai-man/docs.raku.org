@@ -11,7 +11,6 @@
   "homepage": "https://docs.raku.org",
   "repository": "https://github.com/Raku/doc.git",
   "dependencies": {
-    "coffeescript": "latest",
     "highlights": ">3.0",
     "less": "latest",
     "node-sass": "^7.0.1"
