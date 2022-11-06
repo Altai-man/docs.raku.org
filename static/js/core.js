@@ -59,7 +59,7 @@ function setup_theme() {
 
 function setup_glot_io() {
     // CodeMirror editor is enabled on click
-    $('pre').each(function (i, el) {
+    $('.code-output').prev().each(function (i, el) {
         $(el).click(function () {
             var $el = $(this);
             // If already editor, return
