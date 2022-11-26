@@ -2,7 +2,6 @@ $(function () {
     setup_glot_io();
     setup_sidebar();
     setup_theme();
-    setup_search();
 });
 
 // Open navbar menu via burger button on mobiles
@@ -222,27 +221,5 @@ function setup_sidebar() {
             $(elem).parents('li').show();
         });
         $matchingListElements.show();
-    });
-}
-
-function setup_search() {
-    $('#query').focus(function () {
-        if ($('.navbar-menu').css('display') == 'flex') {
-            $("#query").stop(true);
-            $('.navbar-start').hide();
-            $("#query").animate({ width: "980px" }, 200, function () { $(".navbar-search-autocomplete").width("980px"); $('#navbar-search').show(); });
-        } else {
-            $('#navbar-search').show();
-        }
-        $('#navMenu').addClass('navbar-autocomplete-active');
-    });
-    $('#query').blur(function () {
-        if ($('.navbar-menu').css('display') == 'flex') {
-            $("#query").stop(true);
-            $("#query").animate({ width: "200px" }, 400, function () { $('.navbar-start').show() });
-        }
-
-        $('#navbar-search').hide();
-        $('#navMenu').removeClass('navbar-autocomplete-active');
     });
 }
