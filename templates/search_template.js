@@ -42,17 +42,24 @@ const autoCompleteConfig = {
                 return aDistance < bDistance ? -1 : 1;
             });
 
+            // Prioritize results which start with query
+            list.sort((a, b) => {
+                const aValue = a.value.value;
+                const bValue = b.value.value;
+
+                if (aValue.startsWith(inputValue)) {
+                    return -1;
+                } else if (bValue.startsWith(inputValue)) {
+                    return 1;
+                }
+                return 0;
+            });
+
             return list;
         }
     },
     query: stripSigns,
-    searchEngine: (query, record) => {
-        const highlight = autoCompleteConfig.resultItem.highlight;
-
-        const mode = query.includes(' ') ? 'loose' : 'strict';
-
-        return autoCompleteJS.search(query, record, { mode, highlight });
-    },
+    searchEngine: 'loose',
     resultsList: {
         element: (list, data) => {
             if (data.results.length === 0) {
