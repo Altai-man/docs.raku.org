@@ -65,8 +65,13 @@ a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar
 }
 
 
+#query::placeholder {
+  color: $input-placeholder-color;
+}
+
 // Autocompletion popup
 .navbar-search-autocomplete {
+  color: darken($text, 10);
   background-color: $scheme-main-ter;
   box-shadow: $shadow;
   border: 1px solid $border;
@@ -74,12 +79,19 @@ a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar
   li {
     padding: 8px 5px;
 
-    &:hover {
+    &:hover, &[aria-selected="true"] {
+      cursor: pointer;
       background-color: darken($scheme-main-ter, 5);
+    }
+
+    mark {
+      background: transparent;
+      color: rgba(255, 122, 122, 1);
+      font-weight: bold;
     }
   }
 
-  li.ui-autocomplete-category {
+  .autocomplete-result-category {
     // background-color: $heading;
     color: $heading;
     // border-top: 1px solid $border;

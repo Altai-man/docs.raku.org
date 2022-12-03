@@ -80,51 +80,67 @@ body {
   height: 1.85em;
 }
 
-.navbar-search {
-  height: 30px;
-}
-
-// Autocompletion popup
-.navbar-search-wrapper {
-  position: relative;
-}
-
-.navbar-search-autocomplete {
-  position: absolute;
-  width: 240px;
-  // TODO: try to find a better way to do that
-  max-height: calc(100vh - 150px);
-  left: 12px;
-  top: 45px;
-  z-index: 100;
-  overflow-y: scroll;
-  // visibility: hidden;
-
-  font-size: 0.875rem;
-
-  li {
-    padding: 8px 5px;
-    cursor: pointer;
-  }
-
-  li.ui-autocomplete-category {
-    cursor: default;
-    font-weight: $weight-semibold;
-  }
-}
-
-#navbar-search-empty {
-  width: max-content;
-  overflow: hidden;
-  padding: 0.75rem;
-  display: none;
-}
-
 .navbar > .container {
   margin: 0 auto;
   max-width: 1140px;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.navbar-search-wrapper {
+  position: absolute;
+  right: 3px;
+  top: 10%;
+}
+
+.autocomplete_wrapper {
+  position: relative;
+}
+
+.navbar-search-autocomplete {
+  position: absolute;
+  max-height: 80vh;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  list-style: none;
+}
+
+.navbar-search-autocomplete[hidden],
+.navbar-search-autocomplete:empty {
+  display: block;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.autocomplete-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.autocomplete-result-match {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.autocomplete-result-category {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .navbar-logo {

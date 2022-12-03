@@ -14,6 +14,7 @@
     <script defer src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script defer src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script defer src="https://rawgit.com/farzher/fuzzysort/master/fuzzysort.js"></script>
+    <script src="/js/lib/autoComplete.min.js"></script>
     <script defer src="/js/lib/cookie.umd.min.js"></script>
     <script defer src="/js/lib/codemirror.min.js"></script>
     <script defer src="/js/lib/raku-mode.js"></script>
@@ -99,12 +100,6 @@
                   </a>
                 </div>
               </div>
-            </div>
-
-            <div id="navbar-search" class="navbar-search-autocomplete" style="display: none;"></div>
-
-            <div id="navbar-search-empty" class="navbar-search-autocomplete">
-              <a id="try-web-search" href="https://www.google.com/" class="button" target="blank">Not found, but you can try site search</a>
             </div>
           </div>
 
