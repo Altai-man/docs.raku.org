@@ -10,7 +10,7 @@
   "auth": "Write me!",
   "depends": [
     "Cro::HTTP:ver<0.8.7>",
-    "Cro::WebApp",
+    "Cro::WebApp:ver<0.8.7>",
     "Documentable",
     "Pod::From::Cache:ver<0.2+>",
     "Pod::To::HTML:ver<0.8+>",
